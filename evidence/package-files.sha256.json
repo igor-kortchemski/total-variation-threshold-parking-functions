@@ -8,7 +8,6 @@
     "Challenge.lean": "e991271f78457d4671bcb3265021e43eb15ba9acff6544826aaf8384b9500153",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
     "NOTICE": "fed89abdb9c592c92fc6407c50f0f79fa3fc0ba3d8ee3a1d9eced4b2837eb30e",
-    "Parking.lean": "c8c892252c813c331a4969873cedf4fe8e729a1fcbabe0336c13f0e569fcb6db",
     "Parking/Basic.lean": "67af21e75b21e04f39a2f06ea74cbe2782c48ee01f85064c02b3d3a793c153b6",
     "Parking/Borel.lean": "816e33afc7fec93f804a2f9211b2964acfbb741458b5c86389eae1f4a1cffa48",
     "Parking/BorelAsymptotics.lean": "e6a066d35611f5b301a7d5f1ac0611675280ed110d299517022c679fd5ae4f69",
@@ -87,6 +86,7 @@
     "Parking/Symmetrization.lean": "0c100ab8edbc19a6313081d330bef093e260b272926f0f891cb225e3b4e89498",
     "Parking/TVDist.lean": "8968bfc56fd9089b2ba526f28af15be715578ffc3b4b06a8777562ac22893222",
     "Parking/WordLaw.lean": "99f5ed2ecef513f07f94466fa1a723b3c2835c19b21aabcd56a0d4db18fd7069",
+    "Parking.lean": "c8c892252c813c331a4969873cedf4fe8e729a1fcbabe0336c13f0e569fcb6db",
     "README.md": "8a49332ab87bb069023685aa07fd6439b998362285c6a21becc56c6b8aad7b05",
     "Solution.lean": "6812392831f266df1f58607c4c98484b24ea5fe1dcb122de78a47382248b8da8",
     "comparator.json": "a67bf3b723039c40771f653222e8452ea4b7960dedf23628b6eea88bd1c6f50d",
@@ -155,6 +155,7 @@
     "evidence/private-verification-authorization.json": "c23c89b6cdee40f05a6f417412254c130cd240d4cbb6a0eb326ac43b865c7059",
     "evidence/private-workflow-review.json": "0a822fcc9f0e038b1c158d92adc533710ff395e9ab41d25f0abdb7b3bd795f47",
     "evidence/private-workflow-review.md": "0f021a4f8c7dd036fbaf865082508318856058ecde3a739143d6e700f3777669",
+    "evidence/runtime-lookup-fix.json": "996c7c8323d6500544371c77dceb526e017fa79b27c2e937599b5672610c45ea",
     "evidence/solution-abi-raw.txt": "416a57f118bc9daf763522a11d16ab543eea3db4c123594cba12e8702adc1371",
     "evidence/source-manifest.json": "49979cae0aa5bb7512707f107615c78a79d1f0f6015a0ea0d16f5f8dbb7479ed",
     "evidence/source-preservation.json": "069f8d6b500b87e6768307d175f28e28ae9d3058919070cc06b6f42fdc0b0d5c",
@@ -176,6 +177,6 @@
     "scripts/frozen_abi.lean.in": "c87831f3287a8de73b9229a977cc0d893ff961719b870149d12d0efd5aff486f",
     "scripts/prepare-audit.py": "4b3fd43787b84cc5bb7a9fc527e1807609eb4aa738e7003dd267dd1f8be58274",
     "scripts/validate-formalization.rb": "47eeb73febf48a2e23036e67f3223ea0562604139a7e97723c70cc4d5c269782",
-    "scripts/verify-comparator.sh": "abc177b44d8fcfd9c7a6ae34a4b9e81947f31e82aad4229f3ec797ea745270da"
+    "scripts/verify-comparator.sh": "6f49ec8ffc632618adb33729e39c05baf0b38c9665db04c141e45ae0313bbd5b"
   }
 }

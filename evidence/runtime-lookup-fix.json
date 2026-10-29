@@ -1,0 +1,16 @@
+{
+  "diagnosis": "Ubuntu debianutils 5.17build1 registers /usr/bin/which through update-alternatives; the outer namespace omitted /etc/alternatives/which. Lean4.35 Lake.whichExe spawns which and reports a caught launch failure as a missing requested executable.",
+  "change": "Read-only bind of /etc/alternatives/which only, plus fail-closed executable lookup probe before all control compilation.",
+  "checks": [
+    "outer shell syntax",
+    "embedded Python syntax",
+    "lookup shell syntax",
+    "exact Lean4.35 lookup source reviewed",
+    "Ubuntu Noble original postinst reviewed"
+  ],
+  "runtime_status": "pending private rerun",
+  "sha256": "6f49ec8ffc632618adb33729e39c05baf0b38c9665db04c141e45ae0313bbd5b",
+  "proof_sources_changed": false,
+  "previous_run": "40839076586",
+  "previous_source_commit": "1a86c94a5b1184647719bc8902e62e04f639ac97"
+}

@@ -99,7 +99,10 @@ def sandbox(argv, *, cwd, readable=(), writable=(), env=None):
             args += ['--ro-bind', name, name]
     args += ['--dir', '/home', '--dir', '/root', '--dir', '/run/user', '--dir', '/var',
              '--proc', '/proc', '--dev', '/dev', '--tmpfs', '/tmp', '--dir', '/tmp/home']
-    for name in ('/etc/ld.so.cache', '/etc/localtime', '/etc/passwd', '/etc/group', '/etc/nsswitch.conf'):
+    # Ubuntu's /usr/bin/which is an alternatives symlink. Lake.whichExe invokes
+    # it even for absolute checker paths, so retain this exact runtime link.
+    for name in ('/etc/ld.so.cache', '/etc/localtime', '/etc/passwd', '/etc/group',
+                 '/etc/nsswitch.conf', '/etc/alternatives/which'):
         if pathlib.Path(name).exists():
             args += ['--ro-bind', name, name]
     for path in dict.fromkeys([prefix, bwrap, *map(pathlib.Path, readable)]):
@@ -192,6 +195,21 @@ try:
             assert match, 'Unrecognized primitive target.'
             primitives.append(match.group(1))
     assert primitives and len(primitives) == len(set(primitives))
+
+    # Fail before compiling controls if Lake's own executable-lookup mechanism
+    # cannot see the fixed sandbox/checker paths. These lookups run no checker.
+    runtime_probe = out / 'runtime-probe'; runtime_probe.mkdir()
+    lookup_script = '''set -eu
+command -v which
+readlink -f /usr/bin/which
+which "$COMPARATOR_BWRAP" "$1" "$2" git env
+'''
+    must(sandbox(['/bin/sh', '-eu', '-c', lookup_script, 'runtime-probe',
+                  tools['leanchecker'], tools['nanoda_bin']],
+                 cwd=runtime_probe, readable=[runtime_probe]),
+         'runtime-executable-lookup', cwd=runtime_probe)
+    report['runtime_executable_lookup'] = 'passed'
+    save()
 
     # Judge controls are isolated from the candidate and run before its build.
     controls = out / 'controls'; controls.mkdir()
