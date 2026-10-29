@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "scope": "Fresh elaboration of the three complete export statements and their definition closures under the unchanged Lean/Mathlib environment; Challenge template not elaborated",
+  "command": "lake env lean .scratch/validation/FrozenAbi.lean",
+  "abi_checks": [
+    {
+      "export": "Parking.tvDist_firstCoordsLaw_bounds",
+      "expected_sha256": "ff544decb2bedb055a042a7735665ce805574dedd767c506f8f39eb227d814aa",
+      "actual_sha256": "ff544decb2bedb055a042a7735665ce805574dedd767c506f8f39eb227d814aa",
+      "pass": true
+    },
+    {
+      "export": "Parking.tendsto_tvDist_firstCoordsLaw",
+      "expected_sha256": "b47583fb8752c011849eb5cf38b396134981b271bed5c4c3d35303fb02b87d1a",
+      "actual_sha256": "b47583fb8752c011849eb5cf38b396134981b271bed5c4c3d35303fb02b87d1a",
+      "pass": true
+    },
+    {
+      "export": "Parking.klDiv_tvDist_firstCoordsLaw_le",
+      "expected_sha256": "bdd2284b1f51d6ad604ab262deafb182f2914b170650bf6944469300fc3e2aaf",
+      "actual_sha256": "bdd2284b1f51d6ad604ab262deafb182f2914b170650bf6944469300fc3e2aaf",
+      "pass": true
+    }
+  ],
+  "axioms": {
+    "Parking.tvDist_firstCoordsLaw_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Parking.tendsto_tvDist_firstCoordsLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Parking.klDiv_tvDist_firstCoordsLaw_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  }
+}

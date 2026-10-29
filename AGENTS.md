@@ -1,0 +1,14 @@
+# Export maintenance constraints
+
+Read [README](README.md), [Preparation](docs/PREPARATION.md) and [Approval](docs/APPROVAL.md) before changing verification or publication status.
+
+- The user approved the concrete export-only proposal with “Approuve” on 29 October 2026. The verified development library and both original reference projects remain read-only.
+- The active target is Lean `v4.35.0` and Mathlib `56a005855ea17e0b0958f73ec801ae140b0a1679`. Preserve theorem meanings, concrete definitions and proof routes. Recheck source fidelity, build, axiom closures, kernel replay and ABI after relevant changes; historical 4.34 evidence is not current verification.
+- Apache-2.0 applies through the root LICENSE. Preserve author/year notices and third-party attribution. Approved export-successor license and descriptive-header changes do not authorize mathematical changes to Frozen statements or their definitions.
+- Exactly three deliberate `by sorry` bodies are authorized in `Challenge.lean`: `Parking.tvDist_firstCoordsLaw_bounds`, `Parking.tendsto_tvDist_firstCoordsLaw`, and `Parking.klDiv_tvDist_firstCoordsLaw_le`. Challenge imports Mathlib only and must not be imported by Solution or any implementation module. No implementation proof hole, new axiom, trusted-computation shortcut or strengthened premise is allowed.
+- Only `Solution.lean` may import the three Frozen modules. Each provider is otherwise imported only by its corresponding Frozen module. Preserve the approved statements, concrete laws and sealed proof assembly.
+- Six proof-only adaptations in Basic, Law, Count and FirstCoordCount, plus four Challenge-local auxiliary-proof cache resets, are documented and reviewed. Do not silently rewrite supporting definitions or hide private helpers to make comparison pass.
+- Run every Lean/Lake invocation through `scripts/compile-lock.sh`, one process at a time. `scripts/audit-project.sh` already acquires that lock. Temporary audit `.lean` files must be removed before source scanning. Do not infer a stale lock from a failed process-permission check.
+- Keep active source/configuration evidence distinct from `evidence/history-4.34/`. A local raw closure diagnostic is not the official Comparator. Report build, ABI, axiom, kernel, Comparator/NanoDa and full-preflight outcomes separately, with the exact checked commit or hashes.
+- The user subsequently requested “for comparator I prefer a private thing on github”. This authorizes the necessary private repository, push and manual verification for `igor-kortchemski/Parking-paper-palomar`. Keep it private. This does not authorize a public release, visibility change, Palomar intake, registration, or redistribution of excluded manuscript files.
+- Markdown math uses `$...$` inline and `$$` on separate lines with blank lines around display blocks. Do not use backslash-parenthesis or backslash-bracket display delimiters.

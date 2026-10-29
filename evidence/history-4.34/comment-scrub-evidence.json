@@ -1,0 +1,1659 @@
+{
+  "scope": "candidate comment-only lexical equivalence; no Lean command",
+  "comparison": "exact ordered non-comment chunks, including whitespace",
+  "files": [
+    {
+      "path": "Parking.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "4591b34a8b565ec58a21a59e92debaec8b59d0a71b07b28c04f4e5d16de3687e",
+      "candidate_sha256": "17788a314738a3eddb3a04af4d64b2a96b43437007b7fe7dc21e2397b8911c93",
+      "noncomment_sha256": "c3f08a4594f2c3633b429026a8d3ddb95c5f86edce2f418e8f39d138852c6b71",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 66,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Basic.lean",
+      "protected": true,
+      "changed": false,
+      "source_sha256": "272eee48461e608566830972d7ae6cddade98b0394e8328f65c22424f727e71b",
+      "candidate_sha256": "272eee48461e608566830972d7ae6cddade98b0394e8328f65c22424f727e71b",
+      "noncomment_sha256": "1f60281957c8950c12c6f1c19b0087818d5f3ed247456c1868098264255c826f",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/Borel.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "f649e1caa192f203c738f23b007358cb05bd19c9a321ff599a3dbaa39d57ff0c",
+      "candidate_sha256": "d5ae13f3183e30c62cafed5a65ab2fb24117464d02561b46e7d6beeb508387c6",
+      "noncomment_sha256": "e8475e3f17128b231761ad15121842048213b64dc6c4ea19992331cf9ab7328c",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 12,
+          "kind": "block"
+        },
+        {
+          "line": 31,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/BorelAsymptotics.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "818a3464bc46a3e503f956afd7a2ac7dac9f9a257e8044041e4b2c55676a8a81",
+      "candidate_sha256": "19ffec66b33723af761e88b68c62c93fd21f01406b6fe79cb33c088327eba49d",
+      "noncomment_sha256": "1149e156bfc7ccee6fb626554ea51729f7007c3a6ccabde1de91e50de432c4cd",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 9,
+          "kind": "block"
+        },
+        {
+          "line": 42,
+          "kind": "block"
+        },
+        {
+          "line": 295,
+          "kind": "block"
+        },
+        {
+          "line": 402,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/BorelEndpoint.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "b927a445941d0fe24421f11ae8711240c960fed6294e137c604e9db7939dcc01",
+      "candidate_sha256": "318febf81f1db3fed20be99901ef4fb71a1aca97e09aa95df1a28e27a7748ecd",
+      "noncomment_sha256": "1704d164660084c103a7f26f6d5f99cd0c5ebb9375e383db01caf0a5ec033c9d",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 10,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/BorelTail.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "7b6957951f628ee0231260ce08aef8aa373fa1ec57c2888615ea93de8ac3d882",
+      "candidate_sha256": "63228f490c60cafa6c6a97c0e9e993abfd2adbe38d33f0f48cfe9b228e776388",
+      "noncomment_sha256": "8c0c8fe514e077513d4e451941583236e6e5d6202b30f49b6ef150b1f79372e7",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 8,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Breakpoint.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "e2721013d94b6bd9f65d686f027f5385d94facaa7772beec9c89de3f0942c726",
+      "candidate_sha256": "9af15a98abfc39f07c526ec984b227ef860b6b3a6316a0e9bb0a840454bebd57",
+      "noncomment_sha256": "3411398c9c2786b1354c8255dbeec58ce4eaf96327a4a96d85ad4984719296c7",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 16,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/CLCCriterion.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "a002212e33d254080f5dde06c6ed81820a5acd9414260de339cf46d6e9833b1c",
+      "candidate_sha256": "e484cd894d89725f6c769ff5f1b206c530af8d6796a057eeb5a3beb637915eed",
+      "noncomment_sha256": "93edc88b8a483c211875447a9b530f2a33f5f111c4bcd3db50202040bfccb545",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 11,
+          "kind": "block"
+        },
+        {
+          "line": 233,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/CharFunExpansion.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "77a58094964d91eedcab7b9beb7bfa8eda2fc3ef929d8b5c8677984786cf14de",
+      "candidate_sha256": "878cd170b534257787a95aac5615bc572677c3109a4b9a72183540ff68cf39b2",
+      "noncomment_sha256": "eb06a6b3c9a914141e24bd4f4e21e72789a891c439bc88cebb128b2bcb7fbab3",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 10,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Corollaries.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "ffb9645000412d24e1192d59d73330cb3609f9c021a0a0cfcd3fe4ce5fc48165",
+      "candidate_sha256": "e463412ca03fa8da38e1de9a2d47982ae4412cba546ce6bfd4b7d3c66a53bd6a",
+      "noncomment_sha256": "c58a0d0a249435605018ca1dbb334fcff7d7e681f2932be6065901ccf71b63ec",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 16,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Count.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "2f9ee8492b0a1e83df583080babe6c437b50c8aa955f673e2191fdcd5ee1c3e8",
+      "candidate_sha256": "62dffc8a62bd7cceaa7ceef9c47bba4d86372b9a3b924707e13b7e0c16da8326",
+      "noncomment_sha256": "f7b7e7e52a0eebff8b367aeff70573f9b4d18d335200c198a70795fe8b778000",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 8,
+          "kind": "block"
+        },
+        {
+          "line": 252,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/CountPoly.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "c79200d7e5577153f7a3986fffbd69b1a381c1c3b8ce966424a98551e4149570",
+      "candidate_sha256": "eadb65dba99aaa5f30363fc4f5a92862d796998ab6aae34248e01d172058e689",
+      "noncomment_sha256": "35ba13544cc1f0d03a8e063e7ce0c58111a41164fad2d85fc348de47e8a474e7",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 9,
+          "kind": "block"
+        },
+        {
+          "line": 23,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/DecouplingBound.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "1a26e078042cc8f6ce69a4ca1a5a840e17b321085b274a03f9c4110e5936fecd",
+      "candidate_sha256": "d72a36f3f83d8c7425372b812b8bbea738a6615d1dff64f11f5aa8359ac5d20b",
+      "noncomment_sha256": "c054e05657e73b9142fc99486986b87987ae1dd0231243fa7cd7870d83b330ad",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 16,
+          "kind": "block"
+        },
+        {
+          "line": 49,
+          "kind": "block"
+        },
+        {
+          "line": 57,
+          "kind": "block"
+        },
+        {
+          "line": 89,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Entropy.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "5a470c8c6e722cd348bf599e6948c0e4eec3edef4d5d6fa122a5f5a02741ee93",
+      "candidate_sha256": "4940dd64c5af528098905e9930e4d66318a64207a65db1eda803951832b38f34",
+      "noncomment_sha256": "4ce8d42d9a4fef7d72d7c80a9ac8f3186ca0de09474b142d64af1faf6cef6c51",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 9,
+          "kind": "block"
+        },
+        {
+          "line": 23,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/EntropyKL.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "adc701574931f7f3ca7adeda944e13985a78c7e7d41ae00e16dc2bb8a2679a2a",
+      "candidate_sha256": "0d46769d1d806015131911e5552e6fb8e8f0f4ae3881cb31beae2827876b2c6b",
+      "noncomment_sha256": "8afb75e5bd5080d5444b06a9567d6f3bff86e8fce6028ffbccaf63e090802443",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 12,
+          "kind": "block"
+        },
+        {
+          "line": 123,
+          "kind": "block"
+        },
+        {
+          "line": 253,
+          "kind": "block"
+        },
+        {
+          "line": 331,
+          "kind": "block"
+        },
+        {
+          "line": 367,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Exchangeable.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "37412ecabab10233149420eb2421302dff79731a5e390d93562a87f36a2f17d5",
+      "candidate_sha256": "66e19d3173a698058711dcb4e7aa678cb0cf46ce7c8854c40d2bef5e713000f7",
+      "noncomment_sha256": "de22a3b3190229a1e19785f51ede7090e2df367da9133f3671a7f4830466c76e",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 8,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/External.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "e55cfcc5fcc2907617a3f7c045222114f81dfa663d0e80945e185acd0a37f5ca",
+      "candidate_sha256": "83696a3f9f185f78460ef991e301cad8e30d36c505a72110eab1e791abed261c",
+      "noncomment_sha256": "b238cd49aee72a9c6d26452741f8022680e506ea3930fd454fd96ac3f7a5884e",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 9,
+          "kind": "block"
+        },
+        {
+          "line": 30,
+          "kind": "block"
+        },
+        {
+          "line": 36,
+          "kind": "block"
+        },
+        {
+          "line": 42,
+          "kind": "block"
+        },
+        {
+          "line": 49,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/FirstCoordCount.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "8d90cb9c9ff70a50062de9ad51fdaad386d936b6ebe3e4b2d7125830072e3440",
+      "candidate_sha256": "5f68294321b5c59bc47c82c6ab99de3fac1444ffd9bb9098fe466878755c4626",
+      "noncomment_sha256": "2556edc6e7c9cec822e278d13ed2f1031a32959a5d3a0d68c3151c0c2b13dc0b",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 12,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Frozen/Decoupling.lean",
+      "protected": true,
+      "changed": false,
+      "source_sha256": "5d216d73c52ecb3923f6683032ddf94fd5a3c20b3cb19856a46764af819ebad2",
+      "candidate_sha256": "5d216d73c52ecb3923f6683032ddf94fd5a3c20b3cb19856a46764af819ebad2",
+      "noncomment_sha256": "e8de443c522ccda3bbe11fe4ff9691a0885a7f1cbb34da3863ab9c2ea9287aaf",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/Frozen/MainBounds.lean",
+      "protected": true,
+      "changed": false,
+      "source_sha256": "5fc73de522686ca11ddff4fa99039759fe00b7ef257288e24214383902a036ef",
+      "candidate_sha256": "5fc73de522686ca11ddff4fa99039759fe00b7ef257288e24214383902a036ef",
+      "noncomment_sha256": "fee751e30f6d67213fae5bff1b8d8ad86e18dc6e6dd9e625ad2ae6e05375fd9c",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/Frozen/Profile.lean",
+      "protected": true,
+      "changed": false,
+      "source_sha256": "6bb89e9fd9c524a323e57cda22814019e8a2d30f3f57e91df557bffc65b58598",
+      "candidate_sha256": "6bb89e9fd9c524a323e57cda22814019e8a2d30f3f57e91df557bffc65b58598",
+      "noncomment_sha256": "cca5e314dfc0dea16169e3c24e4f20dcde542291b09c23ccdc816bb056b04140",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/GaussianValue.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "9fc58ab5f6653937ed9e07d18f48073eaa2bbecaee788d05556bacf8546e24ac",
+      "candidate_sha256": "9685b923088668493577b324e62f5cd004762c497c7d2a4a53f1d5fbc89e5944",
+      "noncomment_sha256": "aa5bf4b0c4ba5126254b1e42960fdab17912eaab7e1d5b37e6d9515916156401",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 8,
+          "kind": "block"
+        },
+        {
+          "line": 135,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/KLContraction.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "30f331b2c379bde063b411f904d98d4efa1de9743da241e16d16555cec08278b",
+      "candidate_sha256": "62effca76b67409bd81d77a7b6b81fdd25fe574dcc6aa51c885980b459952ec2",
+      "noncomment_sha256": "1df54612ebf776bbcc50b3474dd438a36583774762c96e44b2fe3d51ba867ecc",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 13,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Khintchine.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "7567d0807090042f6fe641a72aef46102faeebecb9591d6533bbc88aecd50f70",
+      "candidate_sha256": "2a0d2ab579b8295f3ac9ef96ea6bfaec38bea59036764c11d24109e74c15d519",
+      "noncomment_sha256": "cbfa05f57d48ca2f82b41600a89042ff45fa148b18f0f82a6ea761166d2b1a43",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 11,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Law.lean",
+      "protected": true,
+      "changed": false,
+      "source_sha256": "6739c283f4356ecba8466f15521281781c1eb302d54ca7ad3926907e0598cb5a",
+      "candidate_sha256": "6739c283f4356ecba8466f15521281781c1eb302d54ca7ad3926907e0598cb5a",
+      "noncomment_sha256": "c2268def6ea2c4f1d0ff773d0e1ec6ebc355d0a7110dbc7ade76ffe336313da9",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/LikelihoodLaw.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "fb9ff50291f3fe7d80450cbc94d1aa7589bf4afe79bfef84695a61eccd1d150b",
+      "candidate_sha256": "edb584c9e5f023f04d223fd1d90f1079829568f0ff12a201f303333773cb43dd",
+      "noncomment_sha256": "d3979df7a1fa95048acfe58a1f5498ab17c9133e85aa8aedafda64444583daa8",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 10,
+          "kind": "block"
+        },
+        {
+          "line": 37,
+          "kind": "block"
+        },
+        {
+          "line": 48,
+          "kind": "block"
+        },
+        {
+          "line": 60,
+          "kind": "block"
+        },
+        {
+          "line": 73,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/LlrLimit.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "a8f81e95897f0cbe967f2dac6d03d2230c0d0537748a1eac6c1ddc3984f2285d",
+      "candidate_sha256": "ee31fef3e56238d78848a8208e6fec403dd9bf37ed8ee3c0b54ca5067b6e52fa",
+      "noncomment_sha256": "44994731530fd6cef99ad4b2097e06958ca1d53d4dc52b33e30b9fb205e20149",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 11,
+          "kind": "block"
+        },
+        {
+          "line": 144,
+          "kind": "block"
+        },
+        {
+          "line": 180,
+          "kind": "block"
+        },
+        {
+          "line": 232,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/LogConcave.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "9d44ea3cf570994df80511c8fdc90ab65fab549a853cc7d4433e7b585478d9fe",
+      "candidate_sha256": "b5b55767b63a7212476ac39a4f66cf46d8c05fcbc488f860a013bd906000e648",
+      "noncomment_sha256": "d1a07b2ce7309b41ae0ef6482f16cc36ad99779e3f6696fb1a3e770d19383a2a",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 11,
+          "kind": "block"
+        },
+        {
+          "line": 30,
+          "kind": "block"
+        },
+        {
+          "line": 40,
+          "kind": "block"
+        },
+        {
+          "line": 54,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/MConvexForms.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "d44433eae1e003f576930c993489e0087ed6714bf694c885a9e6b70b0174770f",
+      "candidate_sha256": "0cdcee41fdc778f37357c3504ee16021869c9003bf9753239bc48cbf8661ea0a",
+      "noncomment_sha256": "3d4242ba7f9b2348358f0b797d8517a18ac24da2cfcbd255044d332dc59df39b",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 11,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/MainScalar.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "1d6e1f62cf9b0f2d1c2744801652a6a7f040b36fa1ee021d70b30d9d188431fc",
+      "candidate_sha256": "6a5ded908e08146861a7e0ad3d81281342ad0e5d13d5d7edf7226961ea9230b9",
+      "noncomment_sha256": "31dfadcfa89edc9340e2b2f79564f9776e5806885b11ab61f7aa12c8d8d9e399",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 9,
+          "kind": "block"
+        },
+        {
+          "line": 38,
+          "kind": "block"
+        },
+        {
+          "line": 117,
+          "kind": "block"
+        },
+        {
+          "line": 146,
+          "kind": "block"
+        },
+        {
+          "line": 159,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/MainScalarPaper.lean",
+      "protected": false,
+      "changed": false,
+      "source_sha256": "7d3403dbe01ce9496bceccb4ff581c6e13f541a6a540e1074f9a98bf26bc78e8",
+      "candidate_sha256": "7d3403dbe01ce9496bceccb4ff581c6e13f541a6a540e1074f9a98bf26bc78e8",
+      "noncomment_sha256": "210b47ab4b809017e85deefb0e9160c24bb6630ce7ffec8898c75c0c7e0b88e7",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/MainTheorem.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "e10bb10bad45749aa9e5b0dbc3415811cd19d682ecf9918d38d41f8549aa36a5",
+      "candidate_sha256": "79d7b1114bbc10177db8045c1116a9d5163d264145d3dce466769e0f187f15fd",
+      "noncomment_sha256": "6d9c4ef847758bd4883e657554334f9d7161747a05457e66d3f0aab2b846dcf8",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 13,
+          "kind": "block"
+        },
+        {
+          "line": 41,
+          "kind": "block"
+        },
+        {
+          "line": 77,
+          "kind": "block"
+        },
+        {
+          "line": 115,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Marginal.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "56eb45e547fafa8156e20edb06161b048b46d2b1cea9b142cb27beac7990b580",
+      "candidate_sha256": "e2bea335584641ea67e73cca2cc562882ca7ec65ba135270890508e064b75581",
+      "noncomment_sha256": "b56736220b6c085d39178f986571372c1c4365fb497510e6ff06452ed67f7fa7",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 10,
+          "kind": "block"
+        },
+        {
+          "line": 45,
+          "kind": "block"
+        },
+        {
+          "line": 149,
+          "kind": "block"
+        },
+        {
+          "line": 180,
+          "kind": "block"
+        },
+        {
+          "line": 196,
+          "kind": "block"
+        },
+        {
+          "line": 208,
+          "kind": "block"
+        },
+        {
+          "line": 240,
+          "kind": "block"
+        },
+        {
+          "line": 249,
+          "kind": "block"
+        },
+        {
+          "line": 295,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/MarginalBounds.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "66a0b0111d8aa622928a08c08e5ec5774aa214aec58e10ec3c68498b75282f2d",
+      "candidate_sha256": "465e134d0716b0f074c75ca73bf8e81fa47dcf9ef2077f9e5cfb17fcc7d9453a",
+      "noncomment_sha256": "65477a4be0ee7cb55066d04eb83de8fc1e0ab71917788a58bf70e1629292939f",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 149,
+          "kind": "block"
+        },
+        {
+          "line": 165,
+          "kind": "block"
+        },
+        {
+          "line": 225,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/MarginalSquareSource.lean",
+      "protected": false,
+      "changed": false,
+      "source_sha256": "43439ac814050a746b5703e1b45d4bc80449e8402086f0f605de4fa83825442c",
+      "candidate_sha256": "43439ac814050a746b5703e1b45d4bc80449e8402086f0f605de4fa83825442c",
+      "noncomment_sha256": "d92ff4ba9caf581fd5bf0cbf1aeea37d8fdfe48cda0d7c2ed93673119bd3b4e2",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/MarginalSquares.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "9d2955b204366b977c0ccdd4645ab9d312a09ed8765af2f494e0e0868b9acd89",
+      "candidate_sha256": "06dc387bd2fefabdf0adc170c51005b6c447449dd3b5de4014164a52da8ae183",
+      "noncomment_sha256": "7d31a716f0cdab78f0729515c773ca7093b3d4e00fdd41159b8178e9adfba522",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 62,
+          "kind": "block"
+        },
+        {
+          "line": 401,
+          "kind": "block"
+        },
+        {
+          "line": 460,
+          "kind": "block"
+        },
+        {
+          "line": 466,
+          "kind": "block"
+        },
+        {
+          "line": 505,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/MixedForm.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "d59628d9f5dda34e2dd59b57659ecdad2deaebd303c715aed2421f46029b9994",
+      "candidate_sha256": "ae454fd5c8ee088ce708426bca797e1ca9999d1481b3559188aaab38807b4503",
+      "noncomment_sha256": "b0d333d32bfee273d171d068639ec12a7efbe52dc79f8047f80779d088b17f4d",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 11,
+          "kind": "block"
+        },
+        {
+          "line": 54,
+          "kind": "block"
+        },
+        {
+          "line": 441,
+          "kind": "block"
+        },
+        {
+          "line": 478,
+          "kind": "block"
+        },
+        {
+          "line": 487,
+          "kind": "block"
+        },
+        {
+          "line": 497,
+          "kind": "block"
+        },
+        {
+          "line": 508,
+          "kind": "block"
+        },
+        {
+          "line": 551,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Occupation.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "53eaf5802d58730f433952e4b4ad06e8caf032a7c9f7c1d671c47bb65e0d8799",
+      "candidate_sha256": "f3f2887ad664f305272208ae49691b9a36d31931dba1832e91a21c87b87749c9",
+      "noncomment_sha256": "c3508c1163aefdf3edd6a28a4e6d41f8562c42a2165aedd08af226db5a956c0f",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 55,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/OccupationCounting.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "7a874d408bf0cfffa68cafdc51442f21f1bf8c4e0babd3dd5c2f8a4d86238907",
+      "candidate_sha256": "259b6363ad7f5200b924470c3383de166a88d4a0f36243d091392ec2fa5afe59",
+      "noncomment_sha256": "1868ccb33ff4db556b2a13ad69b82a5bb3ec5578f3dcbf96467c4cae15a628b6",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 13,
+          "kind": "block"
+        },
+        {
+          "line": 202,
+          "kind": "block"
+        },
+        {
+          "line": 263,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Paper/LinearSubstitution.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "18dfcf60f465d82968bd2a3fda652b9c05485b08d545018ace925732cdeab0b7",
+      "candidate_sha256": "5b0d13f5c6b53099ae7228527a45bdd33f5627f9dc4ab6f1b0d7f9cf7ad2b4d6",
+      "noncomment_sha256": "6ac66a482b673eb4d774d9c35dca43a35a29f580f9c0d6f612d9780137dd8b85",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 10,
+          "kind": "block"
+        },
+        {
+          "line": 208,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Paper/Lorentzian.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "fcd5fc746df5e57268db81a2fda7baae314021cde3849e71be180dee959ec05a",
+      "candidate_sha256": "79fc64bad050b1b8927d6752985437319e53fb61a84ae439c57dd82047bb39c1",
+      "noncomment_sha256": "6b4e00d43fd6a8e04b52a0f4e42c8a5ec16f43caa963798b4e78ced1e87ffdc8",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 231,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Paper/OccupationLogConcavity.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "e5a76da6d6c4d474db1d934eace2faed0150faa655a9ff18a0e068d8406d14dd",
+      "candidate_sha256": "3233b8b154c5409b598916963f00343b3c9aba250a60c6b69cd2e5cefff25c3f",
+      "noncomment_sha256": "3807949459ec45b1f1d7656b2721ac5957ee96c69b61c2399a0dffb604394aec",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 24,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Paper/ParkingBoxOrder.lean",
+      "protected": false,
+      "changed": false,
+      "source_sha256": "3eae28e2d317ecc8f49f61077e93670725a5d829879fb4f502cee4c044118f46",
+      "candidate_sha256": "3eae28e2d317ecc8f49f61077e93670725a5d829879fb4f502cee4c044118f46",
+      "noncomment_sha256": "d91be3f6f673f8dc89f3d1cb8ddd23bfd672463f5bece692acd14337326e40f8",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/Paper/ParkingBoxes.lean",
+      "protected": false,
+      "changed": false,
+      "source_sha256": "c49a74eef7211b9865d8ac3e50058da9aabab7bd71383800d29ca5e60a861aef",
+      "candidate_sha256": "c49a74eef7211b9865d8ac3e50058da9aabab7bd71383800d29ca5e60a861aef",
+      "noncomment_sha256": "bfc038285be2b87ad6c7c2d054193fbf4b647b36dd09f17f45373549f9a95e43",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/Paper/PitmanStanley.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "26b03fb4c3bf721a99afa5fb9ef88b08065c007f3255eecc348735b638da95b7",
+      "candidate_sha256": "7b4f5e9ffb243063a11211ad5e8cacac5a3efb2e84b91f0b76efef918e36bfe4",
+      "noncomment_sha256": "04c8a24d4875793d931caa4200060e1ae28ba4d73ce0d24b0d6c3179fb977755",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 15,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Paper/PitmanStanleyFormula.lean",
+      "protected": false,
+      "changed": false,
+      "source_sha256": "8ca4c1f6ab85283335d38f99c3de3ffae7bd864966d16e21bc6a92236aac0259",
+      "candidate_sha256": "8ca4c1f6ab85283335d38f99c3de3ffae7bd864966d16e21bc6a92236aac0259",
+      "noncomment_sha256": "0bbebc4dc62ae3b94cc0e0d30af950580f6ea2e5e3c5e2f86916689a44273de5",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/Paper/PitmanStanleyMinkowski.lean",
+      "protected": false,
+      "changed": false,
+      "source_sha256": "b631eb026320f5768bfa459f38d8b05c409933e98d200707a65fb6fdf631f7b6",
+      "candidate_sha256": "b631eb026320f5768bfa459f38d8b05c409933e98d200707a65fb6fdf631f7b6",
+      "noncomment_sha256": "7bedba3e103cf31317b8767c12e7cede0b51080383ff8c6e0094569dacfc5c1f",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/Paper/PitmanStanleyVolume.lean",
+      "protected": false,
+      "changed": false,
+      "source_sha256": "1b3eb49a172b52482eac64571b8a418005bed143e35629eb7913df70c498fe00",
+      "candidate_sha256": "1b3eb49a172b52482eac64571b8a418005bed143e35629eb7913df70c498fe00",
+      "noncomment_sha256": "27a83cfb4ed059f2e9aaf14ec91d659e346c9475fd0c3948024c0b9d1ffd7c1a",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/Paper/PrefixProduct.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "e4c9f06743aec7e00f0a49dad0923f53e63cbfa7b9abfe837fd79140e696777a",
+      "candidate_sha256": "74822b2a1257fccc0acf5529c15da37a22d263090a5327675f91383b1a39f41d",
+      "noncomment_sha256": "9848652f4fbe092e202c952cbd14428d5e88228294bd62949c2f119923e9e250",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 11,
+          "kind": "block"
+        },
+        {
+          "line": 32,
+          "kind": "block"
+        },
+        {
+          "line": 103,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Paper/QuadraticSignature.lean",
+      "protected": false,
+      "changed": false,
+      "source_sha256": "dfe54a10c1008867de7695055925898331d8dd8640c6eaabfba3b24eacbcf2c8",
+      "candidate_sha256": "dfe54a10c1008867de7695055925898331d8dd8640c6eaabfba3b24eacbcf2c8",
+      "noncomment_sha256": "07f5604f427ba18a260d07d853d2fe6974d49473cd4df074921e55b0e8b15ee1",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/Paper/RevCSConnected.lean",
+      "protected": false,
+      "changed": false,
+      "source_sha256": "8f578edf4b82a8a1abd869020ee4f792c103697ee7b3b60f9b33cbbaa5dc37fb",
+      "candidate_sha256": "8f578edf4b82a8a1abd869020ee4f792c103697ee7b3b60f9b33cbbaa5dc37fb",
+      "noncomment_sha256": "d28c26689bb46f54baea50114f27c5192044e7686b21867d3cd5fbc3cf86d988",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/Paper/StrongCompleteEquivalence.lean",
+      "protected": false,
+      "changed": false,
+      "source_sha256": "ffee63c7ced0259fa2c3e5f8121ba61432e85449ddb98b38b08e3559e66d1d50",
+      "candidate_sha256": "ffee63c7ced0259fa2c3e5f8121ba61432e85449ddb98b38b08e3559e66d1d50",
+      "noncomment_sha256": "ccf0e82ee7330d98673923fc1efc1a830af17e88d3ed31e12cd2a88f37eeb0b0",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/Paper/StrongLogConcavity.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "c0f53c086a9b84731e7b6a359e15da982bfc15f06e24d58065a41a19a6b00577",
+      "candidate_sha256": "92d6f0a5590c96c9657447619ded56cdac77a6fb941868d69a4c36577641ecb7",
+      "noncomment_sha256": "0997316f4506382890ac4228f8341f4411e0e12b1d69da7163d5c5e36cf01524",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 10,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Paper/SupportNormalization.lean",
+      "protected": false,
+      "changed": false,
+      "source_sha256": "1c1717fde1c090b4fae10046ae28f01ea699142d3962ba5419c3481b952d0b1a",
+      "candidate_sha256": "1c1717fde1c090b4fae10046ae28f01ea699142d3962ba5419c3481b952d0b1a",
+      "noncomment_sha256": "6a1f6fcba6a4a8f573753271a1182ee6e72bcaa726623a86672e332d5da4b628",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": []
+    },
+    {
+      "path": "Parking/PerronStep.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "962696fec973f48903a878647a08dd2939db5e040e264d4f2f19654a6f3b4eb9",
+      "candidate_sha256": "bdfc09b0489282518e490a54094d8cb20750dcbea6d4180b5d6c25aa1fd52777",
+      "noncomment_sha256": "6248dae417f88e060ade73d9828a106544aa4038f6e77e41f30cbbc172a31e7e",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 8,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Pinsker.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "f7cff88e7e47ada38d8a4194dad00d9766ed38bee9f5f0733517bf5349307071",
+      "candidate_sha256": "c8d896bee0c2b30918ac5a6e8356222c43cc5f73714c88acd8fe2df4eca817b2",
+      "noncomment_sha256": "e2b426565e67e20cc8aebf175b1ba2920d6c7559b3c85883cf4b62ce8a28948d",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 11,
+          "kind": "block"
+        },
+        {
+          "line": 139,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/PrefixLaw.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "ea21978fa3418cc2a56cfda8eb66b7b5d3b358dcf13efa046ff0d0085e7f8db8",
+      "candidate_sha256": "2df7e1ac094a2a45dce47a16d8a26bb04849fcaa3f67f23b0c3dbdf6821cd076",
+      "noncomment_sha256": "e1f5d708770c558a5b1b99b811792068d47463a69ff0257a6023194fffc82d13",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 14,
+          "kind": "block"
+        },
+        {
+          "line": 179,
+          "kind": "block"
+        },
+        {
+          "line": 215,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/ProductMoments.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "cff63772db4e1176bc122db28b7bee58d45385081b0c4e29f4bfb8edc2f3b98f",
+      "candidate_sha256": "7be068e17d5ff7a3e53a650580820b88e3cd6b30b6f752489eda55fc4a5376c4",
+      "noncomment_sha256": "6c97681c61dfe1305a0c075925556abf2b7aac527861276def178b8bf9460f30",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 17,
+          "kind": "block"
+        },
+        {
+          "line": 68,
+          "kind": "block"
+        },
+        {
+          "line": 145,
+          "kind": "block"
+        },
+        {
+          "line": 228,
+          "kind": "block"
+        },
+        {
+          "line": 256,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/ProductScore.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "4f28a0d46aba137f60066e6a8379f32e2168e775568130df4e6f1617693c1dd2",
+      "candidate_sha256": "a13db46ff46566251bb5c733202e561a19b7b3632fbeca475e601b40da1db82c",
+      "noncomment_sha256": "bce41598547deab6812fafa3ce06c9ce148e1ac2f35174a4ff43583e0e708cb3",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 12,
+          "kind": "block"
+        },
+        {
+          "line": 53,
+          "kind": "block"
+        },
+        {
+          "line": 59,
+          "kind": "block"
+        },
+        {
+          "line": 65,
+          "kind": "block"
+        },
+        {
+          "line": 167,
+          "kind": "block"
+        },
+        {
+          "line": 277,
+          "kind": "block"
+        },
+        {
+          "line": 600,
+          "kind": "block"
+        },
+        {
+          "line": 616,
+          "kind": "block"
+        },
+        {
+          "line": 661,
+          "kind": "block"
+        },
+        {
+          "line": 683,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Products.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "f9528207df1962e8a413e0b654f9ce8b441fc3fdf8be98e635158df55da5ae0f",
+      "candidate_sha256": "beebc1a06af3a571ad814f2e5f2ac6fa54127ae3583fd2f38387cc92cb6ccb47",
+      "noncomment_sha256": "0d677f3e0a36936ba0980e2935552ca353ffd05589be015d86ad33a47243b8d5",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 8,
+          "kind": "block"
+        },
+        {
+          "line": 34,
+          "kind": "block"
+        },
+        {
+          "line": 41,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/ProductsProved.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "eacbd225626c4b4f9dbca5c894b2ebca076865c5520ec1ffd67c46fa1a0a40cf",
+      "candidate_sha256": "7ab3367f27fc4eb801580304196682cba53496a100c2378611129d1973da8002",
+      "noncomment_sha256": "5a8130db2e24d6e225d2bbd91e51d351b3cf12dc94dab06a929e65f48d250ef3",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 11,
+          "kind": "block"
+        },
+        {
+          "line": 27,
+          "kind": "block"
+        },
+        {
+          "line": 38,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/ProfileTheorem.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "7cd0bf4f090e03613b2e46d19dd8ac6e87c1c6a499d77a36857432fb4a826b9c",
+      "candidate_sha256": "01f9c916ece128d9fe85113535ccd3af33877e0c324e025c62808210899b915d",
+      "noncomment_sha256": "de353cad2fb78f77e9f6dc37be2ba544e245d2eb222cc45ba683a69a13af260c",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 16,
+          "kind": "block"
+        },
+        {
+          "line": 50,
+          "kind": "block"
+        },
+        {
+          "line": 69,
+          "kind": "block"
+        },
+        {
+          "line": 81,
+          "kind": "block"
+        },
+        {
+          "line": 94,
+          "kind": "block"
+        },
+        {
+          "line": 112,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Provider/Decoupling.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "df5f34b687de6bc7e1dc04229c06e4965f0aff65aaaf2639d3af4b84be7fd41a",
+      "candidate_sha256": "a767423a4a2f1762e99cad21d3bf98ebacdab219185df8ae88e6acea6d5adef1",
+      "noncomment_sha256": "839c270199800bfb9467d9002f1f0415158adf875b7636e0e2832abca4fed32b",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 10,
+          "kind": "block"
+        },
+        {
+          "line": 31,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Provider/MainBounds.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "960637cfcc7c69c9cd4dcb89b8c487212179ac384be0895891748264439f48cb",
+      "candidate_sha256": "ab22c3c2ca26643da4d37d98d0383feb48e919e25bd9ee351c920cc38b3dda43",
+      "noncomment_sha256": "2eab1592c9e852eeffdc1703f25049f92cdbf2b1856d6e56a0299b736b5c3eba",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 10,
+          "kind": "block"
+        },
+        {
+          "line": 24,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Provider/Profile.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "22f8573be4387ed91e26857e642363eaf39fba7593e433f0b9f246eeea92ee51",
+      "candidate_sha256": "461665b63df637c0bab6ca9f2cfa22e37dec460152a1fcf103a524c9dbb6b3ea",
+      "noncomment_sha256": "533a07cdf6fd8e60c3e924694082864cdb1531eaa19263a567198fb4a0ae53d4",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 10,
+          "kind": "block"
+        },
+        {
+          "line": 31,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/ProxyMarginal.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "6d0cb3cb0bcb41f17ad09baa86c7c4ed7c0a9815dcf75986671299d6c354c633",
+      "candidate_sha256": "3e7abc0afde4e4cae2741a3c1f234dad76763ceea81900e8b659cf2ada440c41",
+      "noncomment_sha256": "d0651e2d8daecf3bd31b36485560eeacda5f08ace020746661817512eba1ebe5",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 11,
+          "kind": "block"
+        },
+        {
+          "line": 59,
+          "kind": "block"
+        },
+        {
+          "line": 68,
+          "kind": "block"
+        },
+        {
+          "line": 318,
+          "kind": "block"
+        },
+        {
+          "line": 339,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/ProxySums.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "de20af95a466c963c9361932669c0c1684fa871e6f035e622e4e544b9745c53e",
+      "candidate_sha256": "782a83156597f8981273d60205885d0ae5baa9ad342a9da9bb3b5de48ee2ce16",
+      "noncomment_sha256": "fead0651dede66b9dc57196cd987bd87e9ad24502ac99eaa3f8dd29585f82d8c",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 9,
+          "kind": "block"
+        },
+        {
+          "line": 47,
+          "kind": "block"
+        },
+        {
+          "line": 163,
+          "kind": "block"
+        },
+        {
+          "line": 249,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/ProxyTV.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "057eb4236d94e609e210635d3585fd4af8d577bf926b1a3cdda9208933e4a075",
+      "candidate_sha256": "65c65d90328d22a67400d8e08ece9bc4248a5e7cacbf23bd4bb1016057787716",
+      "noncomment_sha256": "0091a14f1d734538419e4752e7ef98163717f89ead32f60229085ba808786d58",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 10,
+          "kind": "block"
+        },
+        {
+          "line": 241,
+          "kind": "block"
+        },
+        {
+          "line": 433,
+          "kind": "block"
+        },
+        {
+          "line": 443,
+          "kind": "block"
+        },
+        {
+          "line": 453,
+          "kind": "block"
+        },
+        {
+          "line": 461,
+          "kind": "block"
+        },
+        {
+          "line": 463,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/RevCauchySchwarz.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "8f894fba4d818c7d95f25af551a3aacb874afeb934da340a99277d21854788a5",
+      "candidate_sha256": "817cb090999a5a349ecfa427557e8f5001d564c38f95f1fde233507908b7af9b",
+      "noncomment_sha256": "31e83db7b1f8d776dd96a3bbe2e3f016dce209cb212fcf134eeedd000b2e85d0",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 10,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/SampleEntropy.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "a7123b3c28a6c2d85bcc8d384d90c3b21f39699983503215dd72f27e43775484",
+      "candidate_sha256": "1cca1f935e20435cc376e21fcf60a658b3cef413990e4a09066948cbbee00a7c",
+      "noncomment_sha256": "8792af7944f293d8f3087630726771402f4e800fa0e364ad8d834587bd4472e9",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 18,
+          "kind": "block"
+        },
+        {
+          "line": 60,
+          "kind": "block"
+        },
+        {
+          "line": 86,
+          "kind": "block"
+        },
+        {
+          "line": 127,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/ScoreTV.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "2de0f0ebd85cc2f1d1e3e541b43514322958a5283ae98a431c88d1884b96b992",
+      "candidate_sha256": "863056f4cfa4304dd34e3d5b3650d04bfa0aa8f0d48da84199d69d839ee839d7",
+      "noncomment_sha256": "990bef4dc753bd0f5a2b876030964335e30f52f9a31905aa2992feb063fc2fb0",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 10,
+          "kind": "block"
+        },
+        {
+          "line": 76,
+          "kind": "block"
+        },
+        {
+          "line": 156,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Separation.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "cb0fcda51af33fae1d7382ebee0391f7c2c400459a332f4763c0a83a9f9117e2",
+      "candidate_sha256": "2d67d05d94195406143497bfe2f9e57fb7f92d10977f4e0ee6893b4e7f11003f",
+      "noncomment_sha256": "63398a6a96aa2f6e2ac5180b3b9163b78a2627132c3a62570393544d5b8ed7d1",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 13,
+          "kind": "block"
+        },
+        {
+          "line": 45,
+          "kind": "block"
+        },
+        {
+          "line": 67,
+          "kind": "block"
+        },
+        {
+          "line": 126,
+          "kind": "block"
+        },
+        {
+          "line": 167,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/SequenceLemma.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "93aa874f033f3de6864e46120f2103e03fdbcfc789fe782b095461445e16e0a0",
+      "candidate_sha256": "eac75cd8d3fd2fc15581574580be51374135c40fe0ddb49ab0d522aaae687848",
+      "noncomment_sha256": "4581543ffc60dd5a508cfa2ff1cfc8ac21a6884a63fa48f2512e024e7d4f757e",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 12,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/SqrtSums.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "8d0ced02297043030acf06022de61f0dc2c907adc226197fbe7d7f4dc175e173",
+      "candidate_sha256": "a8373a4fe6b5971e77b5c0029ce62436ec330b56aacec3513f0581c1944af0a7",
+      "noncomment_sha256": "5130b409b2f575adcf3d02e4e34edcaaf8232fd4abab4df28f8c16deab18b4c4",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 13,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/StrongHan.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "5fd04c6c677814299dfd8ac831c7d9326ca638363c2d2dbb01814fbb6c7895c1",
+      "candidate_sha256": "da7893c900de257865de5e7f050d9c520d544c226ff717cb2c5bc225f23f773b",
+      "noncomment_sha256": "91ae5689980e62a95ee9c669da956d58d8a701ef90cd3927ee3783b8853d04cb",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 17,
+          "kind": "block"
+        },
+        {
+          "line": 534,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/SupportGenFunCLC.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "0e208663d7e3aa0c0ba1c4e21aa5e0e46378e3ba921dc653dbb7815e62e98663",
+      "candidate_sha256": "74f113b8a5f261673e17b19b8b2e262f827adcef1f6c1ff033eab1950264c250",
+      "noncomment_sha256": "31ddc53d5e61bd001385d9831e12cdd0773fdad1784a9067d307b9d6ea5ca0de",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 11,
+          "kind": "block"
+        },
+        {
+          "line": 163,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/Symmetrization.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "bc1426bf3b70180024b4c14b3d477029e9828b50019062f26a626a6121ce98bb",
+      "candidate_sha256": "f727652b4235eba78fd9fdbed4aa0a4e0edca1185e23cf0017ae03df7f4ad878",
+      "noncomment_sha256": "20e196ad137bcce507fc23f037d03f5747a1d85348b16d2313c48c5f1c70e12b",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 12,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/TVDist.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "9dc4456c68598ad98e6fcc899afd35667c17e035e08c45cab2f10767de973bf9",
+      "candidate_sha256": "fb599c7a5d93e5122606c74f9e29a17cbfeec06c416ce14fb214f94838574ad0",
+      "noncomment_sha256": "05d106456a2baa09debd99d167a0093f74fdac9e5d25f932d4713694b1491be1",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 8,
+          "kind": "block"
+        }
+      ]
+    },
+    {
+      "path": "Parking/WordLaw.lean",
+      "protected": false,
+      "changed": true,
+      "source_sha256": "c9a2cc50e5c6b91ffccb32ebfc827a3e63df15b9dbf17779c443df6803f601f2",
+      "candidate_sha256": "cb7080c760c7ec855c1d26cd6d902ecc9549c438e40e8e51dadc963d82a4b58b",
+      "noncomment_sha256": "2f2eaa6ea7aab55dcee755458c128f62472d378b25843897bf5b11ce01f4053c",
+      "noncomment_chunks_equal": true,
+      "copyright_equal": true,
+      "edited_comments": [
+        {
+          "line": 9,
+          "kind": "block"
+        },
+        {
+          "line": 44,
+          "kind": "block"
+        }
+      ]
+    }
+  ],
+  "total_files": 79,
+  "changed_files": 63,
+  "protected_byte_identical": true,
+  "all_noncomment_chunks_equal": true,
+  "all_copyright_headers_equal": true
+}

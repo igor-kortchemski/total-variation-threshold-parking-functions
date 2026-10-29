@@ -1,0 +1,1013 @@
+{
+  "review": "Read-only source-fidelity review of approved export against verified development snapshot",
+  "date": "2026-10-29",
+  "scope": "Source-level check only; no Lean, Lake, Comparator, NanoDa, or build command executed by this reviewer for this review.",
+  "reviewer_independence": "Reviewer did not author these six proof edits or four cache resets; previously contributed underlying library proofs and export comment/license changes.",
+  "status": "PASS_SOURCE_FIDELITY",
+  "baseline": {
+    "project": "Parking-paper",
+    "hash_manifest": "docs/reconstruction/final-source-hashes.json",
+    "manifest_sha256": "5cd891ffdecf0bd01de846395b1a9e97d1f24cc4a10be0dd7a940b4c887e540f",
+    "files_rehashed": 79,
+    "all_saved_baseline_hashes_match": true
+  },
+  "summary": {
+    "implementation_files": 79,
+    "noncomment_identical_files": 75,
+    "changed_files": 4,
+    "proof_edit_sites": 6,
+    "affected_top_level_declarations": 5,
+    "all_statement_source_unchanged": true,
+    "all_data_bearing_definition_source_unchanged": true,
+    "frozen_source_noncomment_unchanged": true,
+    "implementation_forbidden_token_matches": 0,
+    "inputs_stable_at_completion": true
+  },
+  "method": "Remove nested block and line comments, preserving all other characters including whitespace; reject executable strings or quoted names (none encountered). Apply exactly six independently reviewed unique proof-body edits to baseline and require exact equality with current source. This is not a Lean parser or semantic equivalence check.",
+  "proof_edits": [
+    {
+      "path": "Parking/Basic.lean",
+      "before": "  intro j\n  simpa only [Fin.zero_le, Finset.filter_true, Finset.card_fin] using\n    Nat.succ_le_of_lt j.isLt",
+      "after": "  intro j\n  change j.val + 1 ≤ (Finset.univ.filter (fun _ : Fin n => (0 : Fin n) ≤ j)).card\n  rw [Finset.filter_eq_self.mpr (fun _ _ => Fin.zero_le j), Finset.card_fin]\n  exact Nat.succ_le_of_lt j.isLt"
+    },
+    {
+      "path": "Parking/Law.lean",
+      "before": "inferInstanceAs (MeasurableSingletonClass {a : Fin n → Fin n // isParkingFunction a})",
+      "after": "Subtype.instMeasurableSingletonClass"
+    },
+    {
+      "path": "Parking/Count.lean",
+      "before": "  congr 1\n  apply Finset.filter_congr\n  intro i _\n  rw [Fin.val_castSucc, Fin.le_iff_val_le_val, Nat.lt_succ_iff]",
+      "after": "  congr 1"
+    },
+    {
+      "path": "Parking/FirstCoordCount.lean",
+      "before": "        congr 1\n        apply filter_congr\n        intro i _\n        show (a i : ℕ) ≤ s ↔ (a i : ℕ) < s + 1\n        omega",
+      "after": "        congr 1"
+    },
+    {
+      "path": "Parking/FirstCoordCount.lean",
+      "before": "      congr 1\n      apply filter_congr\n      intro i _\n      rw [Fin.le_iff_val_le_val]\n      omega",
+      "after": "      congr 1"
+    },
+    {
+      "path": "Parking/FirstCoordCount.lean",
+      "before": "    congr 1\n    apply filter_congr\n    intro a _\n    rw [Fin.ext_iff]",
+      "after": "    congr 1"
+    }
+  ],
+  "files": [
+    {
+      "path": "Parking.lean",
+      "baseline_sha256": "4591b34a8b565ec58a21a59e92debaec8b59d0a71b07b28c04f4e5d16de3687e",
+      "export_sha256": "c8c892252c813c331a4969873cedf4fe8e729a1fcbabe0336c13f0e569fcb6db",
+      "baseline_noncomment_sha256": "c3f08a4594f2c3633b429026a8d3ddb95c5f86edce2f418e8f39d138852c6b71",
+      "export_noncomment_sha256": "c3f08a4594f2c3633b429026a8d3ddb95c5f86edce2f418e8f39d138852c6b71",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Basic.lean",
+      "baseline_sha256": "272eee48461e608566830972d7ae6cddade98b0394e8328f65c22424f727e71b",
+      "export_sha256": "67af21e75b21e04f39a2f06ea74cbe2782c48ee01f85064c02b3d3a793c153b6",
+      "baseline_noncomment_sha256": "1f60281957c8950c12c6f1c19b0087818d5f3ed247456c1868098264255c826f",
+      "export_noncomment_sha256": "2e29521a8d3c634f741b5bbbf33d734ad2acd34edbbe38ebd5bea240101fd799",
+      "noncomment_equal": false,
+      "reviewed_proof_edit_sites": 1
+    },
+    {
+      "path": "Parking/Borel.lean",
+      "baseline_sha256": "f649e1caa192f203c738f23b007358cb05bd19c9a321ff599a3dbaa39d57ff0c",
+      "export_sha256": "816e33afc7fec93f804a2f9211b2964acfbb741458b5c86389eae1f4a1cffa48",
+      "baseline_noncomment_sha256": "e8475e3f17128b231761ad15121842048213b64dc6c4ea19992331cf9ab7328c",
+      "export_noncomment_sha256": "e8475e3f17128b231761ad15121842048213b64dc6c4ea19992331cf9ab7328c",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/BorelAsymptotics.lean",
+      "baseline_sha256": "818a3464bc46a3e503f956afd7a2ac7dac9f9a257e8044041e4b2c55676a8a81",
+      "export_sha256": "e6a066d35611f5b301a7d5f1ac0611675280ed110d299517022c679fd5ae4f69",
+      "baseline_noncomment_sha256": "1149e156bfc7ccee6fb626554ea51729f7007c3a6ccabde1de91e50de432c4cd",
+      "export_noncomment_sha256": "1149e156bfc7ccee6fb626554ea51729f7007c3a6ccabde1de91e50de432c4cd",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/BorelEndpoint.lean",
+      "baseline_sha256": "b927a445941d0fe24421f11ae8711240c960fed6294e137c604e9db7939dcc01",
+      "export_sha256": "34a0a45a8c981824dc65d93480cfc18a10da7b67e8471a491c4509520513b56d",
+      "baseline_noncomment_sha256": "1704d164660084c103a7f26f6d5f99cd0c5ebb9375e383db01caf0a5ec033c9d",
+      "export_noncomment_sha256": "1704d164660084c103a7f26f6d5f99cd0c5ebb9375e383db01caf0a5ec033c9d",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/BorelTail.lean",
+      "baseline_sha256": "7b6957951f628ee0231260ce08aef8aa373fa1ec57c2888615ea93de8ac3d882",
+      "export_sha256": "7029c43ecd62be64c898c6bb7eecd97d1cfaa1ef0acc826cf8453b5861d94f57",
+      "baseline_noncomment_sha256": "8c0c8fe514e077513d4e451941583236e6e5d6202b30f49b6ef150b1f79372e7",
+      "export_noncomment_sha256": "8c0c8fe514e077513d4e451941583236e6e5d6202b30f49b6ef150b1f79372e7",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Breakpoint.lean",
+      "baseline_sha256": "e2721013d94b6bd9f65d686f027f5385d94facaa7772beec9c89de3f0942c726",
+      "export_sha256": "936580bebcab967038a1e631c75fd5908b85fb34b48565365a432fcf990db089",
+      "baseline_noncomment_sha256": "3411398c9c2786b1354c8255dbeec58ce4eaf96327a4a96d85ad4984719296c7",
+      "export_noncomment_sha256": "3411398c9c2786b1354c8255dbeec58ce4eaf96327a4a96d85ad4984719296c7",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/CLCCriterion.lean",
+      "baseline_sha256": "a002212e33d254080f5dde06c6ed81820a5acd9414260de339cf46d6e9833b1c",
+      "export_sha256": "0cdcf1a62cd3009fb75e2067741061bf2ecc2078e6fa1acd07cc56f47f74483b",
+      "baseline_noncomment_sha256": "93edc88b8a483c211875447a9b530f2a33f5f111c4bcd3db50202040bfccb545",
+      "export_noncomment_sha256": "93edc88b8a483c211875447a9b530f2a33f5f111c4bcd3db50202040bfccb545",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/CharFunExpansion.lean",
+      "baseline_sha256": "77a58094964d91eedcab7b9beb7bfa8eda2fc3ef929d8b5c8677984786cf14de",
+      "export_sha256": "a65eea7d9a450abacf3be928f6987c4bd92c8e1d9ffea67a29e988dc04e0abe3",
+      "baseline_noncomment_sha256": "eb06a6b3c9a914141e24bd4f4e21e72789a891c439bc88cebb128b2bcb7fbab3",
+      "export_noncomment_sha256": "eb06a6b3c9a914141e24bd4f4e21e72789a891c439bc88cebb128b2bcb7fbab3",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Corollaries.lean",
+      "baseline_sha256": "ffb9645000412d24e1192d59d73330cb3609f9c021a0a0cfcd3fe4ce5fc48165",
+      "export_sha256": "17e6aeb400f8d174e6b45a52eb14ae465571e87a7114e94c26423ec79e078a32",
+      "baseline_noncomment_sha256": "c58a0d0a249435605018ca1dbb334fcff7d7e681f2932be6065901ccf71b63ec",
+      "export_noncomment_sha256": "c58a0d0a249435605018ca1dbb334fcff7d7e681f2932be6065901ccf71b63ec",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Count.lean",
+      "baseline_sha256": "2f9ee8492b0a1e83df583080babe6c437b50c8aa955f673e2191fdcd5ee1c3e8",
+      "export_sha256": "a0c1f1abda29a9d7121116f13fee04478a8c6fd39473a2454b4b82e225f6c5c8",
+      "baseline_noncomment_sha256": "f7b7e7e52a0eebff8b367aeff70573f9b4d18d335200c198a70795fe8b778000",
+      "export_noncomment_sha256": "bc01c4d7df7476eeded1c7a28f25f202232336336ca04229de749cee7a89b246",
+      "noncomment_equal": false,
+      "reviewed_proof_edit_sites": 1
+    },
+    {
+      "path": "Parking/CountPoly.lean",
+      "baseline_sha256": "c79200d7e5577153f7a3986fffbd69b1a381c1c3b8ce966424a98551e4149570",
+      "export_sha256": "3b4ae7196e04461e7bca5b82bf98b4c6631ec058a1c0420363c91734b423433c",
+      "baseline_noncomment_sha256": "35ba13544cc1f0d03a8e063e7ce0c58111a41164fad2d85fc348de47e8a474e7",
+      "export_noncomment_sha256": "35ba13544cc1f0d03a8e063e7ce0c58111a41164fad2d85fc348de47e8a474e7",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/DecouplingBound.lean",
+      "baseline_sha256": "1a26e078042cc8f6ce69a4ca1a5a840e17b321085b274a03f9c4110e5936fecd",
+      "export_sha256": "2d70e1d996f3504a78d9b6eb3a4e35311b43033dfabd5c3b4ad24105a96a3104",
+      "baseline_noncomment_sha256": "c054e05657e73b9142fc99486986b87987ae1dd0231243fa7cd7870d83b330ad",
+      "export_noncomment_sha256": "c054e05657e73b9142fc99486986b87987ae1dd0231243fa7cd7870d83b330ad",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Entropy.lean",
+      "baseline_sha256": "5a470c8c6e722cd348bf599e6948c0e4eec3edef4d5d6fa122a5f5a02741ee93",
+      "export_sha256": "b27f0af5144e32738526aa3a59fd0d5e2ca1c56c038df8343c15f304585d9cb5",
+      "baseline_noncomment_sha256": "4ce8d42d9a4fef7d72d7c80a9ac8f3186ca0de09474b142d64af1faf6cef6c51",
+      "export_noncomment_sha256": "4ce8d42d9a4fef7d72d7c80a9ac8f3186ca0de09474b142d64af1faf6cef6c51",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/EntropyKL.lean",
+      "baseline_sha256": "adc701574931f7f3ca7adeda944e13985a78c7e7d41ae00e16dc2bb8a2679a2a",
+      "export_sha256": "7204afff2c03633beb9ba996e9fbd388678080af8849efbe4bc06cd6e090058c",
+      "baseline_noncomment_sha256": "8afb75e5bd5080d5444b06a9567d6f3bff86e8fce6028ffbccaf63e090802443",
+      "export_noncomment_sha256": "8afb75e5bd5080d5444b06a9567d6f3bff86e8fce6028ffbccaf63e090802443",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Exchangeable.lean",
+      "baseline_sha256": "37412ecabab10233149420eb2421302dff79731a5e390d93562a87f36a2f17d5",
+      "export_sha256": "a5635a9c975eaf0dfdb589b2a98e5817e9f13afd5c81772bdabd07181be0da7b",
+      "baseline_noncomment_sha256": "de22a3b3190229a1e19785f51ede7090e2df367da9133f3671a7f4830466c76e",
+      "export_noncomment_sha256": "de22a3b3190229a1e19785f51ede7090e2df367da9133f3671a7f4830466c76e",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/External.lean",
+      "baseline_sha256": "e55cfcc5fcc2907617a3f7c045222114f81dfa663d0e80945e185acd0a37f5ca",
+      "export_sha256": "2cc3c861967773bb151c8e7040fe0997fef9844fad44f2f4d286bc42034d584a",
+      "baseline_noncomment_sha256": "b238cd49aee72a9c6d26452741f8022680e506ea3930fd454fd96ac3f7a5884e",
+      "export_noncomment_sha256": "b238cd49aee72a9c6d26452741f8022680e506ea3930fd454fd96ac3f7a5884e",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/FirstCoordCount.lean",
+      "baseline_sha256": "8d90cb9c9ff70a50062de9ad51fdaad386d936b6ebe3e4b2d7125830072e3440",
+      "export_sha256": "1dc8998d207d5c82a767e749fa7f368b821daef00f242ebf5642d71669b16733",
+      "baseline_noncomment_sha256": "2556edc6e7c9cec822e278d13ed2f1031a32959a5d3a0d68c3151c0c2b13dc0b",
+      "export_noncomment_sha256": "698f9ec196a61a1757e37c1f01da8984f0506e3154e42788cbca350d454d67d2",
+      "noncomment_equal": false,
+      "reviewed_proof_edit_sites": 3
+    },
+    {
+      "path": "Parking/Frozen/Decoupling.lean",
+      "baseline_sha256": "5d216d73c52ecb3923f6683032ddf94fd5a3c20b3cb19856a46764af819ebad2",
+      "export_sha256": "1d8ed979f8702113a998c537e3a7ad870c771bb68e1ff0e19052a21bee0a362f",
+      "baseline_noncomment_sha256": "e8de443c522ccda3bbe11fe4ff9691a0885a7f1cbb34da3863ab9c2ea9287aaf",
+      "export_noncomment_sha256": "e8de443c522ccda3bbe11fe4ff9691a0885a7f1cbb34da3863ab9c2ea9287aaf",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Frozen/MainBounds.lean",
+      "baseline_sha256": "5fc73de522686ca11ddff4fa99039759fe00b7ef257288e24214383902a036ef",
+      "export_sha256": "fd149cdfe3be929cfcc46c26097cd4250954f67b8b04ab82f0d444afacebe183",
+      "baseline_noncomment_sha256": "fee751e30f6d67213fae5bff1b8d8ad86e18dc6e6dd9e625ad2ae6e05375fd9c",
+      "export_noncomment_sha256": "fee751e30f6d67213fae5bff1b8d8ad86e18dc6e6dd9e625ad2ae6e05375fd9c",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Frozen/Profile.lean",
+      "baseline_sha256": "6bb89e9fd9c524a323e57cda22814019e8a2d30f3f57e91df557bffc65b58598",
+      "export_sha256": "841112175fcea390171e1ca4ed5ad3c067e9d08a604753d2e4cb0c8fd73d924c",
+      "baseline_noncomment_sha256": "cca5e314dfc0dea16169e3c24e4f20dcde542291b09c23ccdc816bb056b04140",
+      "export_noncomment_sha256": "cca5e314dfc0dea16169e3c24e4f20dcde542291b09c23ccdc816bb056b04140",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/GaussianValue.lean",
+      "baseline_sha256": "9fc58ab5f6653937ed9e07d18f48073eaa2bbecaee788d05556bacf8546e24ac",
+      "export_sha256": "4f2ebcb33575bbef138a8d202b9e6d178b9e70da6249214154acd987d62531cd",
+      "baseline_noncomment_sha256": "aa5bf4b0c4ba5126254b1e42960fdab17912eaab7e1d5b37e6d9515916156401",
+      "export_noncomment_sha256": "aa5bf4b0c4ba5126254b1e42960fdab17912eaab7e1d5b37e6d9515916156401",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/KLContraction.lean",
+      "baseline_sha256": "30f331b2c379bde063b411f904d98d4efa1de9743da241e16d16555cec08278b",
+      "export_sha256": "9ca0aabbb4f514451846b3c8fbae535010533b15a550072b7b58ea2c978ff531",
+      "baseline_noncomment_sha256": "1df54612ebf776bbcc50b3474dd438a36583774762c96e44b2fe3d51ba867ecc",
+      "export_noncomment_sha256": "1df54612ebf776bbcc50b3474dd438a36583774762c96e44b2fe3d51ba867ecc",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Khintchine.lean",
+      "baseline_sha256": "7567d0807090042f6fe641a72aef46102faeebecb9591d6533bbc88aecd50f70",
+      "export_sha256": "c070d9d0e4ec1bffa18ff09c13237e904e7bd0d6a99a2e43488c60f2a27ff589",
+      "baseline_noncomment_sha256": "cbfa05f57d48ca2f82b41600a89042ff45fa148b18f0f82a6ea761166d2b1a43",
+      "export_noncomment_sha256": "cbfa05f57d48ca2f82b41600a89042ff45fa148b18f0f82a6ea761166d2b1a43",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Law.lean",
+      "baseline_sha256": "6739c283f4356ecba8466f15521281781c1eb302d54ca7ad3926907e0598cb5a",
+      "export_sha256": "f8406658793d967ba216ef77812f0b808eb64b0c9c5509e928f155d005d0f6d6",
+      "baseline_noncomment_sha256": "c2268def6ea2c4f1d0ff773d0e1ec6ebc355d0a7110dbc7ade76ffe336313da9",
+      "export_noncomment_sha256": "cceaec7cba5a759165699f7927c6457aff8b905974c6b6cf18ef9c20b4472048",
+      "noncomment_equal": false,
+      "reviewed_proof_edit_sites": 1
+    },
+    {
+      "path": "Parking/LikelihoodLaw.lean",
+      "baseline_sha256": "fb9ff50291f3fe7d80450cbc94d1aa7589bf4afe79bfef84695a61eccd1d150b",
+      "export_sha256": "3ff7124cd229052c92183b245dd3366b54b20058e0462970613425b6858c62b0",
+      "baseline_noncomment_sha256": "d3979df7a1fa95048acfe58a1f5498ab17c9133e85aa8aedafda64444583daa8",
+      "export_noncomment_sha256": "d3979df7a1fa95048acfe58a1f5498ab17c9133e85aa8aedafda64444583daa8",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/LlrLimit.lean",
+      "baseline_sha256": "a8f81e95897f0cbe967f2dac6d03d2230c0d0537748a1eac6c1ddc3984f2285d",
+      "export_sha256": "1bc4dbe038eb3859992d25132e31ef3f6d17fa48a1a6133173a1a46c4aa517e2",
+      "baseline_noncomment_sha256": "44994731530fd6cef99ad4b2097e06958ca1d53d4dc52b33e30b9fb205e20149",
+      "export_noncomment_sha256": "44994731530fd6cef99ad4b2097e06958ca1d53d4dc52b33e30b9fb205e20149",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/LogConcave.lean",
+      "baseline_sha256": "9d44ea3cf570994df80511c8fdc90ab65fab549a853cc7d4433e7b585478d9fe",
+      "export_sha256": "b0b64375b92675411eeafd47b54bb6d91daa63bda64f71a51e830af029c5b59b",
+      "baseline_noncomment_sha256": "d1a07b2ce7309b41ae0ef6482f16cc36ad99779e3f6696fb1a3e770d19383a2a",
+      "export_noncomment_sha256": "d1a07b2ce7309b41ae0ef6482f16cc36ad99779e3f6696fb1a3e770d19383a2a",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/MConvexForms.lean",
+      "baseline_sha256": "d44433eae1e003f576930c993489e0087ed6714bf694c885a9e6b70b0174770f",
+      "export_sha256": "d9737efadc1e6a70b707a79d4aefb5569ea3c33566a67f0f4b0bcb6aa79eef59",
+      "baseline_noncomment_sha256": "3d4242ba7f9b2348358f0b797d8517a18ac24da2cfcbd255044d332dc59df39b",
+      "export_noncomment_sha256": "3d4242ba7f9b2348358f0b797d8517a18ac24da2cfcbd255044d332dc59df39b",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/MainScalar.lean",
+      "baseline_sha256": "1d6e1f62cf9b0f2d1c2744801652a6a7f040b36fa1ee021d70b30d9d188431fc",
+      "export_sha256": "dbb29e6e70198306f60b7bba338a4dac82d6fcd44fdd54be56eee74241837c6b",
+      "baseline_noncomment_sha256": "31dfadcfa89edc9340e2b2f79564f9776e5806885b11ab61f7aa12c8d8d9e399",
+      "export_noncomment_sha256": "31dfadcfa89edc9340e2b2f79564f9776e5806885b11ab61f7aa12c8d8d9e399",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/MainScalarPaper.lean",
+      "baseline_sha256": "7d3403dbe01ce9496bceccb4ff581c6e13f541a6a540e1074f9a98bf26bc78e8",
+      "export_sha256": "98a698bf603a7f8cfa415637ab54d571c89d4f47a237ba396b66d87a6baced5e",
+      "baseline_noncomment_sha256": "210b47ab4b809017e85deefb0e9160c24bb6630ce7ffec8898c75c0c7e0b88e7",
+      "export_noncomment_sha256": "210b47ab4b809017e85deefb0e9160c24bb6630ce7ffec8898c75c0c7e0b88e7",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/MainTheorem.lean",
+      "baseline_sha256": "e10bb10bad45749aa9e5b0dbc3415811cd19d682ecf9918d38d41f8549aa36a5",
+      "export_sha256": "486628917b5c7cf982821df84514bc80792b574dc4c3a1c877aa0291bca14218",
+      "baseline_noncomment_sha256": "6d9c4ef847758bd4883e657554334f9d7161747a05457e66d3f0aab2b846dcf8",
+      "export_noncomment_sha256": "6d9c4ef847758bd4883e657554334f9d7161747a05457e66d3f0aab2b846dcf8",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Marginal.lean",
+      "baseline_sha256": "56eb45e547fafa8156e20edb06161b048b46d2b1cea9b142cb27beac7990b580",
+      "export_sha256": "e237bb1e30ffe0fe01269e01d9b845f9319a997ba1db856d6705466fde123a8c",
+      "baseline_noncomment_sha256": "b56736220b6c085d39178f986571372c1c4365fb497510e6ff06452ed67f7fa7",
+      "export_noncomment_sha256": "b56736220b6c085d39178f986571372c1c4365fb497510e6ff06452ed67f7fa7",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/MarginalBounds.lean",
+      "baseline_sha256": "66a0b0111d8aa622928a08c08e5ec5774aa214aec58e10ec3c68498b75282f2d",
+      "export_sha256": "4884f78cd6849c1db45146732f648578807e2c9b346613859bbd1846884b8f7e",
+      "baseline_noncomment_sha256": "65477a4be0ee7cb55066d04eb83de8fc1e0ab71917788a58bf70e1629292939f",
+      "export_noncomment_sha256": "65477a4be0ee7cb55066d04eb83de8fc1e0ab71917788a58bf70e1629292939f",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/MarginalSquareSource.lean",
+      "baseline_sha256": "43439ac814050a746b5703e1b45d4bc80449e8402086f0f605de4fa83825442c",
+      "export_sha256": "55bf25cd69e48c61d3f02c60145170e29483089ba3fcec495d6e9fb4f034f390",
+      "baseline_noncomment_sha256": "d92ff4ba9caf581fd5bf0cbf1aeea37d8fdfe48cda0d7c2ed93673119bd3b4e2",
+      "export_noncomment_sha256": "d92ff4ba9caf581fd5bf0cbf1aeea37d8fdfe48cda0d7c2ed93673119bd3b4e2",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/MarginalSquares.lean",
+      "baseline_sha256": "9d2955b204366b977c0ccdd4645ab9d312a09ed8765af2f494e0e0868b9acd89",
+      "export_sha256": "9b7e24252b06e3689bbdd4cfaa604d2faa0c471f036ee2c35c081a8b73e559dc",
+      "baseline_noncomment_sha256": "7d31a716f0cdab78f0729515c773ca7093b3d4e00fdd41159b8178e9adfba522",
+      "export_noncomment_sha256": "7d31a716f0cdab78f0729515c773ca7093b3d4e00fdd41159b8178e9adfba522",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/MixedForm.lean",
+      "baseline_sha256": "d59628d9f5dda34e2dd59b57659ecdad2deaebd303c715aed2421f46029b9994",
+      "export_sha256": "0a03e64c54642ea6214515c92fb564d3218ce23b1596e95913d2985aee1b8eed",
+      "baseline_noncomment_sha256": "b0d333d32bfee273d171d068639ec12a7efbe52dc79f8047f80779d088b17f4d",
+      "export_noncomment_sha256": "b0d333d32bfee273d171d068639ec12a7efbe52dc79f8047f80779d088b17f4d",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Occupation.lean",
+      "baseline_sha256": "53eaf5802d58730f433952e4b4ad06e8caf032a7c9f7c1d671c47bb65e0d8799",
+      "export_sha256": "91ece054ab9677504bda6425614e0dc48fc33bdf2bfdf90c4f7b965860a066f9",
+      "baseline_noncomment_sha256": "c3508c1163aefdf3edd6a28a4e6d41f8562c42a2165aedd08af226db5a956c0f",
+      "export_noncomment_sha256": "c3508c1163aefdf3edd6a28a4e6d41f8562c42a2165aedd08af226db5a956c0f",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/OccupationCounting.lean",
+      "baseline_sha256": "7a874d408bf0cfffa68cafdc51442f21f1bf8c4e0babd3dd5c2f8a4d86238907",
+      "export_sha256": "379bdf67f8b141c07f9893915067fef541b92b423c698b9870e3816a60508b1a",
+      "baseline_noncomment_sha256": "1868ccb33ff4db556b2a13ad69b82a5bb3ec5578f3dcbf96467c4cae15a628b6",
+      "export_noncomment_sha256": "1868ccb33ff4db556b2a13ad69b82a5bb3ec5578f3dcbf96467c4cae15a628b6",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/LinearSubstitution.lean",
+      "baseline_sha256": "18dfcf60f465d82968bd2a3fda652b9c05485b08d545018ace925732cdeab0b7",
+      "export_sha256": "8d59825811a689e1c56c026eefaa9062b93ac80e3be71ccecb8ef0c72a7d1cdc",
+      "baseline_noncomment_sha256": "6ac66a482b673eb4d774d9c35dca43a35a29f580f9c0d6f612d9780137dd8b85",
+      "export_noncomment_sha256": "6ac66a482b673eb4d774d9c35dca43a35a29f580f9c0d6f612d9780137dd8b85",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/Lorentzian.lean",
+      "baseline_sha256": "fcd5fc746df5e57268db81a2fda7baae314021cde3849e71be180dee959ec05a",
+      "export_sha256": "b74d739fdc0cd7c880bc854d346e6db12e24c0142341b4fc8c6de1259b3b97c8",
+      "baseline_noncomment_sha256": "6b4e00d43fd6a8e04b52a0f4e42c8a5ec16f43caa963798b4e78ced1e87ffdc8",
+      "export_noncomment_sha256": "6b4e00d43fd6a8e04b52a0f4e42c8a5ec16f43caa963798b4e78ced1e87ffdc8",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/OccupationLogConcavity.lean",
+      "baseline_sha256": "e5a76da6d6c4d474db1d934eace2faed0150faa655a9ff18a0e068d8406d14dd",
+      "export_sha256": "c3fed443f04ff836678a0bd71d695771d1f7c66f3249d87bb77fc53677592c97",
+      "baseline_noncomment_sha256": "3807949459ec45b1f1d7656b2721ac5957ee96c69b61c2399a0dffb604394aec",
+      "export_noncomment_sha256": "3807949459ec45b1f1d7656b2721ac5957ee96c69b61c2399a0dffb604394aec",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/ParkingBoxOrder.lean",
+      "baseline_sha256": "3eae28e2d317ecc8f49f61077e93670725a5d829879fb4f502cee4c044118f46",
+      "export_sha256": "dd1aa030b2500cc3b0c5cceb5bd075dc3351a9d154fe138fc15c8794c76f264d",
+      "baseline_noncomment_sha256": "d91be3f6f673f8dc89f3d1cb8ddd23bfd672463f5bece692acd14337326e40f8",
+      "export_noncomment_sha256": "d91be3f6f673f8dc89f3d1cb8ddd23bfd672463f5bece692acd14337326e40f8",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/ParkingBoxes.lean",
+      "baseline_sha256": "c49a74eef7211b9865d8ac3e50058da9aabab7bd71383800d29ca5e60a861aef",
+      "export_sha256": "748b94718453deb973b8415d91b13676d604e38de498157cb33382a03ed82982",
+      "baseline_noncomment_sha256": "bfc038285be2b87ad6c7c2d054193fbf4b647b36dd09f17f45373549f9a95e43",
+      "export_noncomment_sha256": "bfc038285be2b87ad6c7c2d054193fbf4b647b36dd09f17f45373549f9a95e43",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/PitmanStanley.lean",
+      "baseline_sha256": "26b03fb4c3bf721a99afa5fb9ef88b08065c007f3255eecc348735b638da95b7",
+      "export_sha256": "4e69eeb296871c68dc9979d26c90c369a9aa9d89886fc7a477e4655e623ad98e",
+      "baseline_noncomment_sha256": "04c8a24d4875793d931caa4200060e1ae28ba4d73ce0d24b0d6c3179fb977755",
+      "export_noncomment_sha256": "04c8a24d4875793d931caa4200060e1ae28ba4d73ce0d24b0d6c3179fb977755",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/PitmanStanleyFormula.lean",
+      "baseline_sha256": "8ca4c1f6ab85283335d38f99c3de3ffae7bd864966d16e21bc6a92236aac0259",
+      "export_sha256": "6ba28b6df9a8dccebf8a94a78fdab8340dfc8a2494681d85b1b20d4d573b6fe5",
+      "baseline_noncomment_sha256": "0bbebc4dc62ae3b94cc0e0d30af950580f6ea2e5e3c5e2f86916689a44273de5",
+      "export_noncomment_sha256": "0bbebc4dc62ae3b94cc0e0d30af950580f6ea2e5e3c5e2f86916689a44273de5",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/PitmanStanleyMinkowski.lean",
+      "baseline_sha256": "b631eb026320f5768bfa459f38d8b05c409933e98d200707a65fb6fdf631f7b6",
+      "export_sha256": "a936441652383fb053cccdd5c6a2b41aa10909052ff0075db2ccd86f945f8bf2",
+      "baseline_noncomment_sha256": "7bedba3e103cf31317b8767c12e7cede0b51080383ff8c6e0094569dacfc5c1f",
+      "export_noncomment_sha256": "7bedba3e103cf31317b8767c12e7cede0b51080383ff8c6e0094569dacfc5c1f",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/PitmanStanleyVolume.lean",
+      "baseline_sha256": "1b3eb49a172b52482eac64571b8a418005bed143e35629eb7913df70c498fe00",
+      "export_sha256": "58ec9b3ad2e93fb2270598d8e5351f87f62c5afc4a77e18f4aecc739a3016d56",
+      "baseline_noncomment_sha256": "27a83cfb4ed059f2e9aaf14ec91d659e346c9475fd0c3948024c0b9d1ffd7c1a",
+      "export_noncomment_sha256": "27a83cfb4ed059f2e9aaf14ec91d659e346c9475fd0c3948024c0b9d1ffd7c1a",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/PrefixProduct.lean",
+      "baseline_sha256": "e4c9f06743aec7e00f0a49dad0923f53e63cbfa7b9abfe837fd79140e696777a",
+      "export_sha256": "3a3b021b0820694439ca1e969e8a7d6a3e926fcf79a318af6b0ed28c26a867c7",
+      "baseline_noncomment_sha256": "9848652f4fbe092e202c952cbd14428d5e88228294bd62949c2f119923e9e250",
+      "export_noncomment_sha256": "9848652f4fbe092e202c952cbd14428d5e88228294bd62949c2f119923e9e250",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/QuadraticSignature.lean",
+      "baseline_sha256": "dfe54a10c1008867de7695055925898331d8dd8640c6eaabfba3b24eacbcf2c8",
+      "export_sha256": "933926c4ddcd801b2499a191e43ef7e8c4ad2561c539901ec4466d6ac00afe25",
+      "baseline_noncomment_sha256": "07f5604f427ba18a260d07d853d2fe6974d49473cd4df074921e55b0e8b15ee1",
+      "export_noncomment_sha256": "07f5604f427ba18a260d07d853d2fe6974d49473cd4df074921e55b0e8b15ee1",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/RevCSConnected.lean",
+      "baseline_sha256": "8f578edf4b82a8a1abd869020ee4f792c103697ee7b3b60f9b33cbbaa5dc37fb",
+      "export_sha256": "cc4a909a01bcaf43391e61e738c1fd4ce078772e3746be3ddfdac9cf635597ec",
+      "baseline_noncomment_sha256": "d28c26689bb46f54baea50114f27c5192044e7686b21867d3cd5fbc3cf86d988",
+      "export_noncomment_sha256": "d28c26689bb46f54baea50114f27c5192044e7686b21867d3cd5fbc3cf86d988",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/StrongCompleteEquivalence.lean",
+      "baseline_sha256": "ffee63c7ced0259fa2c3e5f8121ba61432e85449ddb98b38b08e3559e66d1d50",
+      "export_sha256": "c62aa188991f7764246ed4ff49b495a0ab9a799fd6297bd747a31ef8f5c02cba",
+      "baseline_noncomment_sha256": "ccf0e82ee7330d98673923fc1efc1a830af17e88d3ed31e12cd2a88f37eeb0b0",
+      "export_noncomment_sha256": "ccf0e82ee7330d98673923fc1efc1a830af17e88d3ed31e12cd2a88f37eeb0b0",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/StrongLogConcavity.lean",
+      "baseline_sha256": "c0f53c086a9b84731e7b6a359e15da982bfc15f06e24d58065a41a19a6b00577",
+      "export_sha256": "c0956e53de1942c85df500b1a5bb4040a61792ad7c879c641bc018ba509c2420",
+      "baseline_noncomment_sha256": "0997316f4506382890ac4228f8341f4411e0e12b1d69da7163d5c5e36cf01524",
+      "export_noncomment_sha256": "0997316f4506382890ac4228f8341f4411e0e12b1d69da7163d5c5e36cf01524",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Paper/SupportNormalization.lean",
+      "baseline_sha256": "1c1717fde1c090b4fae10046ae28f01ea699142d3962ba5419c3481b952d0b1a",
+      "export_sha256": "b38a00d2c6d7124bcecd3f08693eb14ff6b361bf4c12b5c715ccb5050c284051",
+      "baseline_noncomment_sha256": "6a1f6fcba6a4a8f573753271a1182ee6e72bcaa726623a86672e332d5da4b628",
+      "export_noncomment_sha256": "6a1f6fcba6a4a8f573753271a1182ee6e72bcaa726623a86672e332d5da4b628",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/PerronStep.lean",
+      "baseline_sha256": "962696fec973f48903a878647a08dd2939db5e040e264d4f2f19654a6f3b4eb9",
+      "export_sha256": "67965ad6c30af54e12a853fe13c4cd6396906ecdaa47eee0d0caee11e318b8e0",
+      "baseline_noncomment_sha256": "6248dae417f88e060ade73d9828a106544aa4038f6e77e41f30cbbc172a31e7e",
+      "export_noncomment_sha256": "6248dae417f88e060ade73d9828a106544aa4038f6e77e41f30cbbc172a31e7e",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Pinsker.lean",
+      "baseline_sha256": "f7cff88e7e47ada38d8a4194dad00d9766ed38bee9f5f0733517bf5349307071",
+      "export_sha256": "e2df75313ddd3c658b66bcda1f65adc8c4787d6ac1e0494c6f910ba7c869e24a",
+      "baseline_noncomment_sha256": "e2b426565e67e20cc8aebf175b1ba2920d6c7559b3c85883cf4b62ce8a28948d",
+      "export_noncomment_sha256": "e2b426565e67e20cc8aebf175b1ba2920d6c7559b3c85883cf4b62ce8a28948d",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/PrefixLaw.lean",
+      "baseline_sha256": "ea21978fa3418cc2a56cfda8eb66b7b5d3b358dcf13efa046ff0d0085e7f8db8",
+      "export_sha256": "b43cc20df186c398ed05372b24225eacf93fcce4fd2f438d2532d43f5f7fe347",
+      "baseline_noncomment_sha256": "e1f5d708770c558a5b1b99b811792068d47463a69ff0257a6023194fffc82d13",
+      "export_noncomment_sha256": "e1f5d708770c558a5b1b99b811792068d47463a69ff0257a6023194fffc82d13",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/ProductMoments.lean",
+      "baseline_sha256": "cff63772db4e1176bc122db28b7bee58d45385081b0c4e29f4bfb8edc2f3b98f",
+      "export_sha256": "0bbef77327304f6b21894696d51ae4c22cb4c1fd6d075357cfbbadec2aa77117",
+      "baseline_noncomment_sha256": "6c97681c61dfe1305a0c075925556abf2b7aac527861276def178b8bf9460f30",
+      "export_noncomment_sha256": "6c97681c61dfe1305a0c075925556abf2b7aac527861276def178b8bf9460f30",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/ProductScore.lean",
+      "baseline_sha256": "4f28a0d46aba137f60066e6a8379f32e2168e775568130df4e6f1617693c1dd2",
+      "export_sha256": "0b6842cd93bf721d0a49e813f66bb2dbf8d8ea518aa19e0c1be7cbc590ec8bad",
+      "baseline_noncomment_sha256": "bce41598547deab6812fafa3ce06c9ce148e1ac2f35174a4ff43583e0e708cb3",
+      "export_noncomment_sha256": "bce41598547deab6812fafa3ce06c9ce148e1ac2f35174a4ff43583e0e708cb3",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Products.lean",
+      "baseline_sha256": "f9528207df1962e8a413e0b654f9ce8b441fc3fdf8be98e635158df55da5ae0f",
+      "export_sha256": "0bfcc2302505f3dc0a8be07ec86042cdc56384649bb42ef44df56be71b538ac0",
+      "baseline_noncomment_sha256": "0d677f3e0a36936ba0980e2935552ca353ffd05589be015d86ad33a47243b8d5",
+      "export_noncomment_sha256": "0d677f3e0a36936ba0980e2935552ca353ffd05589be015d86ad33a47243b8d5",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/ProductsProved.lean",
+      "baseline_sha256": "eacbd225626c4b4f9dbca5c894b2ebca076865c5520ec1ffd67c46fa1a0a40cf",
+      "export_sha256": "0a502c8b7749860a7fdb8fab2da763e5ab85e493889b9e010e40162e88576706",
+      "baseline_noncomment_sha256": "5a8130db2e24d6e225d2bbd91e51d351b3cf12dc94dab06a929e65f48d250ef3",
+      "export_noncomment_sha256": "5a8130db2e24d6e225d2bbd91e51d351b3cf12dc94dab06a929e65f48d250ef3",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/ProfileTheorem.lean",
+      "baseline_sha256": "7cd0bf4f090e03613b2e46d19dd8ac6e87c1c6a499d77a36857432fb4a826b9c",
+      "export_sha256": "b12972ae86f4d5d9435bdcc3f8a483b5928e19a17904ea3e8470880a98449aca",
+      "baseline_noncomment_sha256": "de353cad2fb78f77e9f6dc37be2ba544e245d2eb222cc45ba683a69a13af260c",
+      "export_noncomment_sha256": "de353cad2fb78f77e9f6dc37be2ba544e245d2eb222cc45ba683a69a13af260c",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Provider/Decoupling.lean",
+      "baseline_sha256": "df5f34b687de6bc7e1dc04229c06e4965f0aff65aaaf2639d3af4b84be7fd41a",
+      "export_sha256": "000662b7a2ce91288ca907a5c1ded1ad5c0df0e89f0fdef1501184d17291b2dc",
+      "baseline_noncomment_sha256": "839c270199800bfb9467d9002f1f0415158adf875b7636e0e2832abca4fed32b",
+      "export_noncomment_sha256": "839c270199800bfb9467d9002f1f0415158adf875b7636e0e2832abca4fed32b",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Provider/MainBounds.lean",
+      "baseline_sha256": "960637cfcc7c69c9cd4dcb89b8c487212179ac384be0895891748264439f48cb",
+      "export_sha256": "a69dd2a47bb2e0a213e742a27f9c2c22af81d155641717f94e584c7f2303e0f3",
+      "baseline_noncomment_sha256": "2eab1592c9e852eeffdc1703f25049f92cdbf2b1856d6e56a0299b736b5c3eba",
+      "export_noncomment_sha256": "2eab1592c9e852eeffdc1703f25049f92cdbf2b1856d6e56a0299b736b5c3eba",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Provider/Profile.lean",
+      "baseline_sha256": "22f8573be4387ed91e26857e642363eaf39fba7593e433f0b9f246eeea92ee51",
+      "export_sha256": "bc2b1ca727fe778ee38297a238f9c87450cdd80cbf463ef29b1c1279a156340e",
+      "baseline_noncomment_sha256": "533a07cdf6fd8e60c3e924694082864cdb1531eaa19263a567198fb4a0ae53d4",
+      "export_noncomment_sha256": "533a07cdf6fd8e60c3e924694082864cdb1531eaa19263a567198fb4a0ae53d4",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/ProxyMarginal.lean",
+      "baseline_sha256": "6d0cb3cb0bcb41f17ad09baa86c7c4ed7c0a9815dcf75986671299d6c354c633",
+      "export_sha256": "b9e889fa1152dcbdc5a63e1289a5d79f914df7702ce3128689477b7e3415980b",
+      "baseline_noncomment_sha256": "d0651e2d8daecf3bd31b36485560eeacda5f08ace020746661817512eba1ebe5",
+      "export_noncomment_sha256": "d0651e2d8daecf3bd31b36485560eeacda5f08ace020746661817512eba1ebe5",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/ProxySums.lean",
+      "baseline_sha256": "de20af95a466c963c9361932669c0c1684fa871e6f035e622e4e544b9745c53e",
+      "export_sha256": "fc445e09615829bb783591796c8adc65b5fa1eaf86887e9ff852707f049f3c95",
+      "baseline_noncomment_sha256": "fead0651dede66b9dc57196cd987bd87e9ad24502ac99eaa3f8dd29585f82d8c",
+      "export_noncomment_sha256": "fead0651dede66b9dc57196cd987bd87e9ad24502ac99eaa3f8dd29585f82d8c",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/ProxyTV.lean",
+      "baseline_sha256": "057eb4236d94e609e210635d3585fd4af8d577bf926b1a3cdda9208933e4a075",
+      "export_sha256": "565057c417bdf28413b2cc75fa8e88fa36c033fbeb7f0bbe7f02edbde9cbf9ac",
+      "baseline_noncomment_sha256": "0091a14f1d734538419e4752e7ef98163717f89ead32f60229085ba808786d58",
+      "export_noncomment_sha256": "0091a14f1d734538419e4752e7ef98163717f89ead32f60229085ba808786d58",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/RevCauchySchwarz.lean",
+      "baseline_sha256": "8f894fba4d818c7d95f25af551a3aacb874afeb934da340a99277d21854788a5",
+      "export_sha256": "f21251418e4a2f875e178b0d73f5f16eec67cf42144b54927bfc2460edf2ebbf",
+      "baseline_noncomment_sha256": "31e83db7b1f8d776dd96a3bbe2e3f016dce209cb212fcf134eeedd000b2e85d0",
+      "export_noncomment_sha256": "31e83db7b1f8d776dd96a3bbe2e3f016dce209cb212fcf134eeedd000b2e85d0",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/SampleEntropy.lean",
+      "baseline_sha256": "a7123b3c28a6c2d85bcc8d384d90c3b21f39699983503215dd72f27e43775484",
+      "export_sha256": "55b18fcdb0a6bca15027085c0d9bad1c5ffaccd858c9b0a86adc2cc7f1b24d3e",
+      "baseline_noncomment_sha256": "8792af7944f293d8f3087630726771402f4e800fa0e364ad8d834587bd4472e9",
+      "export_noncomment_sha256": "8792af7944f293d8f3087630726771402f4e800fa0e364ad8d834587bd4472e9",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/ScoreTV.lean",
+      "baseline_sha256": "2de0f0ebd85cc2f1d1e3e541b43514322958a5283ae98a431c88d1884b96b992",
+      "export_sha256": "a043c749f5fb242c23631d3f2acde90092468fa4968ab88606051228f697571d",
+      "baseline_noncomment_sha256": "990bef4dc753bd0f5a2b876030964335e30f52f9a31905aa2992feb063fc2fb0",
+      "export_noncomment_sha256": "990bef4dc753bd0f5a2b876030964335e30f52f9a31905aa2992feb063fc2fb0",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Separation.lean",
+      "baseline_sha256": "cb0fcda51af33fae1d7382ebee0391f7c2c400459a332f4763c0a83a9f9117e2",
+      "export_sha256": "6e37b25424dd28833eb4bc86f4a3a369e3ad84137e7469726704a5218becafcf",
+      "baseline_noncomment_sha256": "63398a6a96aa2f6e2ac5180b3b9163b78a2627132c3a62570393544d5b8ed7d1",
+      "export_noncomment_sha256": "63398a6a96aa2f6e2ac5180b3b9163b78a2627132c3a62570393544d5b8ed7d1",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/SequenceLemma.lean",
+      "baseline_sha256": "93aa874f033f3de6864e46120f2103e03fdbcfc789fe782b095461445e16e0a0",
+      "export_sha256": "483bdbb1e0bb63fadbffb364e69b70c067e030c948dc145bf7a5c1b5078010d1",
+      "baseline_noncomment_sha256": "4581543ffc60dd5a508cfa2ff1cfc8ac21a6884a63fa48f2512e024e7d4f757e",
+      "export_noncomment_sha256": "4581543ffc60dd5a508cfa2ff1cfc8ac21a6884a63fa48f2512e024e7d4f757e",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/SqrtSums.lean",
+      "baseline_sha256": "8d0ced02297043030acf06022de61f0dc2c907adc226197fbe7d7f4dc175e173",
+      "export_sha256": "98cd4c74035f91da83ffa83335ed5725c9e425b3b68eb44aa647e6d7477e78ef",
+      "baseline_noncomment_sha256": "5130b409b2f575adcf3d02e4e34edcaaf8232fd4abab4df28f8c16deab18b4c4",
+      "export_noncomment_sha256": "5130b409b2f575adcf3d02e4e34edcaaf8232fd4abab4df28f8c16deab18b4c4",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/StrongHan.lean",
+      "baseline_sha256": "5fd04c6c677814299dfd8ac831c7d9326ca638363c2d2dbb01814fbb6c7895c1",
+      "export_sha256": "cf064bdef77507d94e95ee5a4c534680f1c707c82a8327a215d61edb7b3063d3",
+      "baseline_noncomment_sha256": "91ae5689980e62a95ee9c669da956d58d8a701ef90cd3927ee3783b8853d04cb",
+      "export_noncomment_sha256": "91ae5689980e62a95ee9c669da956d58d8a701ef90cd3927ee3783b8853d04cb",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/SupportGenFunCLC.lean",
+      "baseline_sha256": "0e208663d7e3aa0c0ba1c4e21aa5e0e46378e3ba921dc653dbb7815e62e98663",
+      "export_sha256": "69593dc2cd0efb7b41697348b3c53680d1143a6af27e9a229429081c1d027eaa",
+      "baseline_noncomment_sha256": "31ddc53d5e61bd001385d9831e12cdd0773fdad1784a9067d307b9d6ea5ca0de",
+      "export_noncomment_sha256": "31ddc53d5e61bd001385d9831e12cdd0773fdad1784a9067d307b9d6ea5ca0de",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/Symmetrization.lean",
+      "baseline_sha256": "bc1426bf3b70180024b4c14b3d477029e9828b50019062f26a626a6121ce98bb",
+      "export_sha256": "0c100ab8edbc19a6313081d330bef093e260b272926f0f891cb225e3b4e89498",
+      "baseline_noncomment_sha256": "20e196ad137bcce507fc23f037d03f5747a1d85348b16d2313c48c5f1c70e12b",
+      "export_noncomment_sha256": "20e196ad137bcce507fc23f037d03f5747a1d85348b16d2313c48c5f1c70e12b",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/TVDist.lean",
+      "baseline_sha256": "9dc4456c68598ad98e6fcc899afd35667c17e035e08c45cab2f10767de973bf9",
+      "export_sha256": "8968bfc56fd9089b2ba526f28af15be715578ffc3b4b06a8777562ac22893222",
+      "baseline_noncomment_sha256": "05d106456a2baa09debd99d167a0093f74fdac9e5d25f932d4713694b1491be1",
+      "export_noncomment_sha256": "05d106456a2baa09debd99d167a0093f74fdac9e5d25f932d4713694b1491be1",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    },
+    {
+      "path": "Parking/WordLaw.lean",
+      "baseline_sha256": "c9a2cc50e5c6b91ffccb32ebfc827a3e63df15b9dbf17779c443df6803f601f2",
+      "export_sha256": "99f5ed2ecef513f07f94466fa1a723b3c2835c19b21aabcd56a0d4db18fd7069",
+      "baseline_noncomment_sha256": "2f2eaa6ea7aab55dcee755458c128f62472d378b25843897bf5b11ce01f4053c",
+      "export_noncomment_sha256": "2f2eaa6ea7aab55dcee755458c128f62472d378b25843897bf5b11ce01f4053c",
+      "noncomment_equal": true,
+      "reviewed_proof_edit_sites": 0
+    }
+  ],
+  "challenge": {
+    "supporting_declarations": 19,
+    "frozen_signatures": 3,
+    "all_blocks_verbatim_current_source": true,
+    "cache_resets": 4,
+    "proof_holes": 3,
+    "public_mathlib_imports": [
+      "Mathlib.Data.PNat.Defs",
+      "Mathlib.Data.Fintype.Card",
+      "Mathlib.Data.Fin.Basic",
+      "Mathlib.Algebra.BigOperators.Group.Finset.Basic",
+      "Mathlib.Probability.UniformOn",
+      "Mathlib.MeasureTheory.Measure.FiniteMeasurePi",
+      "Mathlib.InformationTheory.KullbackLeibler.Basic",
+      "Mathlib.Probability.CDF",
+      "Mathlib.Probability.Distributions.Gaussian.Real"
+    ],
+    "other_residual_commands": "Only reviewed module/section/namespace/open commands",
+    "blocks": [
+      {
+        "source": "Parking/Basic.lean",
+        "kind": "declaration",
+        "declaration": "@[expose] def isParkingFunction",
+        "current_text_sha256": "0e474f6d945613d1a8ca429a550be712bf011461ffcd074f5fa1c95c2916573b",
+        "challenge_line": 50,
+        "current_source_line": 45,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Basic.lean",
+        "kind": "declaration",
+        "declaration": "@[expose] def ParkingFunction",
+        "current_text_sha256": "10f815483aaf84ec225e47c36e55496bd029b3e022b343e16cc9581b6565bc27",
+        "challenge_line": 53,
+        "current_source_line": 49,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Basic.lean",
+        "kind": "declaration",
+        "declaration": "theorem isParkingFunction_zero",
+        "current_text_sha256": "f3c1306ffe0d1a1d3cee6e7b2f21840f6c6438de751e76c7fc5b749ed836d46a",
+        "challenge_line": 56,
+        "current_source_line": 81,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Basic.lean",
+        "kind": "declaration",
+        "declaration": "theorem parkingFunction_nonempty",
+        "current_text_sha256": "e51fe1f705a01f26aa88d9388d8391ca4770193b50f9c5edc547263afb161958",
+        "challenge_line": 63,
+        "current_source_line": 89,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "instance (n : ℕ+) : DecidablePred",
+        "current_text_sha256": "785f7de95fdf9a68a7ce694b5e07197b44074452f9bd0bd53d77d007dee25ddd",
+        "challenge_line": 81,
+        "current_source_line": 48,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "instance (n : ℕ+) : Fintype",
+        "current_text_sha256": "c7a63af464947b232be96185da1f5d488d00bd9559dd065e6efdebefe15897c4",
+        "challenge_line": 85,
+        "current_source_line": 52,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "instance (n : ℕ+) : Nonempty",
+        "current_text_sha256": "c31976b00e939578a0c303338b138c78617312fa32d208afea212bd89496da7c",
+        "challenge_line": 88,
+        "current_source_line": 55,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "instance (n : ℕ+) : MeasurableSpace",
+        "current_text_sha256": "bed45adc6cd28fe7934f7e98d41b63cae01136ba653529eed2e3cd99deef245a",
+        "challenge_line": 91,
+        "current_source_line": 58,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "instance (n : ℕ+) : MeasurableSingletonClass",
+        "current_text_sha256": "4fce96292be036a6414c36dbfe171fdbc50a992370690a2ced7fdf71024f4ba6",
+        "challenge_line": 94,
+        "current_source_line": 61,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "noncomputable def tvDist",
+        "current_text_sha256": "6d7a44fd827c5709545b1f405435d3dfb245bc6677cb0247582f0a9616c54309",
+        "challenge_line": 97,
+        "current_source_line": 68,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "noncomputable def uniformLaw",
+        "current_text_sha256": "a9de13d21612d0257c1197ef8091c1ffd5638ab81d2162ad9b69d51c79d03839",
+        "challenge_line": 101,
+        "current_source_line": 74,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "noncomputable def uniformParking",
+        "current_text_sha256": "4d19430bef62feac1d210292b734949c597aad6824e8f9e8b805c7ba16b1e2fc",
+        "challenge_line": 105,
+        "current_source_line": 79,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "def firstCoords (",
+        "current_text_sha256": "098a7e21b723afb59c771f136b356cf3127bda3ec8e3f2dd526eeb742d6094c8",
+        "challenge_line": 108,
+        "current_source_line": 83,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "noncomputable def firstCoordsLaw",
+        "current_text_sha256": "f0e4c0a6f3bf8f2ec834992c0999549780fea43f40d58ba119f38b8c93d28a3d",
+        "challenge_line": 111,
+        "current_source_line": 87,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "noncomputable def uniformProduct",
+        "current_text_sha256": "6e19f57fc7bb702e29ea47b7b99b14dbfebe22a6def038ebcaa20f093de3a2f5",
+        "challenge_line": 115,
+        "current_source_line": 92,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "def firstCoord (",
+        "current_text_sha256": "3068f390576bb692a4188040640ff333d0e9ff2476a9fc45406a00dd3dabc91e",
+        "challenge_line": 118,
+        "current_source_line": 96,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "noncomputable def marginal (",
+        "current_text_sha256": "4b0b17ca12196742377b38562460f67c84ba11eb42f427e5a806b14bccfc044c",
+        "challenge_line": 121,
+        "current_source_line": 100,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "noncomputable def marginalProduct",
+        "current_text_sha256": "0a9ccaa9358cd440a1e3a0eb24e226c658a0c6cef2bb5be16ff0505af032f41c",
+        "challenge_line": 124,
+        "current_source_line": 111,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Law.lean",
+        "kind": "declaration",
+        "declaration": "noncomputable def profile",
+        "current_text_sha256": "bf2b5c373525c70bf332c91a02d1f614c3a38838f7e899968b69dfaf4d782f78",
+        "challenge_line": 127,
+        "current_source_line": 116,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Frozen/MainBounds.lean",
+        "kind": "frozen_signature",
+        "declaration": "Parking.tvDist_firstCoordsLaw_bounds",
+        "current_text_sha256": "fd3b874c7e42783721357ac946c97cdcaf461cccaaa14cf6d85afd394fb8f149",
+        "challenge_line": 143,
+        "current_source_line": 38,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Frozen/Profile.lean",
+        "kind": "frozen_signature",
+        "declaration": "Parking.tendsto_tvDist_firstCoordsLaw",
+        "current_text_sha256": "b03e36e8d7442de19b6ff28336b0c660e9eac226e381232a1104b62c169ac37f",
+        "challenge_line": 168,
+        "current_source_line": 42,
+        "verbatim_current_source_match": true
+      },
+      {
+        "source": "Parking/Frozen/Decoupling.lean",
+        "kind": "frozen_signature",
+        "declaration": "Parking.klDiv_tvDist_firstCoordsLaw_le",
+        "current_text_sha256": "7bcd201e5f7810ca940d56c3d02d2a5416fdb80f134d8ed844fc74d1218b6896",
+        "challenge_line": 191,
+        "current_source_line": 41,
+        "verbatim_current_source_match": true
+      }
+    ]
+  },
+  "solution": {
+    "only_approved_three_frozen_imports": true,
+    "implementation_holes": 0
+  },
+  "cache_review": {
+    "source": "Lean 4.35 Lean/Meta/Tactic/AuxLemma.lean",
+    "conclusion": "auxLemmasExt is a local unpersisted type-to-name cache. Resets affect reuse of previously generated helper declarations, not constant types/values, kernel checking, or assumptions. Effects on helper identity still require structural comparison."
+  },
+  "semantic_limit": "Identical source across toolchains can elaborate differently. Current Lean 4.35 compilation, axiom checks, kernel replay, structural comparison and official pipeline results require independent current evidence.",
+  "findings": [],
+  "input_sha256": {
+    "Challenge.lean": "e991271f78457d4671bcb3265021e43eb15ba9acff6544826aaf8384b9500153",
+    "Solution.lean": "6812392831f266df1f58607c4c98484b24ea5fe1dcb122de78a47382248b8da8",
+    "lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c",
+    "lakefile.toml": "9394f61408a2f69df260ef232c6ccf96ded42fd33406f1b225dda725249a1056",
+    "lake-manifest.json": "d9319ede1ccec0eb8194e28d9f8313ac52ec0296836008cb0f6221c999b38fc3",
+    "comparator.json": "a67bf3b723039c40771f653222e8452ea4b7960dedf23628b6eea88bd1c6f50d",
+    "frozen-anchors.json": "b73409136777fbf45b825d810a786468e325ae181a8b7d21076f4d8fac8b358f",
+    "evidence/structural-proof-adaptations.json": "af6282ca0eac0c4f2b87e2fd816dcd18aa1b942ea63273f87bda1dcceff2ba84",
+    "evidence/toolchain-proof-repairs.json": "f9aedbf40e40e4735239abb55d1a599a34ed1756556cfc124a9649abbbfd96ce",
+    "evidence/history-4.34/challenge-source-blocks.json": "8f08d52d8ab926347eb5601cd299c51a2d8860ea1c58dd17c992640b0e3e052a"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "scope": "Current active metadata: pinned complete v0.4 schema and binding-policy source category",
+  "metadata_path": "formalization.yaml",
+  "metadata_sha256": "8f4ffcff34f6a4386b4f7cf9d6e6337f3638cb34eac436792c71209e53aeb2d5",
+  "schema_commit": "99c678e569c7c4c0772db297c5ddd5e4c9b6322e",
+  "schema_sha256": "25ff6b25ca4511635aff4443cf20480c15e59dddf19591c730950b442ea54fce",
+  "python": "3.12.14",
+  "jsonschema": "4.25.1",
+  "PyYAML": "6.0.3",
+  "checked_at_utc": "2026-10-29T07:48:39.344663+00:00",
+  "license": "Apache-2.0",
+  "implementation_holes": 0,
+  "separate_authorized_challenge_holes": 3,
+  "official_full_preflight_run": false
+}

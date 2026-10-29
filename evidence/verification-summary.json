@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "scope": "Exact source environment: local Lean verification, not hosted Comparator or official Palomar full preflight",
+  "lean": "v4.35.0",
+  "implementation_modules": 79,
+  "interface_modules": 2,
+  "lake_jobs": 3444,
+  "replayed_constants": 1570,
+  "theorems": 1477,
+  "definitions": 93,
+  "reachable_constants": 62604,
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "negative_control": "rejected",
+  "target_abi_matches": 3,
+  "supporting_raw_constants_matched": 34347,
+  "source_manifest_sha256": "49979cae0aa5bb7512707f107615c78a79d1f0f6015a0ea0d16f5f8dbb7479ed",
+  "source_review": "active-source-review.json",
+  "history": "history-4.34/"
+}

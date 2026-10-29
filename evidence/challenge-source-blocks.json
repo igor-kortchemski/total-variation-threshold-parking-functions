@@ -1,0 +1,223 @@
+{
+  "status": "Active approved Lean4.35 interface: exact source blocks after recorded proof-only adaptations",
+  "source_files": {
+    "Parking/Basic.lean": "67af21e75b21e04f39a2f06ea74cbe2782c48ee01f85064c02b3d3a793c153b6",
+    "Parking/Law.lean": "f8406658793d967ba216ef77812f0b808eb64b0c9c5509e928f155d005d0f6d6",
+    "frozen-anchors.json": "ae2cf3fdeaab03d4f8de5cf4cca41c0dc7da82da311d33100b4e57ebed904e1a",
+    "lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c",
+    "lakefile.toml": "9394f61408a2f69df260ef232c6ccf96ded42fd33406f1b225dda725249a1056",
+    "lake-manifest.json": "d9319ede1ccec0eb8194e28d9f8313ac52ec0296836008cb0f6221c999b38fc3",
+    "Parking/Frozen/MainBounds.lean": "fd149cdfe3be929cfcc46c26097cd4250954f67b8b04ab82f0d444afacebe183",
+    "Parking/Frozen/Profile.lean": "841112175fcea390171e1ca4ed5ad3c067e9d08a604753d2e4cb0c8fd73d924c",
+    "Parking/Frozen/Decoupling.lean": "1d8ed979f8702113a998c537e3a7ad870c771bb68e1ff0e19052a21bee0a362f"
+  },
+  "draft": {
+    "path": "Challenge.lean",
+    "sha256": "e991271f78457d4671bcb3265021e43eb15ba9acff6544826aaf8384b9500153",
+    "lines": 204,
+    "bytes": 7329
+  },
+  "blocks": [
+    {
+      "source": "Parking/Basic.lean",
+      "start_line": 45,
+      "end_line": 46,
+      "sha256": "0e474f6d945613d1a8ca429a550be712bf011461ffcd074f5fa1c95c2916573b",
+      "kind": "declaration",
+      "start": "@[expose] def isParkingFunction",
+      "verbatim_source_text": "@[expose] def isParkingFunction {n : \u2115+} (a : Fin n \u2192 Fin n) : Prop :=\n  \u2200 j : Fin n, j.val + 1 \u2264 (Finset.univ.filter (fun i => a i \u2264 j)).card"
+    },
+    {
+      "source": "Parking/Basic.lean",
+      "start_line": 49,
+      "end_line": 50,
+      "sha256": "10f815483aaf84ec225e47c36e55496bd029b3e022b343e16cc9581b6565bc27",
+      "kind": "declaration",
+      "start": "@[expose] def ParkingFunction",
+      "verbatim_source_text": "@[expose] def ParkingFunction (n : \u2115+) :=\n  {a : Fin n \u2192 Fin n // isParkingFunction a}"
+    },
+    {
+      "source": "Parking/Basic.lean",
+      "start_line": 81,
+      "end_line": 86,
+      "sha256": "f3c1306ffe0d1a1d3cee6e7b2f21840f6c6438de751e76c7fc5b749ed836d46a",
+      "kind": "declaration",
+      "start": "theorem isParkingFunction_zero",
+      "verbatim_source_text": "theorem isParkingFunction_zero (n : \u2115+) :\n    isParkingFunction (fun _ : Fin n => (0 : Fin n)) := by\n  intro j\n  change j.val + 1 \u2264 (Finset.univ.filter (fun _ : Fin n => (0 : Fin n) \u2264 j)).card\n  rw [Finset.filter_eq_self.mpr (fun _ _ => Fin.zero_le j), Finset.card_fin]\n  exact Nat.succ_le_of_lt j.isLt"
+    },
+    {
+      "source": "Parking/Basic.lean",
+      "start_line": 89,
+      "end_line": 90,
+      "sha256": "e51fe1f705a01f26aa88d9388d8391ca4770193b50f9c5edc547263afb161958",
+      "kind": "declaration",
+      "start": "theorem parkingFunction_nonempty",
+      "verbatim_source_text": "theorem parkingFunction_nonempty (n : \u2115+) : Nonempty (ParkingFunction n) :=\n  \u27e8\u27e8fun _ => 0, isParkingFunction_zero n\u27e9\u27e9"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 48,
+      "end_line": 50,
+      "sha256": "785f7de95fdf9a68a7ce694b5e07197b44074452f9bd0bd53d77d007dee25ddd",
+      "kind": "declaration",
+      "start": "instance (n : \u2115+) : DecidablePred",
+      "verbatim_source_text": "instance (n : \u2115+) : DecidablePred (isParkingFunction (n := n)) := fun a => by\n  unfold isParkingFunction\n  infer_instance"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 52,
+      "end_line": 53,
+      "sha256": "c7a63af464947b232be96185da1f5d488d00bd9559dd065e6efdebefe15897c4",
+      "kind": "declaration",
+      "start": "instance (n : \u2115+) : Fintype",
+      "verbatim_source_text": "instance (n : \u2115+) : Fintype (ParkingFunction n) :=\n  inferInstanceAs (Fintype {a : Fin n \u2192 Fin n // isParkingFunction a})"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 55,
+      "end_line": 56,
+      "sha256": "c31976b00e939578a0c303338b138c78617312fa32d208afea212bd89496da7c",
+      "kind": "declaration",
+      "start": "instance (n : \u2115+) : Nonempty",
+      "verbatim_source_text": "instance (n : \u2115+) : Nonempty (ParkingFunction n) :=\n  parkingFunction_nonempty n"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 58,
+      "end_line": 59,
+      "sha256": "bed45adc6cd28fe7934f7e98d41b63cae01136ba653529eed2e3cd99deef245a",
+      "kind": "declaration",
+      "start": "instance (n : \u2115+) : MeasurableSpace",
+      "verbatim_source_text": "instance (n : \u2115+) : MeasurableSpace (ParkingFunction n) :=\n  inferInstanceAs (MeasurableSpace {a : Fin n \u2192 Fin n // isParkingFunction a})"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 61,
+      "end_line": 62,
+      "sha256": "4fce96292be036a6414c36dbfe171fdbc50a992370690a2ced7fdf71024f4ba6",
+      "kind": "declaration",
+      "start": "instance (n : \u2115+) : MeasurableSingletonClass",
+      "verbatim_source_text": "instance (n : \u2115+) : MeasurableSingletonClass (ParkingFunction n) :=\n  Subtype.instMeasurableSingletonClass"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 68,
+      "end_line": 70,
+      "sha256": "6d7a44fd827c5709545b1f405435d3dfb245bc6677cb0247582f0a9616c54309",
+      "kind": "declaration",
+      "start": "noncomputable def tvDist",
+      "verbatim_source_text": "noncomputable def tvDist {\u03b1 : Type*} [Fintype \u03b1] [MeasurableSpace \u03b1]\n    [MeasurableSingletonClass \u03b1] (P Q : ProbabilityMeasure \u03b1) : \u211d :=\n  2\u207b\u00b9 * \u2211 x, |(P {x} : \u211d) - (Q {x} : \u211d)|"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 74,
+      "end_line": 76,
+      "sha256": "a9de13d21612d0257c1197ef8091c1ffd5638ab81d2162ad9b69d51c79d03839",
+      "kind": "declaration",
+      "start": "noncomputable def uniformLaw",
+      "verbatim_source_text": "noncomputable def uniformLaw (\u03b1 : Type*) [Fintype \u03b1] [Nonempty \u03b1] [MeasurableSpace \u03b1]\n    [MeasurableSingletonClass \u03b1] : ProbabilityMeasure \u03b1 :=\n  \u27e8uniformOn Set.univ, isProbabilityMeasure_uniformOn Set.finite_univ Set.univ_nonempty\u27e9"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 79,
+      "end_line": 80,
+      "sha256": "4d19430bef62feac1d210292b734949c597aad6824e8f9e8b805c7ba16b1e2fc",
+      "kind": "declaration",
+      "start": "noncomputable def uniformParking",
+      "verbatim_source_text": "noncomputable def uniformParking (n : \u2115+) : ProbabilityMeasure (ParkingFunction n) :=\n  uniformLaw (ParkingFunction n)"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 83,
+      "end_line": 84,
+      "sha256": "098a7e21b723afb59c771f136b356cf3127bda3ec8e3f2dd526eeb742d6094c8",
+      "kind": "declaration",
+      "start": "def firstCoords (",
+      "verbatim_source_text": "def firstCoords (n : \u2115+) (k : \u2115) (hk : k \u2264 n) (a : ParkingFunction n) : Fin k \u2192 Fin n :=\n  fun r => a.1 (Fin.castLE hk r)"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 87,
+      "end_line": 89,
+      "sha256": "f0e4c0a6f3bf8f2ec834992c0999549780fea43f40d58ba119f38b8c93d28a3d",
+      "kind": "declaration",
+      "start": "noncomputable def firstCoordsLaw",
+      "verbatim_source_text": "noncomputable def firstCoordsLaw (n : \u2115+) (k : \u2115) (hk : k \u2264 n) :\n    ProbabilityMeasure (Fin k \u2192 Fin n) :=\n  (uniformParking n).map (firstCoords n k hk)"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 92,
+      "end_line": 93,
+      "sha256": "6e19f57fc7bb702e29ea47b7b99b14dbfebe22a6def038ebcaa20f093de3a2f5",
+      "kind": "declaration",
+      "start": "noncomputable def uniformProduct",
+      "verbatim_source_text": "noncomputable def uniformProduct (n : \u2115+) (k : \u2115) : ProbabilityMeasure (Fin k \u2192 Fin n) :=\n  ProbabilityMeasure.pi fun _ : Fin k => uniformLaw (Fin n)"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 96,
+      "end_line": 97,
+      "sha256": "3068f390576bb692a4188040640ff333d0e9ff2476a9fc45406a00dd3dabc91e",
+      "kind": "declaration",
+      "start": "def firstCoord (",
+      "verbatim_source_text": "def firstCoord (n : \u2115+) (a : ParkingFunction n) : Fin n :=\n  a.1 \u27e80, n.pos\u27e9"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 100,
+      "end_line": 101,
+      "sha256": "4b0b17ca12196742377b38562460f67c84ba11eb42f427e5a806b14bccfc044c",
+      "kind": "declaration",
+      "start": "noncomputable def marginal (",
+      "verbatim_source_text": "noncomputable def marginal (n : \u2115+) : ProbabilityMeasure (Fin n) :=\n  (uniformParking n).map (firstCoord n)"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 111,
+      "end_line": 112,
+      "sha256": "0a9ccaa9358cd440a1e3a0eb24e226c658a0c6cef2bb5be16ff0505af032f41c",
+      "kind": "declaration",
+      "start": "noncomputable def marginalProduct",
+      "verbatim_source_text": "noncomputable def marginalProduct (n : \u2115+) (k : \u2115) : ProbabilityMeasure (Fin k \u2192 Fin n) :=\n  ProbabilityMeasure.pi fun _ : Fin k => marginal n"
+    },
+    {
+      "source": "Parking/Law.lean",
+      "start_line": 116,
+      "end_line": 118,
+      "sha256": "bf2b5c373525c70bf332c91a02d1f614c3a38838f7e899968b69dfaf4d782f78",
+      "kind": "declaration",
+      "start": "noncomputable def profile",
+      "verbatim_source_text": "noncomputable def profile (lam : \u211d\u22650\u221e) : \u211d :=\n  if lam = \u221e then 1\n  else 2 * cdf (gaussianReal 0 1) (\u221a(lam.toReal / Real.pi)) - 1"
+    },
+    {
+      "source": "Parking/Frozen/MainBounds.lean",
+      "start_line": 38,
+      "end_line": 46,
+      "kind": "frozen_signature",
+      "export": "Parking.tvDist_firstCoordsLaw_bounds",
+      "abi_sha256": "ff544decb2bedb055a042a7735665ce805574dedd767c506f8f39eb227d814aa",
+      "sha256": "c3264477e405f85d9ad294e4bba7ead11ca77b274a25a6f1be52e1cd9d4c0c23",
+      "verbatim_source_text": "theorem tvDist_firstCoordsLaw_bounds :\n    \u2203 C : \u211d, 1 \u2264 C \u2227\n      \u2200 n : \u2115+, 2 \u2264 (n : \u2115) \u2192 \u2200 k : \u2115, 1 \u2264 k \u2192 \u2200 hkn : k \u2264 n,\n        \u221a((k : \u211d) * Real.log ((k : \u211d) + 1) /\n            (C * (n : \u211d) + (k : \u211d) * Real.log ((k : \u211d) + 1)))\n          \u2264 tvDist (firstCoordsLaw n k hkn) (uniformProduct n k) \u2227\n        tvDist (firstCoordsLaw n k hkn) (uniformProduct n k)\n          \u2264 min 1 (C * \u221a((k : \u211d) * Real.log ((k : \u211d) + 1) / (n : \u211d))) :=\n"
+    },
+    {
+      "source": "Parking/Frozen/Profile.lean",
+      "start_line": 42,
+      "end_line": 48,
+      "kind": "frozen_signature",
+      "export": "Parking.tendsto_tvDist_firstCoordsLaw",
+      "abi_sha256": "b47583fb8752c011849eb5cf38b396134981b271bed5c4c3d35303fb02b87d1a",
+      "sha256": "0457736ac0c06c6d4466d339657a09da838fee3f668481027a009f1a1a2ab0d6",
+      "verbatim_source_text": "theorem tendsto_tvDist_firstCoordsLaw (k : \u2115+ \u2192 \u2115) (hk : \u2200 n, 1 \u2264 k n)\n    (hkn : \u2200 n, k n \u2264 n) (lam : \u211d\u22650\u221e)\n    (hlim : Tendsto (fun n : \u2115+ => ENNReal.ofReal ((k n : \u211d) * Real.log (n : \u211d) / (n : \u211d)))\n      atTop (\ud835\udcdd lam)) :\n    Tendsto (fun n : \u2115+ => tvDist (firstCoordsLaw n (k n) (hkn n)) (uniformProduct n (k n)))\n      atTop (\ud835\udcdd (profile lam)) :=\n"
+    },
+    {
+      "source": "Parking/Frozen/Decoupling.lean",
+      "start_line": 41,
+      "end_line": 50,
+      "kind": "frozen_signature",
+      "export": "Parking.klDiv_tvDist_firstCoordsLaw_le",
+      "abi_sha256": "bdd2284b1f51d6ad604ab262deafb182f2914b170650bf6944469300fc3e2aaf",
+      "sha256": "1de18b9ebc92e9f594d93b90f4ac47b869b6b126155aba21d71a137137585733",
+      "verbatim_source_text": "theorem klDiv_tvDist_firstCoordsLaw_le (n : \u2115+) (hn : 2 \u2264 (n : \u2115)) (k : \u2115) (hk : 1 \u2264 k)\n    (hkn : k \u2264 n) :\n    klDiv (firstCoordsLaw n k hkn : Measure (Fin k \u2192 Fin n))\n        (marginalProduct n k : Measure (Fin k \u2192 Fin n))\n      \u2264 ENNReal.ofReal ((k : \u211d) * ((k : \u211d) - 1) / ((n : \u211d) * ((n : \u211d) - 1)) *\n          Real.log (n : \u211d)) \u2227\n    tvDist (firstCoordsLaw n k hkn) (marginalProduct n k)\n      \u2264 \u221a((k : \u211d) * ((k : \u211d) - 1) * Real.log (n : \u211d) /\n          (2 * (n : \u211d) * ((n : \u211d) - 1))) :=\n"
+    }
+  ]
+}

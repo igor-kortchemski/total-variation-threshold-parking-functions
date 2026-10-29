@@ -1,0 +1,23 @@
+{
+  "scope": "Export-only explanatory comments; mathematical declaration and implementation bytes unchanged",
+  "changes": [
+    {
+      "path": "Parking/Frozen/Decoupling.lean",
+      "before_sha256": "2d348bee3b70adcafe7abbf6757a4a66b3c10011723036b81e1df4cef95b2343",
+      "after_sha256": "1d8ed979f8702113a998c537e3a7ad870c771bb68e1ff0e19052a21bee0a362f",
+      "change": "Approved protected-comment successor: document existing sealed proof and Solution-only import exception; declaration/proof text unchanged."
+    },
+    {
+      "path": "Parking/Frozen/MainBounds.lean",
+      "before_sha256": "0d2878f955cb1f8367b3693eab8860228cbbd84d98f02921f1637cf6e1727364",
+      "after_sha256": "fd149cdfe3be929cfcc46c26097cd4250954f67b8b04ab82f0d444afacebe183",
+      "change": "Approved protected-comment successor: document existing sealed proof and Solution-only import exception; declaration/proof text unchanged."
+    },
+    {
+      "path": "Parking/Frozen/Profile.lean",
+      "before_sha256": "0dfbbf26dfe0e781ef701138c6a34027aa654e50dd98c6ba12ea5acc11568427",
+      "after_sha256": "841112175fcea390171e1ca4ed5ad3c067e9d08a604753d2e4cb0c8fd73d924c",
+      "change": "Approved protected-comment successor: document existing sealed proof and Solution-only import exception; declaration/proof text unchanged."
+    }
+  ]
+}

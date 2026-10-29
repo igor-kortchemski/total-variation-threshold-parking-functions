@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "manifest_state": "AUTHOR_APPROVED",
+  "seal_limits": {
+    "max_body_lines": 3,
+    "max_body_bytes": 240
+  },
+  "anchors": [
+    {
+      "id": "thm_main_v1_palomar2",
+      "kind": "theorem",
+      "author_approval": {
+        "approved_by": "Igor Kortchemski",
+        "approved_at": "2026-10-29",
+        "approval_ref": "docs/APPROVAL.md",
+        "approval_version": "2"
+      },
+      "source": {
+        "revision": "parking_threshold.tex sha256:7670d0719c75a0c860181730b7fdffb39f96ca88d2d6f185daefc29ec9ad839b",
+        "range": "parking_threshold.tex:89-100"
+      },
+      "contract": {
+        "id": "parking_threshold.thm:main",
+        "version": "1"
+      },
+      "path": "Parking/Frozen/MainBounds.lean",
+      "export": "Parking.tvDist_firstCoordsLaw_bounds",
+      "implementation": {
+        "module": "Parking.Provider.MainBounds",
+        "export": "Parking.Provider.tvDist_firstCoordsLaw_bounds"
+      },
+      "split_policy": {
+        "source_group": "parking_threshold.thm:main",
+        "mode": "NOT_SPLIT",
+        "ruling_ref": "docs/APPROVAL.md"
+      },
+      "abi_sha256": "ff544decb2bedb055a042a7735665ce805574dedd767c506f8f39eb227d814aa",
+      "definition_closure": [],
+      "state": "SEALED",
+      "prefix_sha256": "b96771230cd3d6de9ada405c35ab2dda67041e1136baba199afd0fd3e18b938c",
+      "suffix_sha256": "a7054d39c438539d216299e7938d916ad7842584573cc3622d22e20dc8bc4a47",
+      "draft_allowlist": {
+        "frozen_paths": [],
+        "audit_paths": []
+      }
+    },
+    {
+      "id": "thm_profile_v1_palomar2",
+      "kind": "theorem",
+      "author_approval": {
+        "approved_by": "Igor Kortchemski",
+        "approved_at": "2026-10-29",
+        "approval_ref": "docs/APPROVAL.md",
+        "approval_version": "2"
+      },
+      "source": {
+        "revision": "parking_threshold.tex sha256:7670d0719c75a0c860181730b7fdffb39f96ca88d2d6f185daefc29ec9ad839b",
+        "range": "parking_threshold.tex:105-119"
+      },
+      "contract": {
+        "id": "parking_threshold.thm:profile",
+        "version": "1"
+      },
+      "path": "Parking/Frozen/Profile.lean",
+      "export": "Parking.tendsto_tvDist_firstCoordsLaw",
+      "implementation": {
+        "module": "Parking.Provider.Profile",
+        "export": "Parking.Provider.tendsto_tvDist_firstCoordsLaw"
+      },
+      "split_policy": {
+        "source_group": "parking_threshold.thm:profile",
+        "mode": "NOT_SPLIT",
+        "ruling_ref": "docs/APPROVAL.md"
+      },
+      "abi_sha256": "b47583fb8752c011849eb5cf38b396134981b271bed5c4c3d35303fb02b87d1a",
+      "definition_closure": [],
+      "state": "SEALED",
+      "prefix_sha256": "6bdb06cd993e75bf335799417e7ef10593c8b147a86a9e563eccca9f86970237",
+      "suffix_sha256": "a7054d39c438539d216299e7938d916ad7842584573cc3622d22e20dc8bc4a47",
+      "draft_allowlist": {
+        "frozen_paths": [],
+        "audit_paths": []
+      }
+    },
+    {
+      "id": "prop_decoupling_v1_palomar2",
+      "kind": "theorem",
+      "author_approval": {
+        "approved_by": "Igor Kortchemski",
+        "approved_at": "2026-10-29",
+        "approval_ref": "docs/APPROVAL.md",
+        "approval_version": "2"
+      },
+      "source": {
+        "revision": "parking_threshold.tex sha256:7670d0719c75a0c860181730b7fdffb39f96ca88d2d6f185daefc29ec9ad839b",
+        "range": "parking_threshold.tex:134-145"
+      },
+      "contract": {
+        "id": "parking_threshold.prop:decoupling",
+        "version": "1"
+      },
+      "path": "Parking/Frozen/Decoupling.lean",
+      "export": "Parking.klDiv_tvDist_firstCoordsLaw_le",
+      "implementation": {
+        "module": "Parking.Provider.Decoupling",
+        "export": "Parking.Provider.klDiv_tvDist_firstCoordsLaw_le"
+      },
+      "split_policy": {
+        "source_group": "parking_threshold.prop:decoupling",
+        "mode": "NOT_SPLIT",
+        "ruling_ref": "docs/APPROVAL.md"
+      },
+      "abi_sha256": "bdd2284b1f51d6ad604ab262deafb182f2914b170650bf6944469300fc3e2aaf",
+      "definition_closure": [],
+      "state": "SEALED",
+      "prefix_sha256": "510fd6effa70374c4504a4844073b607b242f7e94ce4092a92c1a713b70cdb5b",
+      "suffix_sha256": "a7054d39c438539d216299e7938d916ad7842584573cc3622d22e20dc8bc4a47",
+      "draft_allowlist": {
+        "frozen_paths": [],
+        "audit_paths": []
+      }
+    }
+  ]
+}

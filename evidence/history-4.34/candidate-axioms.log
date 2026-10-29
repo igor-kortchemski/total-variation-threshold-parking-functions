@@ -1,0 +1,3 @@
+'Parking.tvDist_firstCoordsLaw_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Parking.tendsto_tvDist_firstCoordsLaw' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Parking.klDiv_tvDist_firstCoordsLaw_le' depends on axioms: [propext, Classical.choice, Quot.sound]

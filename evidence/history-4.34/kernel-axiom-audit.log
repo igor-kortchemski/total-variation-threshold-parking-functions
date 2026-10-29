@@ -1,0 +1,39 @@
+[compile-lock] waiting for the compile lock (held by 36276)
+Loading final project and pinned dependency environments
+Environments loaded; checking project ownership and declarations
+PROJECT INVENTORY: 79 modules, 1574 constants, 1480 theorems, 94 definitions
+BASE: 84 direct dependency imports; 4849 dependency modules; zero project modules/constants
+AXIOM AUDIT OK: all 1574 project constants; 62278 reachable constants; axioms #[propext, Classical.choice, Quot.sound]
+PASS direct proof dependency Parking.pitmanStanleyPolytope_eq_minkowskiSum -> Parking.pitmanStanleyMinkowskiSum_subset
+PASS direct proof dependency Parking.pitmanStanleyPolytope_eq_minkowskiSum -> Parking.pitmanStanleyPolytope_subset_minkowskiSum
+PASS direct proof dependency Parking.volume_parkingBoxUnion -> Parking.disjoint_parkingBox
+PASS direct proof dependency Parking.volume_parkingBoxUnion -> Parking.volume_parkingBox
+PASS direct proof dependency Parking.parkingBoxUnion_ae_eq_symmetrizedRegion -> Parking.mem_parkingBoxUnion_iff_sorted
+PASS direct proof dependency Parking.parkingBoxUnion_ae_eq_symmetrizedRegion -> Parking.mem_pitmanStanleySymmetrizedRegion_iff_sorted
+PASS direct proof dependency Parking.parkingBoxUnion_ae_eq_symmetrizedRegion -> Parking.volume_coordinate_zero
+PASS direct proof dependency Parking.factorial_mul_volume_pitmanStanley -> Parking.parkingBoxUnion_ae_eq_symmetrizedRegion
+PASS direct proof dependency Parking.factorial_mul_volume_pitmanStanley -> Parking.volume_pitmanStanleySymmetrizedRegion
+PASS direct proof dependency Parking.factorial_mul_volume_pitmanStanley -> Parking.volume_parkingBoxUnion_toReal
+PASS direct proof dependency Parking.eval_countPoly_eq_volume_pitmanStanley -> Parking.factorial_mul_volume_pitmanStanley
+PASS direct proof dependency Parking.eval_supportGenFun_eq_volume_pitmanStanley -> Parking.eval_countPoly_eq_volume_pitmanStanley
+PASS direct proof dependency Parking.pitmanStanley_volume_polynomial_lorentzian -> Parking.pitmanStanleyPolytope_eq_minkowskiSum
+PASS direct proof dependency Parking.pitmanStanley_volume_polynomial_lorentzian -> Parking.eval_supportGenFun_eq_volume_pitmanStanley
+PASS direct proof dependency Parking.pitmanStanley_volume_polynomial_lorentzian -> Parking.lorentzian_supportGenFun
+PASS direct proof dependency Parking.pitmanStanley_occupation_remark -> Parking.pitmanStanley_volume_polynomial_lorentzian
+PASS direct proof dependency Parking.pitmanStanley_occupation_remark -> Parking.Lorentzian.smul
+PASS absent from project proof closure Parking.pitmanStanley_occupation_remark -> Parking.completelyLogConcave_countPoly_parkingWordLaw
+PASS absent from project proof closure Parking.pitmanStanley_occupation_remark -> Parking.stronglyLogConcave_countPoly_parkingWordLaw
+PASS absent from project proof closure Parking.pitmanStanley_occupation_remark -> Parking.stronglyLogConcave_supportGenFun_parkingCountSet
+PASS absent from project proof closure Parking.pitmanStanley_occupation_remark -> Parking.tvDist_firstCoordsLaw_bounds
+PASS absent from project proof closure Parking.pitmanStanley_occupation_remark -> Parking.tendsto_tvDist_firstCoordsLaw
+KERNEL REPLAY OK: 1574 project constants rechecked; all types and values identical; 16150 ms
+REPLAYED TARGET Parking.tvDist_firstCoordsLaw_bounds
+REPLAYED TARGET Parking.tendsto_tvDist_firstCoordsLaw
+REPLAYED TARGET Parking.klDiv_tvDist_firstCoordsLaw_le
+REPLAYED TARGET Parking.pitmanStanley_occupation_remark
+NEGATIVE CONTROL rejection: while replaying declaration 'Parking.bh20_supportGenFunCLC':
+(kernel) declaration type mismatch, 'Parking.bh20_supportGenFunCLC' has type
+  True
+but it is expected to have type
+  Parking.BH20.SupportGenFunCLC
+NEGATIVE CONTROL OK: tampered project theorem rejected

@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "scope": "Independent bounded final review of source release files and curated documentation; excludes build/version-control/scratch directories, all .DS_Store files, and the generated review/package manifests; no Lean commands or candidate edits",
+  "release_file_count": 131,
+  "checks": {
+    "policy_source_type_corrected": true,
+    "schema_evidence_matches_current_metadata": true,
+    "no_private_paths_in_release_files": true,
+    "all_markdown_links_resolve": true,
+    "all_six_frozen_manifest_document_refs_resolve": true,
+    "no_math_delimiter_or_table_errors": true,
+    "no_release_file_symlinks": true,
+    "prior_raw_private_reports_removed": true,
+    "internal_root_phrasing_removed": true,
+    "prior_license_preference_claim_removed": true,
+    "source_inventory_and_build_coverage_match": true,
+    "isolated_build_completed_3392_jobs": true,
+    "three_frozen_abis_recomputed_from_raw": true,
+    "three_standard_only_axiom_closures": true,
+    "reported_comment_counts_match": true,
+    "challenge_digest_matches_documentation": true,
+    "no_active_challenge_solution_or_license": true,
+    "active_toolchain_unchanged": true,
+    "scratch_and_build_excluded_by_gitignore": true,
+    "temporary_abi_probe_removed_and_documented": true
+  },
+  "private_path_hits": [],
+  "missing_markdown_links": [],
+  "bad_structured_references": [],
+  "math_errors": [],
+  "table_errors": [],
+  "source_code_comparison": {
+    "modules": 79,
+    "all_noncomment_code_equal": true,
+    "all_source_and_candidate_digests_match": true,
+    "protected_basic_law_frozen_byte_identical": true
+  },
+  "comment_edits": 179,
+  "comment_files": 63,
+  "abi_hashes_recomputed": {
+    "Parking.tvDist_firstCoordsLaw_bounds": true,
+    "Parking.tendsto_tvDist_firstCoordsLaw": true,
+    "Parking.klDiv_tvDist_firstCoordsLaw_le": true
+  },
+  "lean_commands_run": 0,
+  "full_preflight_run": false,
+  "findings": [],
+  "excluded": [
+    ".lake",
+    ".git",
+    ".scratch",
+    "**/.DS_Store",
+    "evidence/FINAL-CANDIDATE-REVIEW-CHECKS.json",
+    "evidence/FINAL-CANDIDATE-REVIEW-HASHES.json",
+    "evidence/FINAL-CANDIDATE-REVIEW.md",
+    "evidence/package-files.sha256.json"
+  ]
+}

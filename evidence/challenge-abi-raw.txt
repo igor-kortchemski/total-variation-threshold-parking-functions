@@ -1,0 +1,803 @@
+=== ABI Parking.tvDist_firstCoordsLaw_bounds ===
+Parking.ParkingFunction : (n : PNat) → Type := fun (n : PNat) =>
+  @Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+    @Parking.isParkingFunction n a
+Parking.firstCoords : (n : PNat) →
+  (k : Nat) →
+    (hk : @LE.le.{0} Nat instLENat k (PNat.val n)) → (a : Parking.ParkingFunction n) → Fin k → Fin (PNat.val n) := fun (n : PNat) (k : Nat) (hk : @LE.le.{0} Nat instLENat k (PNat.val n)) (a : Parking.ParkingFunction n) (r : Fin k) =>
+  @Subtype.val.{1} (Fin (PNat.val n) → Fin (PNat.val n))
+    (fun (a : Fin (PNat.val n) → Fin (PNat.val n)) => @Parking.isParkingFunction n a) a
+    (@Fin.castLE k (PNat.val n) hk r)
+Parking.firstCoordsLaw : (n : PNat) →
+  (k : Nat) →
+    (hk : @LE.le.{0} Nat instLENat k (PNat.val n)) →
+      @MeasureTheory.ProbabilityMeasure.{0} (Fin k → Fin (PNat.val n))
+        (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+          Fin.instMeasurableSpace (PNat.val n)) := fun (n : PNat) (k : Nat) (hk : @LE.le.{0} Nat instLENat k (PNat.val n)) =>
+  @MeasureTheory.ProbabilityMeasure.map.{0, 0} (Parking.ParkingFunction n) (Fin k → Fin (PNat.val n))
+    (Parking.instMeasurableSpaceParkingFunction n)
+    (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+      Fin.instMeasurableSpace (PNat.val n))
+    (Parking.uniformParking n) (Parking.firstCoords n k hk)
+Parking.instDecidablePredForallFinValIsParkingFunction : (n : PNat) → @DecidablePred.{1} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n) := fun (n : PNat) (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+  @id.{1} (Decidable (@Parking.isParkingFunction n a))
+    (@inferInstance.{1}
+      (Decidable
+        (∀ (j : Fin (PNat.val n)),
+          @LE.le.{0} Nat instLENat
+            (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (@Fin.val (PNat.val n) j)
+              (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+            (@Finset.card.{0} (Fin (PNat.val n))
+              (@Finset.filter.{0} (Fin (PNat.val n))
+                (fun (i : Fin (PNat.val n)) => @LE.le.{0} (Fin (PNat.val n)) (@instLEFin (PNat.val n)) (a i) j)
+                (fun (a_1 : Fin (PNat.val n)) => @Fin.decLe (PNat.val n) (a a_1) j)
+                (@Finset.univ.{0} (Fin (PNat.val n)) (Fin.fintype (PNat.val n)))))))
+      (@Nat.decidableForallFin (PNat.val n)
+        (fun (j : Fin (PNat.val n)) =>
+          @LE.le.{0} Nat instLENat
+            (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (@Fin.val (PNat.val n) j)
+              (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+            (@Finset.card.{0} (Fin (PNat.val n))
+              (@Finset.filter.{0} (Fin (PNat.val n))
+                (fun (i : Fin (PNat.val n)) => @LE.le.{0} (Fin (PNat.val n)) (@instLEFin (PNat.val n)) (a i) j)
+                (fun (a_1 : Fin (PNat.val n)) => @Fin.decLe (PNat.val n) (a a_1) j)
+                (@Finset.univ.{0} (Fin (PNat.val n)) (Fin.fintype (PNat.val n))))))
+        fun (a_1 : Fin (PNat.val n)) =>
+        Nat.decLe
+          (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (@Fin.val (PNat.val n) a_1)
+            (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+          (@Finset.card.{0} (Fin (PNat.val n))
+            (@Finset.filter.{0} (Fin (PNat.val n))
+              (fun (i : Fin (PNat.val n)) => @LE.le.{0} (Fin (PNat.val n)) (@instLEFin (PNat.val n)) (a i) a_1)
+              (fun (a_2 : Fin (PNat.val n)) => @Fin.decLe (PNat.val n) (a a_2) a_1)
+              (@Finset.univ.{0} (Fin (PNat.val n)) (Fin.fintype (PNat.val n)))))))
+Parking.instFintypeParkingFunction : (n : PNat) → Fintype.{0} (Parking.ParkingFunction n) := fun (n : PNat) =>
+  @Fintype.mk.{0} (Parking.ParkingFunction n) (Parking.instFintypeParkingFunction._aux_1 n)
+    (Parking.instFintypeParkingFunction._proof_3 n)
+Parking.instFintypeParkingFunction._aux_1 : (n : PNat) → Finset.{0} (Parking.ParkingFunction n) := fun (n : PNat) =>
+  @Finset.mk.{0}
+    (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (x : Fin (PNat.val n) → Fin (PNat.val n)) =>
+      @Parking.isParkingFunction n x)
+    (@Multiset.pmap.{0, 0} (Fin (PNat.val n) → Fin (PNat.val n))
+      (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (x : Fin (PNat.val n) → Fin (PNat.val n)) =>
+        @Parking.isParkingFunction n x)
+      (fun (x : Fin (PNat.val n) → Fin (PNat.val n)) => @Parking.isParkingFunction n x)
+      (@Subtype.mk.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (x : Fin (PNat.val n) → Fin (PNat.val n)) =>
+        @Parking.isParkingFunction n x)
+      (@Finset.val.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+        (@Finset.filter.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+          (Parking.instDecidablePredForallFinValIsParkingFunction n)
+          (@Finset.univ.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+            (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+              (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+              Fin.fintype (PNat.val n)))))
+      (@Fintype.subtype._proof_1.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+        (@Finset.filter.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+          (Parking.instDecidablePredForallFinValIsParkingFunction n)
+          (@Finset.univ.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+            (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+              (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+              Fin.fintype (PNat.val n))))
+        (@Subtype.fintype._proof_1.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+          (Parking.instDecidablePredForallFinValIsParkingFunction n)
+          (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+            (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+            Fin.fintype (PNat.val n)))))
+    (@Fintype.subtype._proof_2.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+      (@Finset.filter.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+        (Parking.instDecidablePredForallFinValIsParkingFunction n)
+        (@Finset.univ.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+          (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+            (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+            Fin.fintype (PNat.val n))))
+      (@Subtype.fintype._proof_1.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+        (Parking.instDecidablePredForallFinValIsParkingFunction n)
+        (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+          (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+          Fin.fintype (PNat.val n))))
+Parking.instFintypeParkingFunction._proof_3 : ∀ (n : PNat) (x : Parking.ParkingFunction n),
+  @Membership.mem.{0, 0} (Parking.ParkingFunction n) (Finset.{0} (Parking.ParkingFunction n))
+    (@SetLike.instMembership.{0, 0} (Finset.{0} (Parking.ParkingFunction n)) (Parking.ParkingFunction n)
+      (@Finset.instSetLike.{0} (Parking.ParkingFunction n)))
+    (Parking.instFintypeParkingFunction._aux_1 n) x
+Parking.instMeasurableSingletonClassParkingFunction : ∀ (n : PNat), @MeasurableSingletonClass.{0} (Parking.ParkingFunction n) (Parking.instMeasurableSpaceParkingFunction n)
+Parking.instMeasurableSpaceParkingFunction : (n : PNat) → MeasurableSpace.{0} (Parking.ParkingFunction n) := fun (n : PNat) =>
+  @MeasurableSpace.mk.{0} (Parking.ParkingFunction n) (Parking.instMeasurableSpaceParkingFunction._aux_1 n)
+    (Parking.instMeasurableSpaceParkingFunction._proof_3 n) (Parking.instMeasurableSpaceParkingFunction._proof_4 n)
+    (Parking.instMeasurableSpaceParkingFunction._proof_5 n)
+Parking.instMeasurableSpaceParkingFunction._aux_1 : (n : PNat) → Set.{0} (Parking.ParkingFunction n) → Prop := fun (n : PNat)
+    (s :
+      Set.{0}
+        (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+          @Parking.isParkingFunction n a)) =>
+  @Exists.{1} (Set.{0} (Fin (PNat.val n) → Fin (PNat.val n)))
+    fun (s' : Set.{0} (Fin (PNat.val n) → Fin (PNat.val n))) =>
+    And
+      (@MeasurableSet.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+        (@MeasurableSpace.pi.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+          fun (a : Fin (PNat.val n)) => Fin.instMeasurableSpace (PNat.val n))
+        s')
+      (@Eq.{1}
+        (Set.{0}
+          (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+            @Parking.isParkingFunction n a))
+        (@Set.preimage.{0, 0}
+          (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+            @Parking.isParkingFunction n a)
+          (Fin (PNat.val n) → Fin (PNat.val n))
+          (@Subtype.val.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+            @Parking.isParkingFunction n a)
+          s')
+        s)
+Parking.instMeasurableSpaceParkingFunction._proof_3 : ∀ (n : PNat),
+  Parking.instMeasurableSpaceParkingFunction._aux_1 n
+    (@EmptyCollection.emptyCollection.{0} (Set.{0} (Parking.ParkingFunction n))
+      (@Set.instEmptyCollection.{0} (Parking.ParkingFunction n)))
+Parking.instMeasurableSpaceParkingFunction._proof_4 : ∀ (n : PNat) (s : Set.{0} (Parking.ParkingFunction n)),
+  Parking.instMeasurableSpaceParkingFunction._aux_1 n s →
+    Parking.instMeasurableSpaceParkingFunction._aux_1 n
+      (@Compl.compl.{0} (Set.{0} (Parking.ParkingFunction n)) (@Set.instCompl.{0} (Parking.ParkingFunction n)) s)
+Parking.instMeasurableSpaceParkingFunction._proof_5 : ∀ (n : PNat) (f : Nat → Set.{0} (Parking.ParkingFunction n)),
+  (∀ (i : Nat), Parking.instMeasurableSpaceParkingFunction._aux_1 n (f i)) →
+    Parking.instMeasurableSpaceParkingFunction._aux_1 n
+      (@Set.iUnion.{0, 1} (Parking.ParkingFunction n) Nat fun (i : Nat) => f i)
+Parking.instNonemptyParkingFunction : ∀ (n : PNat), Nonempty.{1} (Parking.ParkingFunction n)
+Parking.isParkingFunction : {n : PNat} → (a : Fin (PNat.val n) → Fin (PNat.val n)) → Prop := fun {n : PNat} (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+  ∀ (j : Fin (PNat.val n)),
+    @LE.le.{0} Nat instLENat
+      (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (@Fin.val (PNat.val n) j)
+        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+      (@Finset.card.{0} (Fin (PNat.val n))
+        (@Finset.filter.{0} (Fin (PNat.val n))
+          (fun (i : Fin (PNat.val n)) => @LE.le.{0} (Fin (PNat.val n)) (@instLEFin (PNat.val n)) (a i) j)
+          (fun (a_1 : Fin (PNat.val n)) => @Fin.decLe (PNat.val n) (a a_1) j)
+          (@Finset.univ.{0} (Fin (PNat.val n)) (Fin.fintype (PNat.val n)))))
+Parking.tvDist : {α : Type u_1} →
+  [Fintype.{u_1} α] →
+    [inst : MeasurableSpace.{u_1} α] →
+      [@MeasurableSingletonClass.{u_1} α inst] → (P Q : @MeasureTheory.ProbabilityMeasure.{u_1} α inst) → Real := fun {α : Type u_1} [inst : Fintype.{u_1} α] [inst_1 : MeasurableSpace.{u_1} α]
+    [@MeasurableSingletonClass.{u_1} α inst_1] (P Q : @MeasureTheory.ProbabilityMeasure.{u_1} α inst_1) =>
+  @HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+    (@Inv.inv.{0} Real Real.instInv
+      (@OfNat.ofNat.{0} Real (nat_lit 2)
+        (@instOfNatAtLeastTwo.{0} Real (nat_lit 2) Real.instNatCast Parking.tvDist._proof_1)))
+    (@Finset.sum.{u_1, 0} α Real Real.instAddCommMonoid (@Finset.univ.{u_1} α inst) fun (x : α) =>
+      @abs.{0} Real Real.lattice Real.instAddGroup
+        (@HSub.hSub.{0, 0, 0} Real Real Real (@instHSub.{0} Real Real.instSub)
+          (NNReal.toReal
+            (@DFunLike.coe.{u_1 + 1, u_1 + 1, 1} (@MeasureTheory.ProbabilityMeasure.{u_1} α inst_1) (Set.{u_1} α)
+              (fun (x : Set.{u_1} α) => NNReal) (@MeasureTheory.ProbabilityMeasure.instFunLike.{u_1} α inst_1) P
+              (@Singleton.singleton.{u_1, u_1} α (Set.{u_1} α) (@Set.instSingletonSet.{u_1} α) x)))
+          (NNReal.toReal
+            (@DFunLike.coe.{u_1 + 1, u_1 + 1, 1} (@MeasureTheory.ProbabilityMeasure.{u_1} α inst_1) (Set.{u_1} α)
+              (fun (x : Set.{u_1} α) => NNReal) (@MeasureTheory.ProbabilityMeasure.instFunLike.{u_1} α inst_1) Q
+              (@Singleton.singleton.{u_1, u_1} α (Set.{u_1} α) (@Set.instSingletonSet.{u_1} α) x)))))
+Parking.tvDist._proof_1 : Nat.AtLeastTwo
+  (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat)
+    (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))
+    (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+Parking.tvDist_firstCoordsLaw_bounds : @Exists.{1} Real fun (C : Real) =>
+  And (@LE.le.{0} Real Real.instLE (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne)) C)
+    (∀ (n : PNat),
+      @LE.le.{0} Nat instLENat (@OfNat.ofNat.{0} Nat (nat_lit 2) (instOfNatNat (nat_lit 2))) (PNat.val n) →
+        ∀ (k : Nat),
+          @LE.le.{0} Nat instLENat (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))) k →
+            ∀ (hkn : @LE.le.{0} Nat instLENat k (PNat.val n)),
+              And
+                (@LE.le.{0} Real Real.instLE
+                  (Real.sqrt
+                    (@HDiv.hDiv.{0, 0, 0} Real Real Real
+                      (@instHDiv.{0} Real (@DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid))
+                      (@HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+                        (@Nat.cast.{0} Real Real.instNatCast k)
+                        (Real.log
+                          (@HAdd.hAdd.{0, 0, 0} Real Real Real (@instHAdd.{0} Real Real.instAdd)
+                            (@Nat.cast.{0} Real Real.instNatCast k)
+                            (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne)))))
+                      (@HAdd.hAdd.{0, 0, 0} Real Real Real (@instHAdd.{0} Real Real.instAdd)
+                        (@HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul) C
+                          (@Nat.cast.{0} Real Real.instNatCast (PNat.val n)))
+                        (@HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+                          (@Nat.cast.{0} Real Real.instNatCast k)
+                          (Real.log
+                            (@HAdd.hAdd.{0, 0, 0} Real Real Real (@instHAdd.{0} Real Real.instAdd)
+                              (@Nat.cast.{0} Real Real.instNatCast k)
+                              (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne))))))))
+                  (@Parking.tvDist.{0} (Fin k → Fin (PNat.val n))
+                    (@Pi.instFintype.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) (instDecidableEqFin k)
+                      (Fin.fintype k) fun (a : Fin k) => Fin.fintype (PNat.val n))
+                    (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+                      Fin.instMeasurableSpace (PNat.val n))
+                    (@Pi.instMeasurableSingletonClass.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n))
+                      (fun (a : Fin k) => Fin.instMeasurableSpace (PNat.val n)) (@instCountableFin k) fun (a : Fin k) =>
+                      Fin.instMeasurableSingletonClass (PNat.val n))
+                    (Parking.firstCoordsLaw n k hkn) (Parking.uniformProduct n k)))
+                (@LE.le.{0} Real Real.instLE
+                  (@Parking.tvDist.{0} (Fin k → Fin (PNat.val n))
+                    (@Pi.instFintype.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) (instDecidableEqFin k)
+                      (Fin.fintype k) fun (a : Fin k) => Fin.fintype (PNat.val n))
+                    (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+                      Fin.instMeasurableSpace (PNat.val n))
+                    (@Pi.instMeasurableSingletonClass.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n))
+                      (fun (a : Fin k) => Fin.instMeasurableSpace (PNat.val n)) (@instCountableFin k) fun (a : Fin k) =>
+                      Fin.instMeasurableSingletonClass (PNat.val n))
+                    (Parking.firstCoordsLaw n k hkn) (Parking.uniformProduct n k))
+                  (@Min.min.{0} Real Real.instMin
+                    (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne))
+                    (@HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul) C
+                      (Real.sqrt
+                        (@HDiv.hDiv.{0, 0, 0} Real Real Real
+                          (@instHDiv.{0} Real (@DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid))
+                          (@HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+                            (@Nat.cast.{0} Real Real.instNatCast k)
+                            (Real.log
+                              (@HAdd.hAdd.{0, 0, 0} Real Real Real (@instHAdd.{0} Real Real.instAdd)
+                                (@Nat.cast.{0} Real Real.instNatCast k)
+                                (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne)))))
+                          (@Nat.cast.{0} Real Real.instNatCast (PNat.val n))))))))
+Parking.uniformLaw : (α : Type u_1) →
+  [Fintype.{u_1} α] →
+    [Nonempty.{u_1 + 1} α] →
+      [inst : MeasurableSpace.{u_1} α] →
+        [@MeasurableSingletonClass.{u_1} α inst] → @MeasureTheory.ProbabilityMeasure.{u_1} α inst := fun (α : Type u_1) [inst : Fintype.{u_1} α] [inst_1 : Nonempty.{u_1 + 1} α] [inst_2 : MeasurableSpace.{u_1} α]
+    [inst_3 : @MeasurableSingletonClass.{u_1} α inst_2] =>
+  @Subtype.mk.{u_1 + 1} (@MeasureTheory.Measure.{u_1} α inst_2)
+    (fun (μ : @MeasureTheory.Measure.{u_1} α inst_2) => @MeasureTheory.IsProbabilityMeasure.{u_1} α inst_2 μ)
+    (@ProbabilityTheory.uniformOn.{u_1} α inst_2 (@Set.univ.{u_1} α))
+    (@Parking.uniformLaw._proof_1.{u_1} α inst inst_1 inst_2 inst_3)
+Parking.uniformLaw._proof_1 : ∀ (α : Type u_1) [Fintype.{u_1} α] [Nonempty.{u_1 + 1} α] [inst : MeasurableSpace.{u_1} α]
+  [@MeasurableSingletonClass.{u_1} α inst],
+  @MeasureTheory.IsProbabilityMeasure.{u_1} α inst (@ProbabilityTheory.uniformOn.{u_1} α inst (@Set.univ.{u_1} α))
+Parking.uniformParking : (n : PNat) →
+  @MeasureTheory.ProbabilityMeasure.{0} (Parking.ParkingFunction n) (Parking.instMeasurableSpaceParkingFunction n) := fun (n : PNat) =>
+  @Parking.uniformLaw.{0} (Parking.ParkingFunction n) (Parking.instFintypeParkingFunction n)
+    (Parking.instNonemptyParkingFunction n) (Parking.instMeasurableSpaceParkingFunction n)
+    (Parking.instMeasurableSingletonClassParkingFunction n)
+Parking.uniformProduct : (n : PNat) →
+  (k : Nat) →
+    @MeasureTheory.ProbabilityMeasure.{0} (Fin k → Fin (PNat.val n))
+      (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+        Fin.instMeasurableSpace (PNat.val n)) := fun (n : PNat) (k : Nat) =>
+  @MeasureTheory.ProbabilityMeasure.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) (Fin.fintype k)
+    (fun (a : Fin k) => Fin.instMeasurableSpace (PNat.val n)) fun (x : Fin k) =>
+    @Parking.uniformLaw.{0} (Fin (PNat.val n)) (Fin.fintype (PNat.val n)) (Parking.uniformProduct._proof_1 n)
+      (Fin.instMeasurableSpace (PNat.val n)) (Parking.uniformProduct._proof_2 n)
+Parking.uniformProduct._proof_1 : ∀ (n : PNat), Nonempty.{1} (Fin (PNat.val n))
+Parking.uniformProduct._proof_2 : ∀ (n : PNat), @MeasurableSingletonClass.{0} (Fin (PNat.val n)) (Fin.instMeasurableSpace (PNat.val n))
+=== END ===
+=== ABI Parking.tendsto_tvDist_firstCoordsLaw ===
+Parking.ParkingFunction : (n : PNat) → Type := fun (n : PNat) =>
+  @Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+    @Parking.isParkingFunction n a
+Parking.firstCoords : (n : PNat) →
+  (k : Nat) →
+    (hk : @LE.le.{0} Nat instLENat k (PNat.val n)) → (a : Parking.ParkingFunction n) → Fin k → Fin (PNat.val n) := fun (n : PNat) (k : Nat) (hk : @LE.le.{0} Nat instLENat k (PNat.val n)) (a : Parking.ParkingFunction n) (r : Fin k) =>
+  @Subtype.val.{1} (Fin (PNat.val n) → Fin (PNat.val n))
+    (fun (a : Fin (PNat.val n) → Fin (PNat.val n)) => @Parking.isParkingFunction n a) a
+    (@Fin.castLE k (PNat.val n) hk r)
+Parking.firstCoordsLaw : (n : PNat) →
+  (k : Nat) →
+    (hk : @LE.le.{0} Nat instLENat k (PNat.val n)) →
+      @MeasureTheory.ProbabilityMeasure.{0} (Fin k → Fin (PNat.val n))
+        (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+          Fin.instMeasurableSpace (PNat.val n)) := fun (n : PNat) (k : Nat) (hk : @LE.le.{0} Nat instLENat k (PNat.val n)) =>
+  @MeasureTheory.ProbabilityMeasure.map.{0, 0} (Parking.ParkingFunction n) (Fin k → Fin (PNat.val n))
+    (Parking.instMeasurableSpaceParkingFunction n)
+    (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+      Fin.instMeasurableSpace (PNat.val n))
+    (Parking.uniformParking n) (Parking.firstCoords n k hk)
+Parking.instDecidablePredForallFinValIsParkingFunction : (n : PNat) → @DecidablePred.{1} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n) := fun (n : PNat) (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+  @id.{1} (Decidable (@Parking.isParkingFunction n a))
+    (@inferInstance.{1}
+      (Decidable
+        (∀ (j : Fin (PNat.val n)),
+          @LE.le.{0} Nat instLENat
+            (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (@Fin.val (PNat.val n) j)
+              (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+            (@Finset.card.{0} (Fin (PNat.val n))
+              (@Finset.filter.{0} (Fin (PNat.val n))
+                (fun (i : Fin (PNat.val n)) => @LE.le.{0} (Fin (PNat.val n)) (@instLEFin (PNat.val n)) (a i) j)
+                (fun (a_1 : Fin (PNat.val n)) => @Fin.decLe (PNat.val n) (a a_1) j)
+                (@Finset.univ.{0} (Fin (PNat.val n)) (Fin.fintype (PNat.val n)))))))
+      (@Nat.decidableForallFin (PNat.val n)
+        (fun (j : Fin (PNat.val n)) =>
+          @LE.le.{0} Nat instLENat
+            (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (@Fin.val (PNat.val n) j)
+              (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+            (@Finset.card.{0} (Fin (PNat.val n))
+              (@Finset.filter.{0} (Fin (PNat.val n))
+                (fun (i : Fin (PNat.val n)) => @LE.le.{0} (Fin (PNat.val n)) (@instLEFin (PNat.val n)) (a i) j)
+                (fun (a_1 : Fin (PNat.val n)) => @Fin.decLe (PNat.val n) (a a_1) j)
+                (@Finset.univ.{0} (Fin (PNat.val n)) (Fin.fintype (PNat.val n))))))
+        fun (a_1 : Fin (PNat.val n)) =>
+        Nat.decLe
+          (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (@Fin.val (PNat.val n) a_1)
+            (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+          (@Finset.card.{0} (Fin (PNat.val n))
+            (@Finset.filter.{0} (Fin (PNat.val n))
+              (fun (i : Fin (PNat.val n)) => @LE.le.{0} (Fin (PNat.val n)) (@instLEFin (PNat.val n)) (a i) a_1)
+              (fun (a_2 : Fin (PNat.val n)) => @Fin.decLe (PNat.val n) (a a_2) a_1)
+              (@Finset.univ.{0} (Fin (PNat.val n)) (Fin.fintype (PNat.val n)))))))
+Parking.instFintypeParkingFunction : (n : PNat) → Fintype.{0} (Parking.ParkingFunction n) := fun (n : PNat) =>
+  @Fintype.mk.{0} (Parking.ParkingFunction n) (Parking.instFintypeParkingFunction._aux_1 n)
+    (Parking.instFintypeParkingFunction._proof_3 n)
+Parking.instFintypeParkingFunction._aux_1 : (n : PNat) → Finset.{0} (Parking.ParkingFunction n) := fun (n : PNat) =>
+  @Finset.mk.{0}
+    (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (x : Fin (PNat.val n) → Fin (PNat.val n)) =>
+      @Parking.isParkingFunction n x)
+    (@Multiset.pmap.{0, 0} (Fin (PNat.val n) → Fin (PNat.val n))
+      (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (x : Fin (PNat.val n) → Fin (PNat.val n)) =>
+        @Parking.isParkingFunction n x)
+      (fun (x : Fin (PNat.val n) → Fin (PNat.val n)) => @Parking.isParkingFunction n x)
+      (@Subtype.mk.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (x : Fin (PNat.val n) → Fin (PNat.val n)) =>
+        @Parking.isParkingFunction n x)
+      (@Finset.val.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+        (@Finset.filter.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+          (Parking.instDecidablePredForallFinValIsParkingFunction n)
+          (@Finset.univ.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+            (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+              (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+              Fin.fintype (PNat.val n)))))
+      (@Fintype.subtype._proof_1.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+        (@Finset.filter.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+          (Parking.instDecidablePredForallFinValIsParkingFunction n)
+          (@Finset.univ.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+            (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+              (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+              Fin.fintype (PNat.val n))))
+        (@Subtype.fintype._proof_1.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+          (Parking.instDecidablePredForallFinValIsParkingFunction n)
+          (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+            (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+            Fin.fintype (PNat.val n)))))
+    (@Fintype.subtype._proof_2.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+      (@Finset.filter.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+        (Parking.instDecidablePredForallFinValIsParkingFunction n)
+        (@Finset.univ.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+          (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+            (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+            Fin.fintype (PNat.val n))))
+      (@Subtype.fintype._proof_1.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+        (Parking.instDecidablePredForallFinValIsParkingFunction n)
+        (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+          (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+          Fin.fintype (PNat.val n))))
+Parking.instFintypeParkingFunction._proof_3 : ∀ (n : PNat) (x : Parking.ParkingFunction n),
+  @Membership.mem.{0, 0} (Parking.ParkingFunction n) (Finset.{0} (Parking.ParkingFunction n))
+    (@SetLike.instMembership.{0, 0} (Finset.{0} (Parking.ParkingFunction n)) (Parking.ParkingFunction n)
+      (@Finset.instSetLike.{0} (Parking.ParkingFunction n)))
+    (Parking.instFintypeParkingFunction._aux_1 n) x
+Parking.instMeasurableSingletonClassParkingFunction : ∀ (n : PNat), @MeasurableSingletonClass.{0} (Parking.ParkingFunction n) (Parking.instMeasurableSpaceParkingFunction n)
+Parking.instMeasurableSpaceParkingFunction : (n : PNat) → MeasurableSpace.{0} (Parking.ParkingFunction n) := fun (n : PNat) =>
+  @MeasurableSpace.mk.{0} (Parking.ParkingFunction n) (Parking.instMeasurableSpaceParkingFunction._aux_1 n)
+    (Parking.instMeasurableSpaceParkingFunction._proof_3 n) (Parking.instMeasurableSpaceParkingFunction._proof_4 n)
+    (Parking.instMeasurableSpaceParkingFunction._proof_5 n)
+Parking.instMeasurableSpaceParkingFunction._aux_1 : (n : PNat) → Set.{0} (Parking.ParkingFunction n) → Prop := fun (n : PNat)
+    (s :
+      Set.{0}
+        (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+          @Parking.isParkingFunction n a)) =>
+  @Exists.{1} (Set.{0} (Fin (PNat.val n) → Fin (PNat.val n)))
+    fun (s' : Set.{0} (Fin (PNat.val n) → Fin (PNat.val n))) =>
+    And
+      (@MeasurableSet.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+        (@MeasurableSpace.pi.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+          fun (a : Fin (PNat.val n)) => Fin.instMeasurableSpace (PNat.val n))
+        s')
+      (@Eq.{1}
+        (Set.{0}
+          (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+            @Parking.isParkingFunction n a))
+        (@Set.preimage.{0, 0}
+          (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+            @Parking.isParkingFunction n a)
+          (Fin (PNat.val n) → Fin (PNat.val n))
+          (@Subtype.val.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+            @Parking.isParkingFunction n a)
+          s')
+        s)
+Parking.instMeasurableSpaceParkingFunction._proof_3 : ∀ (n : PNat),
+  Parking.instMeasurableSpaceParkingFunction._aux_1 n
+    (@EmptyCollection.emptyCollection.{0} (Set.{0} (Parking.ParkingFunction n))
+      (@Set.instEmptyCollection.{0} (Parking.ParkingFunction n)))
+Parking.instMeasurableSpaceParkingFunction._proof_4 : ∀ (n : PNat) (s : Set.{0} (Parking.ParkingFunction n)),
+  Parking.instMeasurableSpaceParkingFunction._aux_1 n s →
+    Parking.instMeasurableSpaceParkingFunction._aux_1 n
+      (@Compl.compl.{0} (Set.{0} (Parking.ParkingFunction n)) (@Set.instCompl.{0} (Parking.ParkingFunction n)) s)
+Parking.instMeasurableSpaceParkingFunction._proof_5 : ∀ (n : PNat) (f : Nat → Set.{0} (Parking.ParkingFunction n)),
+  (∀ (i : Nat), Parking.instMeasurableSpaceParkingFunction._aux_1 n (f i)) →
+    Parking.instMeasurableSpaceParkingFunction._aux_1 n
+      (@Set.iUnion.{0, 1} (Parking.ParkingFunction n) Nat fun (i : Nat) => f i)
+Parking.instNonemptyParkingFunction : ∀ (n : PNat), Nonempty.{1} (Parking.ParkingFunction n)
+Parking.isParkingFunction : {n : PNat} → (a : Fin (PNat.val n) → Fin (PNat.val n)) → Prop := fun {n : PNat} (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+  ∀ (j : Fin (PNat.val n)),
+    @LE.le.{0} Nat instLENat
+      (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (@Fin.val (PNat.val n) j)
+        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+      (@Finset.card.{0} (Fin (PNat.val n))
+        (@Finset.filter.{0} (Fin (PNat.val n))
+          (fun (i : Fin (PNat.val n)) => @LE.le.{0} (Fin (PNat.val n)) (@instLEFin (PNat.val n)) (a i) j)
+          (fun (a_1 : Fin (PNat.val n)) => @Fin.decLe (PNat.val n) (a a_1) j)
+          (@Finset.univ.{0} (Fin (PNat.val n)) (Fin.fintype (PNat.val n)))))
+Parking.profile : (lam : ENNReal) → Real := fun (lam : ENNReal) =>
+  @ite.{1} Real (@Eq.{1} ENNReal lam (@Top.top.{0} ENNReal ENNReal.instTop))
+    (@LinearOrder.toDecidableEq.{0} ENNReal ENNReal.instLinearOrder lam (@Top.top.{0} ENNReal ENNReal.instTop))
+    (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne))
+    (@HSub.hSub.{0, 0, 0} Real Real Real (@instHSub.{0} Real Real.instSub)
+      (@HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+        (@OfNat.ofNat.{0} Real (nat_lit 2)
+          (@instOfNatAtLeastTwo.{0} Real (nat_lit 2) Real.instNatCast Parking.tvDist._proof_1))
+        (@StieltjesFunction.toFun.{0} Real Real.linearOrder
+          (@UniformSpace.toTopologicalSpace.{0} Real
+            (@PseudoMetricSpace.toUniformSpace.{0} Real Real.pseudoMetricSpace))
+          (ProbabilityTheory.cdf
+            (ProbabilityTheory.gaussianReal (@OfNat.ofNat.{0} Real (nat_lit 0) (@Zero.toOfNat0.{0} Real Real.instZero))
+              (@OfNat.ofNat.{0} NNReal (nat_lit 1) (@One.toOfNat1.{0} NNReal NNReal.instOne))))
+          (Real.sqrt
+            (@HDiv.hDiv.{0, 0, 0} Real Real Real
+              (@instHDiv.{0} Real (@DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (ENNReal.toReal lam) Real.pi))))
+      (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne)))
+Parking.tendsto_tvDist_firstCoordsLaw : ∀ (k : PNat → Nat)
+  (hk : ∀ (n : PNat), @LE.le.{0} Nat instLENat (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))) (k n))
+  (hkn : ∀ (n : PNat), @LE.le.{0} Nat instLENat (k n) (PNat.val n)) (lam : ENNReal)
+  (hlim :
+    @Filter.Tendsto.{0, 0} PNat ENNReal
+      (fun (n : PNat) =>
+        ENNReal.ofReal
+          (@HDiv.hDiv.{0, 0, 0} Real Real Real (@instHDiv.{0} Real (@DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid))
+            (@HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+              (@Nat.cast.{0} Real Real.instNatCast (k n)) (Real.log (@Nat.cast.{0} Real Real.instNatCast (PNat.val n))))
+            (@Nat.cast.{0} Real Real.instNatCast (PNat.val n))))
+      (@Filter.atTop.{0} PNat
+        (@PartialOrder.toPreorder.{0} PNat
+          (@SemilatticeInf.toPartialOrder.{0} PNat
+            (@Lattice.toSemilatticeInf.{0} PNat
+              (@DistribLattice.toLattice.{0} PNat (@instDistribLatticeOfLinearOrder.{0} PNat instLinearOrderPNat))))))
+      (@nhds.{0} ENNReal ENNReal.instTopologicalSpace lam)),
+  @Filter.Tendsto.{0, 0} PNat Real
+    (fun (n : PNat) =>
+      @Parking.tvDist.{0} (Fin (k n) → Fin (PNat.val n))
+        (@Pi.instFintype.{0, 0} (Fin (k n)) (fun (a : Fin (k n)) => Fin (PNat.val n)) (instDecidableEqFin (k n))
+          (Fin.fintype (k n)) fun (a : Fin (k n)) => Fin.fintype (PNat.val n))
+        (@MeasurableSpace.pi.{0, 0} (Fin (k n)) (fun (a : Fin (k n)) => Fin (PNat.val n)) fun (a : Fin (k n)) =>
+          Fin.instMeasurableSpace (PNat.val n))
+        (@Pi.instMeasurableSingletonClass.{0, 0} (Fin (k n)) (fun (a : Fin (k n)) => Fin (PNat.val n))
+          (fun (a : Fin (k n)) => Fin.instMeasurableSpace (PNat.val n)) (@instCountableFin (k n)) fun (a : Fin (k n)) =>
+          Fin.instMeasurableSingletonClass (PNat.val n))
+        (Parking.firstCoordsLaw n (k n) (hkn n)) (Parking.uniformProduct n (k n)))
+    (@Filter.atTop.{0} PNat
+      (@PartialOrder.toPreorder.{0} PNat
+        (@SemilatticeInf.toPartialOrder.{0} PNat
+          (@Lattice.toSemilatticeInf.{0} PNat
+            (@DistribLattice.toLattice.{0} PNat (@instDistribLatticeOfLinearOrder.{0} PNat instLinearOrderPNat))))))
+    (@nhds.{0} Real
+      (@UniformSpace.toTopologicalSpace.{0} Real (@PseudoMetricSpace.toUniformSpace.{0} Real Real.pseudoMetricSpace))
+      (Parking.profile lam))
+Parking.tvDist : {α : Type u_1} →
+  [Fintype.{u_1} α] →
+    [inst : MeasurableSpace.{u_1} α] →
+      [@MeasurableSingletonClass.{u_1} α inst] → (P Q : @MeasureTheory.ProbabilityMeasure.{u_1} α inst) → Real := fun {α : Type u_1} [inst : Fintype.{u_1} α] [inst_1 : MeasurableSpace.{u_1} α]
+    [@MeasurableSingletonClass.{u_1} α inst_1] (P Q : @MeasureTheory.ProbabilityMeasure.{u_1} α inst_1) =>
+  @HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+    (@Inv.inv.{0} Real Real.instInv
+      (@OfNat.ofNat.{0} Real (nat_lit 2)
+        (@instOfNatAtLeastTwo.{0} Real (nat_lit 2) Real.instNatCast Parking.tvDist._proof_1)))
+    (@Finset.sum.{u_1, 0} α Real Real.instAddCommMonoid (@Finset.univ.{u_1} α inst) fun (x : α) =>
+      @abs.{0} Real Real.lattice Real.instAddGroup
+        (@HSub.hSub.{0, 0, 0} Real Real Real (@instHSub.{0} Real Real.instSub)
+          (NNReal.toReal
+            (@DFunLike.coe.{u_1 + 1, u_1 + 1, 1} (@MeasureTheory.ProbabilityMeasure.{u_1} α inst_1) (Set.{u_1} α)
+              (fun (x : Set.{u_1} α) => NNReal) (@MeasureTheory.ProbabilityMeasure.instFunLike.{u_1} α inst_1) P
+              (@Singleton.singleton.{u_1, u_1} α (Set.{u_1} α) (@Set.instSingletonSet.{u_1} α) x)))
+          (NNReal.toReal
+            (@DFunLike.coe.{u_1 + 1, u_1 + 1, 1} (@MeasureTheory.ProbabilityMeasure.{u_1} α inst_1) (Set.{u_1} α)
+              (fun (x : Set.{u_1} α) => NNReal) (@MeasureTheory.ProbabilityMeasure.instFunLike.{u_1} α inst_1) Q
+              (@Singleton.singleton.{u_1, u_1} α (Set.{u_1} α) (@Set.instSingletonSet.{u_1} α) x)))))
+Parking.tvDist._proof_1 : Nat.AtLeastTwo
+  (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat)
+    (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))
+    (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+Parking.uniformLaw : (α : Type u_1) →
+  [Fintype.{u_1} α] →
+    [Nonempty.{u_1 + 1} α] →
+      [inst : MeasurableSpace.{u_1} α] →
+        [@MeasurableSingletonClass.{u_1} α inst] → @MeasureTheory.ProbabilityMeasure.{u_1} α inst := fun (α : Type u_1) [inst : Fintype.{u_1} α] [inst_1 : Nonempty.{u_1 + 1} α] [inst_2 : MeasurableSpace.{u_1} α]
+    [inst_3 : @MeasurableSingletonClass.{u_1} α inst_2] =>
+  @Subtype.mk.{u_1 + 1} (@MeasureTheory.Measure.{u_1} α inst_2)
+    (fun (μ : @MeasureTheory.Measure.{u_1} α inst_2) => @MeasureTheory.IsProbabilityMeasure.{u_1} α inst_2 μ)
+    (@ProbabilityTheory.uniformOn.{u_1} α inst_2 (@Set.univ.{u_1} α))
+    (@Parking.uniformLaw._proof_1.{u_1} α inst inst_1 inst_2 inst_3)
+Parking.uniformLaw._proof_1 : ∀ (α : Type u_1) [Fintype.{u_1} α] [Nonempty.{u_1 + 1} α] [inst : MeasurableSpace.{u_1} α]
+  [@MeasurableSingletonClass.{u_1} α inst],
+  @MeasureTheory.IsProbabilityMeasure.{u_1} α inst (@ProbabilityTheory.uniformOn.{u_1} α inst (@Set.univ.{u_1} α))
+Parking.uniformParking : (n : PNat) →
+  @MeasureTheory.ProbabilityMeasure.{0} (Parking.ParkingFunction n) (Parking.instMeasurableSpaceParkingFunction n) := fun (n : PNat) =>
+  @Parking.uniformLaw.{0} (Parking.ParkingFunction n) (Parking.instFintypeParkingFunction n)
+    (Parking.instNonemptyParkingFunction n) (Parking.instMeasurableSpaceParkingFunction n)
+    (Parking.instMeasurableSingletonClassParkingFunction n)
+Parking.uniformProduct : (n : PNat) →
+  (k : Nat) →
+    @MeasureTheory.ProbabilityMeasure.{0} (Fin k → Fin (PNat.val n))
+      (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+        Fin.instMeasurableSpace (PNat.val n)) := fun (n : PNat) (k : Nat) =>
+  @MeasureTheory.ProbabilityMeasure.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) (Fin.fintype k)
+    (fun (a : Fin k) => Fin.instMeasurableSpace (PNat.val n)) fun (x : Fin k) =>
+    @Parking.uniformLaw.{0} (Fin (PNat.val n)) (Fin.fintype (PNat.val n)) (Parking.uniformProduct._proof_1 n)
+      (Fin.instMeasurableSpace (PNat.val n)) (Parking.uniformProduct._proof_2 n)
+Parking.uniformProduct._proof_1 : ∀ (n : PNat), Nonempty.{1} (Fin (PNat.val n))
+Parking.uniformProduct._proof_2 : ∀ (n : PNat), @MeasurableSingletonClass.{0} (Fin (PNat.val n)) (Fin.instMeasurableSpace (PNat.val n))
+=== END ===
+=== ABI Parking.klDiv_tvDist_firstCoordsLaw_le ===
+Parking.ParkingFunction : (n : PNat) → Type := fun (n : PNat) =>
+  @Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+    @Parking.isParkingFunction n a
+Parking.firstCoord : (n : PNat) → (a : Parking.ParkingFunction n) → Fin (PNat.val n) := fun (n : PNat) (a : Parking.ParkingFunction n) =>
+  @Subtype.val.{1} (Fin (PNat.val n) → Fin (PNat.val n))
+    (fun (a : Fin (PNat.val n) → Fin (PNat.val n)) => @Parking.isParkingFunction n a) a
+    (@Fin.mk (PNat.val n) (@OfNat.ofNat.{0} Nat (nat_lit 0) (instOfNatNat (nat_lit 0))) (PNat.pos n))
+Parking.firstCoords : (n : PNat) →
+  (k : Nat) →
+    (hk : @LE.le.{0} Nat instLENat k (PNat.val n)) → (a : Parking.ParkingFunction n) → Fin k → Fin (PNat.val n) := fun (n : PNat) (k : Nat) (hk : @LE.le.{0} Nat instLENat k (PNat.val n)) (a : Parking.ParkingFunction n) (r : Fin k) =>
+  @Subtype.val.{1} (Fin (PNat.val n) → Fin (PNat.val n))
+    (fun (a : Fin (PNat.val n) → Fin (PNat.val n)) => @Parking.isParkingFunction n a) a
+    (@Fin.castLE k (PNat.val n) hk r)
+Parking.firstCoordsLaw : (n : PNat) →
+  (k : Nat) →
+    (hk : @LE.le.{0} Nat instLENat k (PNat.val n)) →
+      @MeasureTheory.ProbabilityMeasure.{0} (Fin k → Fin (PNat.val n))
+        (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+          Fin.instMeasurableSpace (PNat.val n)) := fun (n : PNat) (k : Nat) (hk : @LE.le.{0} Nat instLENat k (PNat.val n)) =>
+  @MeasureTheory.ProbabilityMeasure.map.{0, 0} (Parking.ParkingFunction n) (Fin k → Fin (PNat.val n))
+    (Parking.instMeasurableSpaceParkingFunction n)
+    (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+      Fin.instMeasurableSpace (PNat.val n))
+    (Parking.uniformParking n) (Parking.firstCoords n k hk)
+Parking.instDecidablePredForallFinValIsParkingFunction : (n : PNat) → @DecidablePred.{1} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n) := fun (n : PNat) (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+  @id.{1} (Decidable (@Parking.isParkingFunction n a))
+    (@inferInstance.{1}
+      (Decidable
+        (∀ (j : Fin (PNat.val n)),
+          @LE.le.{0} Nat instLENat
+            (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (@Fin.val (PNat.val n) j)
+              (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+            (@Finset.card.{0} (Fin (PNat.val n))
+              (@Finset.filter.{0} (Fin (PNat.val n))
+                (fun (i : Fin (PNat.val n)) => @LE.le.{0} (Fin (PNat.val n)) (@instLEFin (PNat.val n)) (a i) j)
+                (fun (a_1 : Fin (PNat.val n)) => @Fin.decLe (PNat.val n) (a a_1) j)
+                (@Finset.univ.{0} (Fin (PNat.val n)) (Fin.fintype (PNat.val n)))))))
+      (@Nat.decidableForallFin (PNat.val n)
+        (fun (j : Fin (PNat.val n)) =>
+          @LE.le.{0} Nat instLENat
+            (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (@Fin.val (PNat.val n) j)
+              (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+            (@Finset.card.{0} (Fin (PNat.val n))
+              (@Finset.filter.{0} (Fin (PNat.val n))
+                (fun (i : Fin (PNat.val n)) => @LE.le.{0} (Fin (PNat.val n)) (@instLEFin (PNat.val n)) (a i) j)
+                (fun (a_1 : Fin (PNat.val n)) => @Fin.decLe (PNat.val n) (a a_1) j)
+                (@Finset.univ.{0} (Fin (PNat.val n)) (Fin.fintype (PNat.val n))))))
+        fun (a_1 : Fin (PNat.val n)) =>
+        Nat.decLe
+          (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (@Fin.val (PNat.val n) a_1)
+            (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+          (@Finset.card.{0} (Fin (PNat.val n))
+            (@Finset.filter.{0} (Fin (PNat.val n))
+              (fun (i : Fin (PNat.val n)) => @LE.le.{0} (Fin (PNat.val n)) (@instLEFin (PNat.val n)) (a i) a_1)
+              (fun (a_2 : Fin (PNat.val n)) => @Fin.decLe (PNat.val n) (a a_2) a_1)
+              (@Finset.univ.{0} (Fin (PNat.val n)) (Fin.fintype (PNat.val n)))))))
+Parking.instFintypeParkingFunction : (n : PNat) → Fintype.{0} (Parking.ParkingFunction n) := fun (n : PNat) =>
+  @Fintype.mk.{0} (Parking.ParkingFunction n) (Parking.instFintypeParkingFunction._aux_1 n)
+    (Parking.instFintypeParkingFunction._proof_3 n)
+Parking.instFintypeParkingFunction._aux_1 : (n : PNat) → Finset.{0} (Parking.ParkingFunction n) := fun (n : PNat) =>
+  @Finset.mk.{0}
+    (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (x : Fin (PNat.val n) → Fin (PNat.val n)) =>
+      @Parking.isParkingFunction n x)
+    (@Multiset.pmap.{0, 0} (Fin (PNat.val n) → Fin (PNat.val n))
+      (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (x : Fin (PNat.val n) → Fin (PNat.val n)) =>
+        @Parking.isParkingFunction n x)
+      (fun (x : Fin (PNat.val n) → Fin (PNat.val n)) => @Parking.isParkingFunction n x)
+      (@Subtype.mk.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (x : Fin (PNat.val n) → Fin (PNat.val n)) =>
+        @Parking.isParkingFunction n x)
+      (@Finset.val.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+        (@Finset.filter.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+          (Parking.instDecidablePredForallFinValIsParkingFunction n)
+          (@Finset.univ.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+            (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+              (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+              Fin.fintype (PNat.val n)))))
+      (@Fintype.subtype._proof_1.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+        (@Finset.filter.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+          (Parking.instDecidablePredForallFinValIsParkingFunction n)
+          (@Finset.univ.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+            (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+              (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+              Fin.fintype (PNat.val n))))
+        (@Subtype.fintype._proof_1.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+          (Parking.instDecidablePredForallFinValIsParkingFunction n)
+          (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+            (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+            Fin.fintype (PNat.val n)))))
+    (@Fintype.subtype._proof_2.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+      (@Finset.filter.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+        (Parking.instDecidablePredForallFinValIsParkingFunction n)
+        (@Finset.univ.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+          (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+            (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+            Fin.fintype (PNat.val n))))
+      (@Subtype.fintype._proof_1.{0} (Fin (PNat.val n) → Fin (PNat.val n)) (@Parking.isParkingFunction n)
+        (Parking.instDecidablePredForallFinValIsParkingFunction n)
+        (@Pi.instFintype.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+          (instDecidableEqFin (PNat.val n)) (Fin.fintype (PNat.val n)) fun (a : Fin (PNat.val n)) =>
+          Fin.fintype (PNat.val n))))
+Parking.instFintypeParkingFunction._proof_3 : ∀ (n : PNat) (x : Parking.ParkingFunction n),
+  @Membership.mem.{0, 0} (Parking.ParkingFunction n) (Finset.{0} (Parking.ParkingFunction n))
+    (@SetLike.instMembership.{0, 0} (Finset.{0} (Parking.ParkingFunction n)) (Parking.ParkingFunction n)
+      (@Finset.instSetLike.{0} (Parking.ParkingFunction n)))
+    (Parking.instFintypeParkingFunction._aux_1 n) x
+Parking.instMeasurableSingletonClassParkingFunction : ∀ (n : PNat), @MeasurableSingletonClass.{0} (Parking.ParkingFunction n) (Parking.instMeasurableSpaceParkingFunction n)
+Parking.instMeasurableSpaceParkingFunction : (n : PNat) → MeasurableSpace.{0} (Parking.ParkingFunction n) := fun (n : PNat) =>
+  @MeasurableSpace.mk.{0} (Parking.ParkingFunction n) (Parking.instMeasurableSpaceParkingFunction._aux_1 n)
+    (Parking.instMeasurableSpaceParkingFunction._proof_3 n) (Parking.instMeasurableSpaceParkingFunction._proof_4 n)
+    (Parking.instMeasurableSpaceParkingFunction._proof_5 n)
+Parking.instMeasurableSpaceParkingFunction._aux_1 : (n : PNat) → Set.{0} (Parking.ParkingFunction n) → Prop := fun (n : PNat)
+    (s :
+      Set.{0}
+        (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+          @Parking.isParkingFunction n a)) =>
+  @Exists.{1} (Set.{0} (Fin (PNat.val n) → Fin (PNat.val n)))
+    fun (s' : Set.{0} (Fin (PNat.val n) → Fin (PNat.val n))) =>
+    And
+      (@MeasurableSet.{0} (Fin (PNat.val n) → Fin (PNat.val n))
+        (@MeasurableSpace.pi.{0, 0} (Fin (PNat.val n)) (fun (a : Fin (PNat.val n)) => Fin (PNat.val n))
+          fun (a : Fin (PNat.val n)) => Fin.instMeasurableSpace (PNat.val n))
+        s')
+      (@Eq.{1}
+        (Set.{0}
+          (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+            @Parking.isParkingFunction n a))
+        (@Set.preimage.{0, 0}
+          (@Subtype.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+            @Parking.isParkingFunction n a)
+          (Fin (PNat.val n) → Fin (PNat.val n))
+          (@Subtype.val.{1} (Fin (PNat.val n) → Fin (PNat.val n)) fun (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+            @Parking.isParkingFunction n a)
+          s')
+        s)
+Parking.instMeasurableSpaceParkingFunction._proof_3 : ∀ (n : PNat),
+  Parking.instMeasurableSpaceParkingFunction._aux_1 n
+    (@EmptyCollection.emptyCollection.{0} (Set.{0} (Parking.ParkingFunction n))
+      (@Set.instEmptyCollection.{0} (Parking.ParkingFunction n)))
+Parking.instMeasurableSpaceParkingFunction._proof_4 : ∀ (n : PNat) (s : Set.{0} (Parking.ParkingFunction n)),
+  Parking.instMeasurableSpaceParkingFunction._aux_1 n s →
+    Parking.instMeasurableSpaceParkingFunction._aux_1 n
+      (@Compl.compl.{0} (Set.{0} (Parking.ParkingFunction n)) (@Set.instCompl.{0} (Parking.ParkingFunction n)) s)
+Parking.instMeasurableSpaceParkingFunction._proof_5 : ∀ (n : PNat) (f : Nat → Set.{0} (Parking.ParkingFunction n)),
+  (∀ (i : Nat), Parking.instMeasurableSpaceParkingFunction._aux_1 n (f i)) →
+    Parking.instMeasurableSpaceParkingFunction._aux_1 n
+      (@Set.iUnion.{0, 1} (Parking.ParkingFunction n) Nat fun (i : Nat) => f i)
+Parking.instNonemptyParkingFunction : ∀ (n : PNat), Nonempty.{1} (Parking.ParkingFunction n)
+Parking.isParkingFunction : {n : PNat} → (a : Fin (PNat.val n) → Fin (PNat.val n)) → Prop := fun {n : PNat} (a : Fin (PNat.val n) → Fin (PNat.val n)) =>
+  ∀ (j : Fin (PNat.val n)),
+    @LE.le.{0} Nat instLENat
+      (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (@Fin.val (PNat.val n) j)
+        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+      (@Finset.card.{0} (Fin (PNat.val n))
+        (@Finset.filter.{0} (Fin (PNat.val n))
+          (fun (i : Fin (PNat.val n)) => @LE.le.{0} (Fin (PNat.val n)) (@instLEFin (PNat.val n)) (a i) j)
+          (fun (a_1 : Fin (PNat.val n)) => @Fin.decLe (PNat.val n) (a a_1) j)
+          (@Finset.univ.{0} (Fin (PNat.val n)) (Fin.fintype (PNat.val n)))))
+Parking.klDiv_tvDist_firstCoordsLaw_le : ∀ (n : PNat) (hn : @LE.le.{0} Nat instLENat (@OfNat.ofNat.{0} Nat (nat_lit 2) (instOfNatNat (nat_lit 2))) (PNat.val n))
+  (k : Nat) (hk : @LE.le.{0} Nat instLENat (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))) k)
+  (hkn : @LE.le.{0} Nat instLENat k (PNat.val n)),
+  And
+    (@LE.le.{0} ENNReal ENNReal.instLE
+      (@InformationTheory.klDiv.{0} (Fin k → Fin (PNat.val n))
+        (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+          Fin.instMeasurableSpace (PNat.val n))
+        (@MeasureTheory.ProbabilityMeasure.toMeasure.{0} (Fin k → Fin (PNat.val n))
+          (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+            Fin.instMeasurableSpace (PNat.val n))
+          (Parking.firstCoordsLaw n k hkn))
+        (@MeasureTheory.ProbabilityMeasure.toMeasure.{0} (Fin k → Fin (PNat.val n))
+          (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+            Fin.instMeasurableSpace (PNat.val n))
+          (Parking.marginalProduct n k)))
+      (ENNReal.ofReal
+        (@HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+          (@HDiv.hDiv.{0, 0, 0} Real Real Real (@instHDiv.{0} Real (@DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid))
+            (@HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+              (@Nat.cast.{0} Real Real.instNatCast k)
+              (@HSub.hSub.{0, 0, 0} Real Real Real (@instHSub.{0} Real Real.instSub)
+                (@Nat.cast.{0} Real Real.instNatCast k)
+                (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne))))
+            (@HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+              (@Nat.cast.{0} Real Real.instNatCast (PNat.val n))
+              (@HSub.hSub.{0, 0, 0} Real Real Real (@instHSub.{0} Real Real.instSub)
+                (@Nat.cast.{0} Real Real.instNatCast (PNat.val n))
+                (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne)))))
+          (Real.log (@Nat.cast.{0} Real Real.instNatCast (PNat.val n))))))
+    (@LE.le.{0} Real Real.instLE
+      (@Parking.tvDist.{0} (Fin k → Fin (PNat.val n))
+        (@Pi.instFintype.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) (instDecidableEqFin k) (Fin.fintype k)
+          fun (a : Fin k) => Fin.fintype (PNat.val n))
+        (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+          Fin.instMeasurableSpace (PNat.val n))
+        (@Pi.instMeasurableSingletonClass.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n))
+          (fun (a : Fin k) => Fin.instMeasurableSpace (PNat.val n)) (@instCountableFin k) fun (a : Fin k) =>
+          Fin.instMeasurableSingletonClass (PNat.val n))
+        (Parking.firstCoordsLaw n k hkn) (Parking.marginalProduct n k))
+      (Real.sqrt
+        (@HDiv.hDiv.{0, 0, 0} Real Real Real (@instHDiv.{0} Real (@DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid))
+          (@HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+            (@HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+              (@Nat.cast.{0} Real Real.instNatCast k)
+              (@HSub.hSub.{0, 0, 0} Real Real Real (@instHSub.{0} Real Real.instSub)
+                (@Nat.cast.{0} Real Real.instNatCast k)
+                (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne))))
+            (Real.log (@Nat.cast.{0} Real Real.instNatCast (PNat.val n))))
+          (@HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+            (@HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+              (@OfNat.ofNat.{0} Real (nat_lit 2)
+                (@instOfNatAtLeastTwo.{0} Real (nat_lit 2) Real.instNatCast
+                  (@Nat.instAtLeastTwoHAddOfNat (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))
+                    (@Nat.instNeZeroSucc (@OfNat.ofNat.{0} Nat (nat_lit 0) (instOfNatNat (nat_lit 0)))))))
+              (@Nat.cast.{0} Real Real.instNatCast (PNat.val n)))
+            (@HSub.hSub.{0, 0, 0} Real Real Real (@instHSub.{0} Real Real.instSub)
+              (@Nat.cast.{0} Real Real.instNatCast (PNat.val n))
+              (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne)))))))
+Parking.marginal : (n : PNat) → @MeasureTheory.ProbabilityMeasure.{0} (Fin (PNat.val n)) (Fin.instMeasurableSpace (PNat.val n)) := fun (n : PNat) =>
+  @MeasureTheory.ProbabilityMeasure.map.{0, 0} (Parking.ParkingFunction n) (Fin (PNat.val n))
+    (Parking.instMeasurableSpaceParkingFunction n) (Fin.instMeasurableSpace (PNat.val n)) (Parking.uniformParking n)
+    (Parking.firstCoord n)
+Parking.marginalProduct : (n : PNat) →
+  (k : Nat) →
+    @MeasureTheory.ProbabilityMeasure.{0} (Fin k → Fin (PNat.val n))
+      (@MeasurableSpace.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) fun (a : Fin k) =>
+        Fin.instMeasurableSpace (PNat.val n)) := fun (n : PNat) (k : Nat) =>
+  @MeasureTheory.ProbabilityMeasure.pi.{0, 0} (Fin k) (fun (a : Fin k) => Fin (PNat.val n)) (Fin.fintype k)
+    (fun (a : Fin k) => Fin.instMeasurableSpace (PNat.val n)) fun (x : Fin k) => Parking.marginal n
+Parking.tvDist : {α : Type u_1} →
+  [Fintype.{u_1} α] →
+    [inst : MeasurableSpace.{u_1} α] →
+      [@MeasurableSingletonClass.{u_1} α inst] → (P Q : @MeasureTheory.ProbabilityMeasure.{u_1} α inst) → Real := fun {α : Type u_1} [inst : Fintype.{u_1} α] [inst_1 : MeasurableSpace.{u_1} α]
+    [@MeasurableSingletonClass.{u_1} α inst_1] (P Q : @MeasureTheory.ProbabilityMeasure.{u_1} α inst_1) =>
+  @HMul.hMul.{0, 0, 0} Real Real Real (@instHMul.{0} Real Real.instMul)
+    (@Inv.inv.{0} Real Real.instInv
+      (@OfNat.ofNat.{0} Real (nat_lit 2)
+        (@instOfNatAtLeastTwo.{0} Real (nat_lit 2) Real.instNatCast Parking.tvDist._proof_1)))
+    (@Finset.sum.{u_1, 0} α Real Real.instAddCommMonoid (@Finset.univ.{u_1} α inst) fun (x : α) =>
+      @abs.{0} Real Real.lattice Real.instAddGroup
+        (@HSub.hSub.{0, 0, 0} Real Real Real (@instHSub.{0} Real Real.instSub)
+          (NNReal.toReal
+            (@DFunLike.coe.{u_1 + 1, u_1 + 1, 1} (@MeasureTheory.ProbabilityMeasure.{u_1} α inst_1) (Set.{u_1} α)
+              (fun (x : Set.{u_1} α) => NNReal) (@MeasureTheory.ProbabilityMeasure.instFunLike.{u_1} α inst_1) P
+              (@Singleton.singleton.{u_1, u_1} α (Set.{u_1} α) (@Set.instSingletonSet.{u_1} α) x)))
+          (NNReal.toReal
+            (@DFunLike.coe.{u_1 + 1, u_1 + 1, 1} (@MeasureTheory.ProbabilityMeasure.{u_1} α inst_1) (Set.{u_1} α)
+              (fun (x : Set.{u_1} α) => NNReal) (@MeasureTheory.ProbabilityMeasure.instFunLike.{u_1} α inst_1) Q
+              (@Singleton.singleton.{u_1, u_1} α (Set.{u_1} α) (@Set.instSingletonSet.{u_1} α) x)))))
+Parking.tvDist._proof_1 : Nat.AtLeastTwo
+  (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat)
+    (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))
+    (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+Parking.uniformLaw : (α : Type u_1) →
+  [Fintype.{u_1} α] →
+    [Nonempty.{u_1 + 1} α] →
+      [inst : MeasurableSpace.{u_1} α] →
+        [@MeasurableSingletonClass.{u_1} α inst] → @MeasureTheory.ProbabilityMeasure.{u_1} α inst := fun (α : Type u_1) [inst : Fintype.{u_1} α] [inst_1 : Nonempty.{u_1 + 1} α] [inst_2 : MeasurableSpace.{u_1} α]
+    [inst_3 : @MeasurableSingletonClass.{u_1} α inst_2] =>
+  @Subtype.mk.{u_1 + 1} (@MeasureTheory.Measure.{u_1} α inst_2)
+    (fun (μ : @MeasureTheory.Measure.{u_1} α inst_2) => @MeasureTheory.IsProbabilityMeasure.{u_1} α inst_2 μ)
+    (@ProbabilityTheory.uniformOn.{u_1} α inst_2 (@Set.univ.{u_1} α))
+    (@Parking.uniformLaw._proof_1.{u_1} α inst inst_1 inst_2 inst_3)
+Parking.uniformLaw._proof_1 : ∀ (α : Type u_1) [Fintype.{u_1} α] [Nonempty.{u_1 + 1} α] [inst : MeasurableSpace.{u_1} α]
+  [@MeasurableSingletonClass.{u_1} α inst],
+  @MeasureTheory.IsProbabilityMeasure.{u_1} α inst (@ProbabilityTheory.uniformOn.{u_1} α inst (@Set.univ.{u_1} α))
+Parking.uniformParking : (n : PNat) →
+  @MeasureTheory.ProbabilityMeasure.{0} (Parking.ParkingFunction n) (Parking.instMeasurableSpaceParkingFunction n) := fun (n : PNat) =>
+  @Parking.uniformLaw.{0} (Parking.ParkingFunction n) (Parking.instFintypeParkingFunction n)
+    (Parking.instNonemptyParkingFunction n) (Parking.instMeasurableSpaceParkingFunction n)
+    (Parking.instMeasurableSingletonClassParkingFunction n)
+=== END ===
+'Parking.tvDist_firstCoordsLaw_bounds' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Parking.tendsto_tvDist_firstCoordsLaw' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Parking.klDiv_tvDist_firstCoordsLaw_le' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

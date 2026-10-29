@@ -1,0 +1,15 @@
+{
+  "result": "pass",
+  "checks": [
+    "all 19 supporting declarations byte-identical to source",
+    "all three frozen signatures byte-identical to source",
+    "source file hashes unchanged since draft extraction",
+    "draft digest and size match manifest",
+    "exactly three invalid proof-template markers",
+    "no proof-hole/axiom/private keyword in template",
+    "only nine Mathlib public imports",
+    "notes links, math delimiters and table cell counts valid"
+  ],
+  "lean_commands_run": 0,
+  "elaborated_challenge_or_comparator_verified": false
+}

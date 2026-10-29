@@ -1,0 +1,15 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "Parking.tvDist_firstCoordsLaw_bounds",
+    "Parking.tendsto_tvDist_firstCoordsLaw",
+    "Parking.klDiv_tvDist_firstCoordsLaw_le"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

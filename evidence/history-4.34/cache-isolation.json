@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "scope": "All symlinks in the separate candidate dependency and build cache; cache is excluded from the archive",
+  "symlinks": [
+    {
+      "path": ".lake/packages/mathlib/scripts/bench/size/run.py",
+      "target_inside_candidate": true
+    },
+    {
+      "path": ".lake/packages/mathlib/scripts/bench/build/fake-root/bin/lean.py",
+      "target_inside_candidate": true
+    },
+    {
+      "path": ".lake/packages/batteries/docs/README.md",
+      "target_inside_candidate": true
+    }
+  ],
+  "external_symlink_count": 0
+}

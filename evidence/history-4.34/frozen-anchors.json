@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "manifest_state": "AUTHOR_APPROVED",
+  "seal_limits": {
+    "max_body_lines": 3,
+    "max_body_bytes": 240
+  },
+  "anchors": [
+    {
+      "id": "thm_main_v1",
+      "kind": "theorem",
+      "author_approval": {
+        "approved_by": "Igor Kortchemski",
+        "approved_at": "2026-10-28",
+        "approval_ref": "docs/FROZEN.md#approbation",
+        "approval_version": "1"
+      },
+      "source": {
+        "revision": "parking_threshold.tex sha256:7670d0719c75a0c860181730b7fdffb39f96ca88d2d6f185daefc29ec9ad839b",
+        "range": "parking_threshold.tex:89-100"
+      },
+      "contract": {
+        "id": "parking_threshold.thm:main",
+        "version": "1"
+      },
+      "path": "Parking/Frozen/MainBounds.lean",
+      "export": "Parking.tvDist_firstCoordsLaw_bounds",
+      "implementation": {
+        "module": "Parking.Provider.MainBounds",
+        "export": "Parking.Provider.tvDist_firstCoordsLaw_bounds"
+      },
+      "split_policy": {
+        "source_group": "parking_threshold.thm:main",
+        "mode": "NOT_SPLIT",
+        "ruling_ref": "docs/FROZEN.md#approbation"
+      },
+      "abi_sha256": "ff544decb2bedb055a042a7735665ce805574dedd767c506f8f39eb227d814aa",
+      "definition_closure": [],
+      "state": "SEALED",
+      "prefix_sha256": "f3108e7b98f61c448bb67d9becad680819be1fd3467dd071e33656991fa8f049",
+      "suffix_sha256": "a7054d39c438539d216299e7938d916ad7842584573cc3622d22e20dc8bc4a47",
+      "draft_allowlist": {
+        "frozen_paths": [],
+        "audit_paths": []
+      }
+    },
+    {
+      "id": "thm_profile_v1",
+      "kind": "theorem",
+      "author_approval": {
+        "approved_by": "Igor Kortchemski",
+        "approved_at": "2026-10-28",
+        "approval_ref": "docs/FROZEN.md#approbation",
+        "approval_version": "1"
+      },
+      "source": {
+        "revision": "parking_threshold.tex sha256:7670d0719c75a0c860181730b7fdffb39f96ca88d2d6f185daefc29ec9ad839b",
+        "range": "parking_threshold.tex:105-119"
+      },
+      "contract": {
+        "id": "parking_threshold.thm:profile",
+        "version": "1"
+      },
+      "path": "Parking/Frozen/Profile.lean",
+      "export": "Parking.tendsto_tvDist_firstCoordsLaw",
+      "implementation": {
+        "module": "Parking.Provider.Profile",
+        "export": "Parking.Provider.tendsto_tvDist_firstCoordsLaw"
+      },
+      "split_policy": {
+        "source_group": "parking_threshold.thm:profile",
+        "mode": "NOT_SPLIT",
+        "ruling_ref": "docs/FROZEN.md#approbation"
+      },
+      "abi_sha256": "b47583fb8752c011849eb5cf38b396134981b271bed5c4c3d35303fb02b87d1a",
+      "definition_closure": [],
+      "state": "SEALED",
+      "prefix_sha256": "b49e1428e0cb12da9e5cc71d8de65e77ba8a74db48b755308cfccc2e75dacc39",
+      "suffix_sha256": "a7054d39c438539d216299e7938d916ad7842584573cc3622d22e20dc8bc4a47",
+      "draft_allowlist": {
+        "frozen_paths": [],
+        "audit_paths": []
+      }
+    },
+    {
+      "id": "prop_decoupling_v1",
+      "kind": "theorem",
+      "author_approval": {
+        "approved_by": "Igor Kortchemski",
+        "approved_at": "2026-10-28",
+        "approval_ref": "docs/FROZEN.md#approbation",
+        "approval_version": "1"
+      },
+      "source": {
+        "revision": "parking_threshold.tex sha256:7670d0719c75a0c860181730b7fdffb39f96ca88d2d6f185daefc29ec9ad839b",
+        "range": "parking_threshold.tex:134-145"
+      },
+      "contract": {
+        "id": "parking_threshold.prop:decoupling",
+        "version": "1"
+      },
+      "path": "Parking/Frozen/Decoupling.lean",
+      "export": "Parking.klDiv_tvDist_firstCoordsLaw_le",
+      "implementation": {
+        "module": "Parking.Provider.Decoupling",
+        "export": "Parking.Provider.klDiv_tvDist_firstCoordsLaw_le"
+      },
+      "split_policy": {
+        "source_group": "parking_threshold.prop:decoupling",
+        "mode": "NOT_SPLIT",
+        "ruling_ref": "docs/FROZEN.md#approbation"
+      },
+      "abi_sha256": "bdd2284b1f51d6ad604ab262deafb182f2914b170650bf6944469300fc3e2aaf",
+      "definition_closure": [],
+      "state": "SEALED",
+      "prefix_sha256": "20541220f52c4e51bd09eb95fd03de3abc5433ef6c7c6be46c815c4d3a00e7d2",
+      "suffix_sha256": "a7054d39c438539d216299e7938d916ad7842584573cc3622d22e20dc8bc4a47",
+      "draft_allowlist": {
+        "frozen_paths": [],
+        "audit_paths": []
+      }
+    }
+  ]
+}

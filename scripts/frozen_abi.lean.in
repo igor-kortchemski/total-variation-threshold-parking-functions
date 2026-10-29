@@ -1,0 +1,63 @@
+import Parking.Frozen.MainBounds
+import Parking.Frozen.Profile
+import Parking.Frozen.Decoupling
+
+/-!
+# Elaborated ABI of the frozen statements
+
+For each frozen statement, prints the type of the statement together with the type and
+body of every project-owned constant (namespace `Parking`) on which it depends,
+transitively, rendered with `pp.all`. Proofs of theorems are not followed: only their
+statements carry meaning. `scripts/check_frozen.sh` hashes each block and compares the
+result with `abi_sha256` in `frozen-anchors.json`, so a change to a definition used by a
+frozen statement is detected even though the statement's own bytes are unchanged.
+
+This file is a template: no tracked Lean file may import the frozen statements, so
+`scripts/check_frozen.sh` copies it to a temporary `.lean` file and runs it with
+`lake env lean`, after building the frozen modules.
+-/
+
+open Lean Meta Elab Command
+
+/-- Canonical rendering of `root` and of the project-owned constants it depends on. -/
+def abiText (root : Name) : MetaM String := do
+  let env ← getEnv
+  let isProject (c : Name) : Bool := (`Parking).isPrefixOf c
+  let render (e : Expr) : MetaM String :=
+    withOptions (fun o => o.setBool `pp.all true) do return toString (← ppExpr e)
+  let mut seen : NameSet := {}
+  let mut todo : List Name := [root]
+  let mut parts : Array (String × String) := #[]
+  while true do
+    match todo with
+    | [] => break
+    | c :: rest =>
+      todo := rest
+      if seen.contains c then continue
+      seen := seen.insert c
+      let some info := env.find? c | throwError "unknown constant {c}"
+      let mut line := s!"{c} : {← render info.type}"
+      let mut deps := info.type.getUsedConstants
+      if let .defnInfo d := info then
+        line := line ++ s!" := {← render d.value}"
+        deps := deps ++ d.value.getUsedConstants
+      parts := parts.push (c.toString, line)
+      for dep in deps do
+        if isProject dep && !seen.contains dep then todo := dep :: todo
+  let sorted := parts.qsort (fun a b => a.1 < b.1)
+  return "\n".intercalate (sorted.map (·.2)).toList
+
+/-- `#frozen_abi c` prints the ABI block of the frozen statement `c`. -/
+elab "#frozen_abi " id:ident : command => do
+  let text ← liftTermElabM <| abiText id.getId
+  IO.println s!"=== ABI {id.getId} ==="
+  IO.println text
+  IO.println "=== END ==="
+
+#frozen_abi Parking.tvDist_firstCoordsLaw_bounds
+#frozen_abi Parking.tendsto_tvDist_firstCoordsLaw
+#frozen_abi Parking.klDiv_tvDist_firstCoordsLaw_le
+
+#print axioms Parking.tvDist_firstCoordsLaw_bounds
+#print axioms Parking.tendsto_tvDist_firstCoordsLaw
+#print axioms Parking.klDiv_tvDist_firstCoordsLaw_le

@@ -1,0 +1,23 @@
+{
+  "checked_at_utc": "2026-10-29T00:56:27.978371+00:00",
+  "mathematical_reconstruction": "verified",
+  "substantive_source_units": 121,
+  "fresh_project_modules": 79,
+  "project_constants_replayed": 1574,
+  "theorems": 1480,
+  "definitions": 94,
+  "reachable_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "frozen_abis_passed": 3,
+  "protected_files_identical": 11,
+  "negative_control": "rejected",
+  "official_leanchecker_modules_passed": 6,
+  "integrated_required_paths_passed": 23,
+  "integrated_exclusions_passed": 5,
+  "unresolved_mathematical_obligations": [],
+  "external_kernel_certification": false,
+  "scope": "Verified reconstruction under Lean 4.34.0; this is not Palomar preflight evidence."
+}

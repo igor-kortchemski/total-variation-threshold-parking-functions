@@ -1,0 +1,100 @@
+{
+  "review": "Final private-workflow pre-push review",
+  "date": "2026-10-29",
+  "result": "NO_OPEN_MATERIAL_FINDINGS",
+  "scope": "Read-only static review of exact files and installed Lean 4.35 source; pure-Python acceptance/parser checks only. No Lean execution, Linux runtime execution, Git push, workflow dispatch, or external action.",
+  "reviewer_independence": "Reviewer did not author the private workflow or verification wrapper; reviewer previously edited reader documentation and underlying mathematical proofs.",
+  "input_sha256": {
+    ".github/workflows/private-comparator.yml": "00fad27c0ee06b1d6bd1a497d0deea710bae83e17204f5dbe2f9e5de20d3b720",
+    "scripts/verify-comparator.sh": "abc177b44d8fcfd9c7a6ae34a4b9e81947f31e82aad4229f3ec797ea745270da",
+    "README.md": "8a49332ab87bb069023685aa07fd6439b998362285c6a21becc56c6b8aad7b05",
+    "formalization.yaml": "8f4ffcff34f6a4386b4f7cf9d6e6337f3638cb34eac436792c71209e53aeb2d5",
+    "comparator.json": "a67bf3b723039c40771f653222e8452ea4b7960dedf23628b6eea88bd1c6f50d",
+    "lakefile.toml": "9394f61408a2f69df260ef232c6ccf96ded42fd33406f1b225dda725249a1056",
+    "lake-manifest.json": "d9319ede1ccec0eb8194e28d9f8313ac52ec0296836008cb0f6221c999b38fc3",
+    "lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c",
+    "evidence/source-manifest.json": "49979cae0aa5bb7512707f107615c78a79d1f0f6015a0ea0d16f5f8dbb7479ed",
+    "docs/PREPARATION.md": "769e4e9bbc1939f22e50ec3862fd74c2f77930c857e7e784d74e7de66235497f",
+    "docs/CHALLENGE-FIDELITY.md": "e8d95ef649697cb97e64c628757c7f29ed542b1743a686a701740b5f788ea47a",
+    "docs/FROZEN.md": "e8dc694ebfbc276c765b75027dda548424a25ac99b889b89363e4087c844557d",
+    "docs/PROVENANCE.md": "59729bb2bcccab54c420536010e53140875b7da03c4dd53097f97716fbe51e27",
+    "docs/APPROVAL.md": "e862e6fc98b52abb17d10b44cd3f8a721ce32fad2121afd6423a5c29d8185b2b",
+    "docs/ERRATA-AND-DEVIATIONS.md": "244ac94a1c496c2977509acd46aeaccd094a3b73a4a854031c097622388da959",
+    "AGENTS.md": "d474bc1854f599c7362708be6691d80b030fdd422739d4645bd014da807faf97"
+  },
+  "inputs_stable_at_completion": true,
+  "source_manifest": {
+    "count": 81,
+    "all_current_hashes_match": true,
+    "sha256": "49979cae0aa5bb7512707f107615c78a79d1f0f6015a0ea0d16f5f8dbb7479ed"
+  },
+  "controls": {
+    "mandatory_acceptance": "Comparator exit zero AND all three fixed success strings. Official 4.35 code runs all configured kernels and built-in Lean, then throws on any rejection before printing final success.",
+    "mandatory_predicate_python_cases": 8,
+    "official_advisory_parser_python_cases": 7,
+    "python_case_result": "PASS",
+    "positive": "Same exported True theorem must pass mandatory Comparator, Lean and NanoDa.",
+    "statement_negative": "True versus True-and-True must fail with the actual statement mismatch diagnostic.",
+    "axiom_negative": "Proof using a custom axiom must fail with the actual illegal-axiom diagnostic.",
+    "kernel_negative": "Target proof field replaced with its type expression must be rejected by BOTH NanoDa and Lean; target type remains unchanged.",
+    "advisory_controls": "Pinned con-ron must accept the good export and reject the ill-typed export before candidate verification.",
+    "advisory_policy": "Official pinned con_ron_outcome parser; rejection/unknown error blocks; positively recognized support/fuel decline or supervisor timeout after mandatory acceptance may decline without adding con-ron to successful kernels."
+  },
+  "workflow_checks": {
+    "manual_only": true,
+    "private_repository_gate": true,
+    "read_only_contents_permission": true,
+    "immutable_checkout_ref": "github.sha",
+    "persist_credentials": false,
+    "default_build_targets": [
+      "Parking",
+      "Challenge",
+      "Solution"
+    ],
+    "candidate_build_and_exports": "Separate network-disabled Bubblewrap processes; candidate source and tools read-only, only candidate .lake writable during build.",
+    "judge_boundary": "Official lake comparator invoked using protected export files and configuration; candidate source/olean files are not mounted into the judge.",
+    "source_integrity": "Before/after source snapshot plus tracked, staged and untracked Git checks. Export hashes checked unchanged after mandatory and advisory replay.",
+    "commit_binding": "Exact github.sha checkout, report source commit equality required, artifact named by commit and run attempt.",
+    "failure_behavior": "Bootstrap, controls, mandatory checks, source integrity, final report status and artifact-upload failures produce unsuccessful workflow; no continue-on-error.",
+    "secrets": "No repository credentials persisted by checkout, no secret input to the verifier, cleared sandbox environment; bootstrap is the explicit network-enabled phase.",
+    "advisory_separation": "Only Lean/NanoDa mandatory success can establish mandatory_status passed; con-ron separately recorded.",
+    "publication": "No visibility change, registry submission or intake command."
+  },
+  "pins": {
+    "lean_4_35_linux_archive_sha256": "7289597a44543246c9227b8cae501767e095ce17f6d448b95fc4a8dc97268f6d",
+    "con_ron_release": "v4.36.0-rc1",
+    "con_ron_archive_sha256": "26b3cea1a006ad419215520b8668dcd3f6a9eeba1a123756563a739f9c6274b2",
+    "con_ron_binary_sha256": "4e5616d94374cae37324dad2594f6230c2bb2297240249fc78ff508f3bc5acef",
+    "outcome_parser_sha256": "63329382f969ca8280661076ab4ce7dc1d9a1b54083d2c8a9d57a25a16486e79",
+    "installer_sha256": "c290df6cebdf1cb26edb69ed4164d9551062bfeb65243b93d1d1d3b77eac0a35",
+    "verified_against_retained_authoritative_downloads": true
+  },
+  "reference_source_sha256": {
+    "Lake/CLI/Check.lean": "55daf430e5adea38453b21798cbdf4cd099f66ec969494022a566a8ae098c00b",
+    "Lake/Check/Compare.lean": "0281630a33b8f08a9f3f40f229cd843c02441a0cd4d8a6d8548dc2bb8ded4c68",
+    "Lake/Check/Axioms.lean": "261fa54494a6a17c23b8588d788ab1080e5c39af2143948f8e140cfa295560d1",
+    "LeanExport/Basic.lean": "2e839d4ac1ef1992cfe09c489a97928ad8f8eaea3925bc76b511c6bf85e1b8aa"
+  },
+  "retained_official_download_sha256": {
+    "kernel_outcomes.py": "63329382f969ca8280661076ab4ce7dc1d9a1b54083d2c8a9d57a25a16486e79",
+    "install_bwrap.sh": "c290df6cebdf1cb26edb69ed4164d9551062bfeb65243b93d1d1d3b77eac0a35",
+    "checker-revisions.json": "f8bf5d9df7e38fb16d667003b1b47dd28aaf4dc380ce01b50df3f8c36a79c6f3",
+    "lean-4.35-release.json": "d9ed980a7c47cc1055c1c217cec114f2c2c2815df1c03a794aac60c45a82decb",
+    "verify_submission.py": "3ff03bf4d7774ec47e1e81fe397d03e54895ee59901036580c6da3b57010cc08"
+  },
+  "documentation": "README and metadata distinguish completed local build/ABI/kernel/raw-closure checks from hosted per-commit reports and unrun official full preflight. Zero implementation holes explicitly excludes three authorized Challenge holes. Current metadata targets/axioms and source inventory agree with configuration.",
+  "resolved_findings": [
+    {
+      "severity": "minor robustness",
+      "location": ".github/workflows/private-comparator.yml:168",
+      "finding": "Final reporting step could write not_verified without independently failing its step; prior failed steps normally already failed the job.",
+      "resolution": "Root added if not passed: raise SystemExit(1) after writing report and summary. Verified in final reviewed workflow."
+    }
+  ],
+  "open_findings": [],
+  "limits": [
+    "No hosted/Linux execution performed in this review; nested namespaces, resource use and exact checker outcomes must be established by the actual private run.",
+    "Positive/negative controls establish correct behavior on their fixtures; they are not a proof of checker correctness.",
+    "Private standalone verification is not official Palomar full mechanical preflight."
+  ]
+}

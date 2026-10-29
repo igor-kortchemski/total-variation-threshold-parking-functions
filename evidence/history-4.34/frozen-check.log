@@ -1,0 +1,8 @@
+[compile-lock] waiting for the compile lock (held by 36193)
+== Frozen-anchor checker (tracked files)
+FROZEN-ANCHOR GUARD OK
+== Elaborated ABI
+OK thm_main_v1 Parking.tvDist_firstCoordsLaw_bounds
+OK thm_profile_v1 Parking.tendsto_tvDist_firstCoordsLaw
+OK prop_decoupling_v1 Parking.klDiv_tvDist_firstCoordsLaw_le
+ABI CHECK OK

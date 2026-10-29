@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "scope": "Metadata draft, complete pinned v0.4 JSON Schema; separate binding-policy source type check",
+  "metadata_path": "drafts/formalization.yaml.in",
+  "metadata_sha256": "68be3f020d3ddf731e50deeaf3f57db6608600bc9402fd8533a015d141357328",
+  "schema_commit": "99c678e569c7c4c0772db297c5ddd5e4c9b6322e",
+  "schema_sha256": "25ff6b25ca4511635aff4443cf20480c15e59dddf19591c730950b442ea54fce",
+  "validator": "jsonschema 4.25.1 Draft7Validator",
+  "errors": [],
+  "license_applied": false,
+  "full_preflight_run": false
+}

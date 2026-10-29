@@ -1,0 +1,15 @@
+{
+  "approved": true,
+  "date": "2026-10-29",
+  "user_message": "Approuve",
+  "scope": "Export-only proposal approved in this conversation; original/reference/development projects remain outside mutation scope",
+  "proposal_sha256": "c13c7d14a200d70151cff1ff91eb09c64b1f5c9cd23b15862bde4ae42646fa5e",
+  "allowed": [
+    "Lean 4.35.0 and Mathlib 56a005855ea17e0b0958f73ec801ae140b0a1679 migration",
+    "Apache-2.0 and included earlier ledger contributions",
+    "Exactly three theorem proof holes in Challenge only",
+    "Solution-only imports of three sealed frozen modules",
+    "Protected export header/ABI successors with unchanged mathematical meaning and renewed verification"
+  ],
+  "external_publication_push_intake_registration": false
+}

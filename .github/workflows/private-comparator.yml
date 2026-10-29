@@ -1,0 +1,182 @@
+name: Private Comparator check
+
+"on":
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: private-comparator-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  comparator:
+    name: Compare the three parking results
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    steps:
+      - name: Require the authorized private repository route
+        env:
+          PRIVATE_REPOSITORY: ${{ github.event.repository.private }}
+        run: test "$PRIVATE_REPOSITORY" = true
+
+      - name: Check out the exact source commit
+        id: checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Free disk on the disposable GitHub-hosted runner
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          if [[ "${RUNNER_ENVIRONMENT:-}" == github-hosted ]]; then
+            sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+            sudo docker image prune --all --force > /dev/null || true
+          fi
+          df -h .
+          available_kib="$(df -Pk . | awk 'NR==2 {print $4}')"
+          test "$available_kib" -ge 20971520
+
+      - name: Install authenticated Linux tools and the pinned sandbox
+        id: toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(tr -d '[:space:]' < lean-toolchain)" = leanprover/lean4:v4.35.0
+          mkdir -p "$RUNNER_TEMP/comparator-evidence" "$RUNNER_TEMP/checkers/advisory" "$RUNNER_TEMP/downloads"
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq meson ninja-build libcap-dev pkg-config apparmor zstd
+          curl --fail --location --silent --show-error --proto '=https' --tlsv1.2 --retry 3 \
+            --output "$RUNNER_TEMP/downloads/lean-4.35.0-linux.tar.zst" \
+            https://github.com/leanprover/lean4/releases/download/v4.35.0/lean-4.35.0-linux.tar.zst
+          printf '%s  %s\n' 7289597a44543246c9227b8cae501767e095ce17f6d448b95fc4a8dc97268f6d \
+            "$RUNNER_TEMP/downloads/lean-4.35.0-linux.tar.zst" | sha256sum --check --quiet
+          tar --zstd -xf "$RUNNER_TEMP/downloads/lean-4.35.0-linux.tar.zst" -C "$RUNNER_TEMP/checkers"
+          echo "$RUNNER_TEMP/checkers/lean-4.35.0-linux/bin" >> "$GITHUB_PATH"
+          curl --fail --location --silent --show-error --proto '=https' --tlsv1.2 --retry 3 \
+            --output "$RUNNER_TEMP/downloads/lean-4.36.0-rc1-linux.tar.zst" \
+            https://github.com/leanprover/lean4/releases/download/v4.36.0-rc1/lean-4.36.0-rc1-linux.tar.zst
+          printf '%s  %s\n' 26b3cea1a006ad419215520b8668dcd3f6a9eeba1a123756563a739f9c6274b2 \
+            "$RUNNER_TEMP/downloads/lean-4.36.0-rc1-linux.tar.zst" | sha256sum --check --quiet
+          tar --zstd -xf "$RUNNER_TEMP/downloads/lean-4.36.0-rc1-linux.tar.zst" \
+            -C "$RUNNER_TEMP/checkers/advisory" --strip-components=2 lean-4.36.0-rc1-linux/bin/con-ron
+          printf '%s  %s\n' 4e5616d94374cae37324dad2594f6230c2bb2297240249fc78ff508f3bc5acef \
+            "$RUNNER_TEMP/checkers/advisory/con-ron" | sha256sum --check --quiet
+          curl --fail --location --silent --show-error --proto '=https' --tlsv1.2 --retry 3 \
+            --output "$RUNNER_TEMP/downloads/install_bwrap.sh" \
+            https://raw.githubusercontent.com/PalomarRegistry/PalomarSubmission/14aa8d6b3c2f14a8540605e37144560b9a00e7e7/scripts/install_bwrap.sh
+          printf '%s  %s\n' c290df6cebdf1cb26edb69ed4164d9551062bfeb65243b93d1d1d3b77eac0a35 \
+            "$RUNNER_TEMP/downloads/install_bwrap.sh" | sha256sum --check --quiet
+          comparator_bwrap=$(bash "$RUNNER_TEMP/downloads/install_bwrap.sh" "$RUNNER_TEMP/checkers/bwrap")
+          echo "$RUNNER_TEMP/checkers/bwrap" >> "$GITHUB_PATH"
+          echo "COMPARATOR_BWRAP=$comparator_bwrap" >> "$GITHUB_ENV"
+          "$comparator_bwrap" --unshare-all --new-session --die-with-parent \
+            --ro-bind / / --proc /proc --dev /dev -- /usr/bin/true
+          curl --fail --location --silent --show-error --proto '=https' --tlsv1.2 --retry 3 \
+            --output "$RUNNER_TEMP/checkers/kernel_outcomes.py" \
+            https://raw.githubusercontent.com/PalomarRegistry/PalomarSubmission/14aa8d6b3c2f14a8540605e37144560b9a00e7e7/scripts/kernel_outcomes.py
+          printf '%s  %s\n' 63329382f969ca8280661076ab4ce7dc1d9a1b54083d2c8a9d57a25a16486e79 \
+            "$RUNNER_TEMP/checkers/kernel_outcomes.py" | sha256sum --check --quiet
+          echo "PALOMAR_CON_RON=$RUNNER_TEMP/checkers/advisory/con-ron" >> "$GITHUB_ENV"
+          echo "PALOMAR_OUTCOME_POLICY=$RUNNER_TEMP/checkers/kernel_outcomes.py" >> "$GITHUB_ENV"
+          echo "PALOMAR_STANDALONE_OUTPUT=$RUNNER_TEMP/comparator-evidence" >> "$GITHUB_ENV"
+          "$RUNNER_TEMP/checkers/lean-4.35.0-linux/bin/lean" --version > "$RUNNER_TEMP/comparator-evidence/lean-version.log"
+          "$comparator_bwrap" --version > "$RUNNER_TEMP/comparator-evidence/bwrap-version.log"
+          sha256sum "$RUNNER_TEMP/downloads/lean-4.35.0-linux.tar.zst" \
+            "$RUNNER_TEMP/downloads/lean-4.36.0-rc1-linux.tar.zst" \
+            "$RUNNER_TEMP/downloads/install_bwrap.sh" "$RUNNER_TEMP/checkers/kernel_outcomes.py" \
+            > "$RUNNER_TEMP/comparator-evidence/bootstrap-sha256.log"
+
+      - name: Record resources and execute standalone verification
+        id: comparator
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            uname -a
+            nproc
+            free -h
+            df -h "$GITHUB_WORKSPACE" "$RUNNER_TEMP"
+          } > "$RUNNER_TEMP/comparator-evidence/resources.log"
+          set +e
+          timeout --signal=TERM --kill-after=60s 330m \
+            ./scripts/verify-comparator.sh 2>&1 | tee "$RUNNER_TEMP/comparator-evidence/driver.log"
+          comparator_exit_code=${PIPESTATUS[0]}
+          set -e
+          printf '%s\n' "$comparator_exit_code" > "$RUNNER_TEMP/comparator-evidence/exit-code.log"
+          exit "$comparator_exit_code"
+
+      - name: Check source integrity after every verification outcome
+        id: source_integrity
+        if: always() && steps.checkout.outcome == 'success'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code
+          git diff --cached --exit-code
+          test -z "$(git ls-files --others --exclude-standard)"
+
+      - name: Record the commit-bound private result
+        if: always()
+        env:
+          CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
+          TOOLCHAIN_OUTCOME: ${{ steps.toolchain.outcome }}
+          COMPARATOR_OUTCOME: ${{ steps.comparator.outcome }}
+          SOURCE_INTEGRITY_OUTCOME: ${{ steps.source_integrity.outcome }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          evidence = Path(os.environ['RUNNER_TEMP']) / 'comparator-evidence'
+          evidence.mkdir(exist_ok=True)
+          record = evidence / 'standalone-report.json'
+          result = {'kind': 'private-standalone-comparator', 'mandatory_status': 'not_verified',
+                    'kernels': [], 'kernel_attempts': [], 'controls': {}}
+          if record.is_file():
+              try:
+                  result.update(json.loads(record.read_text()))
+              except (OSError, ValueError, TypeError) as error:
+                  result['report_read_error'] = str(error)
+          steps = {name.lower(): os.environ[name + '_OUTCOME']
+                   for name in ['CHECKOUT', 'TOOLCHAIN', 'COMPARATOR', 'SOURCE_INTEGRITY']}
+          passed = (all(value == 'success' for value in steps.values())
+                    and result.get('status') == 'passed'
+                    and result.get('mandatory_status') == 'passed'
+                    and result.get('source_integrity') == 'passed'
+                    and result.get('source_commit') == os.environ['GITHUB_SHA'])
+          result.update({
+              'status': 'passed' if passed else 'not_verified', 'steps': steps,
+              'official_palomar_full_preflight': False,
+              'repository': os.environ['GITHUB_REPOSITORY'], 'source_commit': os.environ['GITHUB_SHA'],
+              'workflow_url': f"{os.environ['GITHUB_SERVER_URL']}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}",
+              'run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
+              'pipeline_policy_commit': '14aa8d6b3c2f14a8540605e37144560b9a00e7e7',
+              'required_kernels': ['Lean', 'NanoDa'],
+              'advisory_checker_release': 'v4.36.0-rc1',
+              'note': 'Private standalone verification only. Incomplete controls, mandatory phases, or source-integrity checks are not a pass. No public release, Palomar full preflight, intake or registration occurs.'})
+          (evidence / 'private-comparator-report.json').write_text(json.dumps(result, indent=2) + '\n')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write(f"Private standalone status: **{result['status']}**\n\n")
+              summary.write(f"Source commit: `{result['source_commit']}`\n\n")
+              summary.write(f"Mandatory Lean/NanoDa: **{result.get('mandatory_status', 'not_verified')}**\n\n")
+              summary.write('Successful kernels: ' + ', '.join(result.get('kernels', [])) + '\n\n')
+              summary.write('Inspect the private artifact for controls, source hashes and separate advisory outcome. This is not official full Palomar preflight.\n')
+          if not passed:
+              raise SystemExit(1)
+          PY
+
+      - name: Save private commit-bound verification evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: private-comparator-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/comparator-evidence/*.json
+            ${{ runner.temp }}/comparator-evidence/*.jsonl
+            ${{ runner.temp }}/comparator-evidence/*.log
+          if-no-files-found: error
+          retention-days: 14

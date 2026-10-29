@@ -1,0 +1,37 @@
+{
+  "scope": "Author-approved export header successors, unchanged statements and proof assembly; ABI re-elaborated with Lean4.35",
+  "predecessor_manifest": "history-4.34/frozen-anchors.json",
+  "approval": "export-approval.json",
+  "anchors": [
+    {
+      "predecessor_id": "thm_main_v1",
+      "successor_id": "thm_main_v1_palomar2",
+      "export": "Parking.tvDist_firstCoordsLaw_bounds",
+      "source_contract_unchanged": true,
+      "abi_identical_across_migration": true,
+      "abi_sha256": "ff544decb2bedb055a042a7735665ce805574dedd767c506f8f39eb227d814aa",
+      "prefix_changed": true,
+      "suffix_unchanged": true
+    },
+    {
+      "predecessor_id": "thm_profile_v1",
+      "successor_id": "thm_profile_v1_palomar2",
+      "export": "Parking.tendsto_tvDist_firstCoordsLaw",
+      "source_contract_unchanged": true,
+      "abi_identical_across_migration": true,
+      "abi_sha256": "b47583fb8752c011849eb5cf38b396134981b271bed5c4c3d35303fb02b87d1a",
+      "prefix_changed": true,
+      "suffix_unchanged": true
+    },
+    {
+      "predecessor_id": "prop_decoupling_v1",
+      "successor_id": "prop_decoupling_v1_palomar2",
+      "export": "Parking.klDiv_tvDist_firstCoordsLaw_le",
+      "source_contract_unchanged": true,
+      "abi_identical_across_migration": true,
+      "abi_sha256": "bdd2284b1f51d6ad604ab262deafb182f2914b170650bf6944469300fc3e2aaf",
+      "prefix_changed": true,
+      "suffix_unchanged": true
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+Parking manuscript reconstruction
+Copyright (c) 2026 Igor Kortchemski.
+
+This export is licensed under the Apache License, Version 2.0; see LICENSE.
+The author approved this export's license and the redistribution scope described
+in docs/PROVENANCE.md on 29 October 2026. This notice records attribution; it does
+not enlarge the approved publication or submission scope.
+
+The files scripts/check-lean-sources.py, scripts/validate-formalization.rb and
+scripts/verify-comparator.sh are copied from PalomarRegistry/PalomarTemplate,
+commit 2891de4c48955af824969a263d31b25e7a9a1406, under Apache-2.0.
+The applicable third-party license is included in scripts/LICENSE.Apache-2.0.txt.
+
+Mathlib and other external dependencies retain their respective licenses.
+Earlier parallel formalization contributions and the analytic Hessian adaptation
+are attributed in their source comments and docs/PROVENANCE.md. No independent
+human peer review or endorsement by those projects or by Palomar is asserted.
+
+No manuscript source file, PDF, private development history or raw parallel
+ledger is redistributed in this candidate. Licensing this export does not itself
+publish it or authorize Palomar intake or registration.

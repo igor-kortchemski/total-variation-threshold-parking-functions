@@ -1,0 +1,8 @@
+⚠ [3435/3444] Replayed Challenge
+warning: Challenge.lean:143:8: declaration uses `sorry`
+warning: Challenge.lean:168:8: declaration uses `sorry`
+warning: Challenge.lean:191:8: declaration uses `sorry`
+✔ [3440/3444] Built Parking.Frozen.MainBounds (8.3s)
+✔ [3441/3444] Built Parking.Frozen.Profile (8.2s)
+✔ [3442/3444] Built Parking.Frozen.Decoupling (8.4s)
+Build completed successfully (3444 jobs).

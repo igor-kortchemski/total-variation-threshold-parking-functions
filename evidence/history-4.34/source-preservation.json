@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-10-29T07:03:12.971738+00:00",
+  "verified_source_modules_unchanged": 79,
+  "export_source_files_use_distinct_inodes": 79,
+  "reference_project_commands_this_preparation": "No build or mutation command was run in either original reference project.",
+  "scope": "79 reconstructed source files compared with the recorded source hashes. This is not a new full reference-tree audit."
+}

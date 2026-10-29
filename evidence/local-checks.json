@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-10-29T07:50:32.976210+00:00",
+  "checks": [
+    "python3 scripts/check-package.py",
+    "python3 scripts/check-lean-sources.py",
+    "ruby scripts/validate-formalization.rb formalization.yaml",
+    "bash -n scripts/verify-comparator.sh",
+    "bash -n scripts/audit-project.sh",
+    "All internal Markdown links resolve; MathJax delimiter convention"
+  ],
+  "scope": "Local source, metadata-template and shell checks; full schema validation is separately recorded; no hosted result claimed"
+}

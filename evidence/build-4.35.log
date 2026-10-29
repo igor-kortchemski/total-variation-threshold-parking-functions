@@ -1,0 +1,27 @@
+⚠ [3417/3444] Replayed Challenge
+warning: Challenge.lean:143:8: declaration uses `sorry`
+warning: Challenge.lean:168:8: declaration uses `sorry`
+warning: Challenge.lean:191:8: declaration uses `sorry`
+✔ [3421/3444] Built Parking.FirstCoordCount (6.7s)
+✔ [3422/3444] Built Parking.Marginal (8.4s)
+✔ [3423/3444] Built Parking.LikelihoodLaw (6.6s)
+✔ [3424/3444] Built Parking.BorelEndpoint (10s)
+✔ [3425/3444] Built Parking.BorelTail (9.7s)
+✔ [3426/3444] Built Parking.MarginalBounds (8.3s)
+✔ [3427/3444] Built Parking.MarginalSquareSource (23s)
+✔ [3428/3444] Built Parking.MarginalSquares (32s)
+✔ [3429/3444] Built Parking.LlrLimit (8.5s)
+✔ [3430/3444] Built Parking.Separation (9.2s)
+✔ [3431/3444] Built Parking.ProxyMarginal (9.5s)
+✔ [3432/3444] Built Parking.ProfileTheorem (6.4s)
+✔ [3433/3444] Built Parking.Products (6.4s)
+✔ [3434/3444] Built Parking.Provider.Profile (6.0s)
+✔ [3435/3444] Built Parking.MainTheorem (7.9s)
+✔ [3436/3444] Built Parking.Frozen.Profile (5.8s)
+✔ [3437/3444] Built Parking.ProductsProved (5.6s)
+✔ [3438/3444] Built Parking.Provider.MainBounds (6.2s)
+✔ [3439/3444] Built Parking.Corollaries (6.9s)
+✔ [3440/3444] Built Parking.Frozen.MainBounds (5.9s)
+✔ [3441/3444] Built Parking (6.2s)
+✔ [3443/3444] Built Solution (5.4s)
+Build completed successfully (3444 jobs).

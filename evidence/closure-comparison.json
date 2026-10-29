@@ -1,0 +1,21 @@
+{
+  "challenge_module": "Challenge",
+  "checked_names": 34350,
+  "diagnostic": "raw ConstantInfo comparison; not official Comparator",
+  "failures": [],
+  "import_level": "private",
+  "lean_version": "4.35.0",
+  "load_extensions": false,
+  "missing_in_challenge": 0,
+  "missing_in_solution": 0,
+  "permitted_axiom_seed_count": 3,
+  "primitive_seed_count": 26,
+  "private_names_visited": 4036,
+  "raw_closures_match": true,
+  "solution_module": "Solution",
+  "supporting_failures": 0,
+  "supporting_matches": 34347,
+  "supporting_theorem_bodies_compared": 24773,
+  "target_failures": 0,
+  "target_matches": 3
+}

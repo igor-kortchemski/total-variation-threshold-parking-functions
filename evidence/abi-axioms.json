@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "lean": "v4.35.0",
+  "abi_checks": [
+    {
+      "export": "Parking.tvDist_firstCoordsLaw_bounds",
+      "solution_sha256": "ff544decb2bedb055a042a7735665ce805574dedd767c506f8f39eb227d814aa",
+      "challenge_sha256": "ff544decb2bedb055a042a7735665ce805574dedd767c506f8f39eb227d814aa",
+      "approved_original_abi_sha256": "ff544decb2bedb055a042a7735665ce805574dedd767c506f8f39eb227d814aa",
+      "match": true
+    },
+    {
+      "export": "Parking.tendsto_tvDist_firstCoordsLaw",
+      "solution_sha256": "b47583fb8752c011849eb5cf38b396134981b271bed5c4c3d35303fb02b87d1a",
+      "challenge_sha256": "b47583fb8752c011849eb5cf38b396134981b271bed5c4c3d35303fb02b87d1a",
+      "approved_original_abi_sha256": "b47583fb8752c011849eb5cf38b396134981b271bed5c4c3d35303fb02b87d1a",
+      "match": true
+    },
+    {
+      "export": "Parking.klDiv_tvDist_firstCoordsLaw_le",
+      "solution_sha256": "bdd2284b1f51d6ad604ab262deafb182f2914b170650bf6944469300fc3e2aaf",
+      "challenge_sha256": "bdd2284b1f51d6ad604ab262deafb182f2914b170650bf6944469300fc3e2aaf",
+      "approved_original_abi_sha256": "bdd2284b1f51d6ad604ab262deafb182f2914b170650bf6944469300fc3e2aaf",
+      "match": true
+    }
+  ],
+  "solution_axioms": {
+    "Parking.tvDist_firstCoordsLaw_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Parking.tendsto_tvDist_firstCoordsLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Parking.klDiv_tvDist_firstCoordsLaw_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "challenge_proof_holes": 3,
+  "official_comparator_run": false
+}

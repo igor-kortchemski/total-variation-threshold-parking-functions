@@ -1,0 +1,10 @@
+{
+  "active_lean": "leanprover/lean4:v4.34.0",
+  "active_mathlib": "5ed2965256430c3649e86755f9576b54eca72435",
+  "palomar_minimum": "v4.35.0-rc2",
+  "proposed_lean": "leanprover/lean4:v4.35.0",
+  "proposed_mathlib": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "proposed_mathlib_tag": "v4.35.0",
+  "applied": false,
+  "reason": "Prior project/user instructions require explicit approval for toolchain changes; migration will occur only in this independent export."
+}

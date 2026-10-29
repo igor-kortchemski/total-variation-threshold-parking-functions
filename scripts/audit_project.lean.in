@@ -1,0 +1,151 @@
+import Lean.Replay
+import Lean.Util.Path
+
+open Lean
+
+/- Verification program, copied to .scratch by prepare_audit.py.
+   This template is not a production module and imports no frozen theorem statically. -/
+
+def isProject (n : Name) : Bool := (`Parking).isPrefixOf n
+
+def ownerIsProject (env : Environment) (n : Name) : Bool :=
+  match env.getModuleIdxFor? n with
+  | some i => isProject env.header.modules[i.toNat]!.module
+  | none => false
+
+def readImports (path : System.FilePath) : IO (Array Import) := do
+  let lines := (← IO.FS.readFile path).splitOn "\n"
+  return (lines.filter (· != "")).toArray.map fun s => { module := s.toName }
+
+def proofDeps (ci : ConstantInfo) : Array Name :=
+  match ci.value? (allowOpaque := true) with
+  | some v => v.getUsedConstants
+  | none => #[]
+
+def checkDirect (env : Environment) (a b : Name) : IO Unit := do
+  let some ci := env.find? a | throw <| IO.userError s!"missing {a}"
+  unless (proofDeps ci).contains b do
+    throw <| IO.userError s!"missing direct proof dependency {a} -> {b}"
+  IO.println s!"PASS direct proof dependency {a} -> {b}"
+
+def checkAbsentClosure (env : Environment) (root forbidden : Name) : IO Unit := do
+  let mut todo := [root]
+  let mut seen : NameSet := {}
+  while !todo.isEmpty do
+    let n := todo.head!
+    todo := todo.tail!
+    if seen.contains n then continue
+    seen := seen.insert n
+    if n == forbidden then throw <| IO.userError s!"forbidden dependency {root} -> {forbidden}"
+    if ownerIsProject env n then
+      let some ci := env.find? n | throw <| IO.userError s!"missing {n}"
+      todo := (proofDeps ci).toList ++ todo
+  IO.println s!"PASS absent from project proof closure {root} -> {forbidden}"
+
+def main : IO Unit := do
+  initSearchPath (← findSysroot)
+  let imports ← readImports "evidence/audit/project-modules.txt"
+  let baseImports ← readImports "evidence/audit/dependency-imports.txt"
+  IO.println "Loading final project and pinned dependency environments"
+  (← IO.getStdout).flush
+  let env ← importModules imports {} 0 (loadExts := false)
+  let base ← importModules baseImports {} 0 (loadExts := false)
+  IO.println "Environments loaded; checking project ownership and declarations"
+  (← IO.getStdout).flush
+  unless !(base.header.moduleNames.any isProject) do
+    throw <| IO.userError "base environment imports a project module"
+  let mut project : Std.HashMap Name ConstantInfo := {}
+  let allConstants := env.constants.toList
+  for (n, ci) in allConstants do
+    if ownerIsProject env n then project := project.insert n ci
+  let sorted := project.toArray.qsort fun a b => Name.lt a.1 b.1
+  let mut thms := 0
+  let mut defs := 0
+  for (n, ci) in sorted do
+    if base.contains n then throw <| IO.userError s!"project constant in base: {n}"
+    if ci.isUnsafe || ci.isPartial then throw <| IO.userError s!"unsafe or partial project constant: {n}"
+    match ci with
+    | .axiomInfo _ => throw <| IO.userError s!"project axiom: {n}"
+    | .opaqueInfo _ => throw <| IO.userError s!"project opaque: {n}"
+    | .thmInfo _ => thms := thms + 1
+    | .defnInfo _ => defs := defs + 1
+    | _ => pure ()
+  for (n, _) in allConstants do
+    unless base.contains n || project.contains n do
+      throw <| IO.userError s!"unclassified constant: {n}"
+  IO.println s!"PROJECT INVENTORY: {imports.size} modules, {project.size} constants, {thms} theorems, {defs} definitions"
+  IO.println s!"BASE: {baseImports.size} direct dependency imports; {base.header.moduleNames.size} dependency modules; zero project modules/constants"
+  (← IO.getStdout).flush
+  let mut edges : Array String := #["consumer\tkind\tdependency"]
+  for (n, ci) in sorted do
+    for dep in (proofDeps ci).qsort Name.lt do
+      if project.contains dep then edges := edges.push s!"{n}\tvalue\t{dep}"
+    for dep in ci.type.getUsedConstants.qsort Name.lt do
+      if project.contains dep then edges := edges.push s!"{n}\ttype\t{dep}"
+  IO.FS.writeFile "evidence/audit/proof-dependencies.tsv" ("\n".intercalate edges.toList ++ "\n")
+  let mut todo := sorted.toList.map Prod.fst
+  let mut seen : NameSet := {}
+  let mut axs : NameSet := {}
+  let banned := #[`sorryAx, `Lean.ofReduceBool, `Lean.ofReduceNat, `Lean.trustCompiler]
+  while !todo.isEmpty do
+    let n := todo.head!
+    todo := todo.tail!
+    if seen.contains n then continue
+    seen := seen.insert n
+    if banned.contains n then throw <| IO.userError s!"forbidden dependency {n}"
+    let some ci := env.find? n | throw <| IO.userError s!"missing dependency {n}"
+    if let .axiomInfo _ := ci then axs := axs.insert n
+    todo := ci.getUsedConstantsAsSet.toList ++ todo
+  let allowed := #[`propext, `Classical.choice, `Quot.sound]
+  for ax in axs do
+    unless allowed.contains ax do throw <| IO.userError s!"nonstandard axiom {ax}"
+  IO.println s!"AXIOM AUDIT OK: all {project.size} project constants; {seen.size} reachable constants; axioms {axs.toArray.qsort Name.lt}"
+  (← IO.getStdout).flush
+  let geometryEdges := #[
+    (`Parking.pitmanStanleyPolytope_eq_minkowskiSum, `Parking.pitmanStanleyMinkowskiSum_subset),
+    (`Parking.pitmanStanleyPolytope_eq_minkowskiSum, `Parking.pitmanStanleyPolytope_subset_minkowskiSum),
+    (`Parking.volume_parkingBoxUnion, `Parking.disjoint_parkingBox),
+    (`Parking.volume_parkingBoxUnion, `Parking.volume_parkingBox),
+    (`Parking.parkingBoxUnion_ae_eq_symmetrizedRegion, `Parking.mem_parkingBoxUnion_iff_sorted),
+    (`Parking.parkingBoxUnion_ae_eq_symmetrizedRegion, `Parking.mem_pitmanStanleySymmetrizedRegion_iff_sorted),
+    (`Parking.parkingBoxUnion_ae_eq_symmetrizedRegion, `Parking.volume_coordinate_zero),
+    (`Parking.factorial_mul_volume_pitmanStanley, `Parking.parkingBoxUnion_ae_eq_symmetrizedRegion),
+    (`Parking.factorial_mul_volume_pitmanStanley, `Parking.volume_pitmanStanleySymmetrizedRegion),
+    (`Parking.factorial_mul_volume_pitmanStanley, `Parking.volume_parkingBoxUnion_toReal),
+    (`Parking.eval_countPoly_eq_volume_pitmanStanley, `Parking.factorial_mul_volume_pitmanStanley),
+    (`Parking.eval_supportGenFun_eq_volume_pitmanStanley, `Parking.eval_countPoly_eq_volume_pitmanStanley),
+    (`Parking.pitmanStanley_volume_polynomial_lorentzian, `Parking.pitmanStanleyPolytope_eq_minkowskiSum),
+    (`Parking.pitmanStanley_volume_polynomial_lorentzian, `Parking.eval_supportGenFun_eq_volume_pitmanStanley),
+    (`Parking.pitmanStanley_volume_polynomial_lorentzian, `Parking.lorentzian_supportGenFun),
+    (`Parking.pitmanStanley_occupation_remark, `Parking.pitmanStanley_volume_polynomial_lorentzian),
+    (`Parking.pitmanStanley_occupation_remark, `Parking.Lorentzian.smul)]
+  for (a, b) in geometryEdges do checkDirect env a b
+  let forbidden := #[`Parking.completelyLogConcave_countPoly_parkingWordLaw,
+    `Parking.stronglyLogConcave_countPoly_parkingWordLaw,
+    `Parking.stronglyLogConcave_supportGenFun_parkingCountSet,
+    `Parking.tvDist_firstCoordsLaw_bounds, `Parking.tendsto_tvDist_firstCoordsLaw]
+  for n in forbidden do
+    checkAbsentClosure env `Parking.pitmanStanley_occupation_remark n
+  (← IO.getStdout).flush
+  let start ← IO.monoMsNow
+  let replayed ← base.toKernelEnv.replay project
+  for (n, ci) in sorted do
+    let some ci' := replayed.find? n | throw <| IO.userError s!"replay omitted {n}"
+    unless ci.type == ci'.type && ci.value? == ci'.value? do
+      throw <| IO.userError s!"replayed declaration mismatch: {n}"
+  IO.println s!"KERNEL REPLAY OK: {project.size} project constants rechecked; all types and values identical; {(← IO.monoMsNow) - start} ms"
+  for n in #[`Parking.tvDist_firstCoordsLaw_bounds, `Parking.tendsto_tvDist_firstCoordsLaw,
+      `Parking.klDiv_tvDist_firstCoordsLaw_le, `Parking.pitmanStanley_occupation_remark] do
+    unless (replayed.find? n).isSome do throw <| IO.userError s!"missing target {n}"
+    IO.println s!"REPLAYED TARGET {n}"
+  let some (.thmInfo original) := project[`Parking.bh20_supportGenFunCLC]?
+    | throw <| IO.userError "negative control target absent"
+  let tampered := project.insert original.name (.thmInfo { original with value := mkConst `True.intro })
+  let rejected ← try
+    discard <| base.toKernelEnv.replay tampered
+    pure false
+  catch e =>
+    IO.println s!"NEGATIVE CONTROL rejection: {e}"
+    pure true
+  unless rejected do throw <| IO.userError "negative control incorrectly accepted"
+  IO.println "NEGATIVE CONTROL OK: tampered project theorem rejected"

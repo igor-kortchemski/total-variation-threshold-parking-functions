@@ -1,0 +1,38 @@
+{
+  "scope": "Approved export-only proof/instance spelling adaptations for structural Challenge/Solution equality; theorem statements and concrete probability definitions unchanged",
+  "reason": "Comparator compares reachable constant structures, including supporting proof bodies; module-private helper names differ when separately elaborated source modules are combined",
+  "changes": [
+    {
+      "path": "Parking/Basic.lean",
+      "before_sha256": "46d0a5adfca5b2d63267215853a5be11a0009ced9129802fcf57e8858a35a405",
+      "after_sha256": "67af21e75b21e04f39a2f06ea74cbe2782c48ee01f85064c02b3d3a793c153b6",
+      "old_proof": "  intro j\n  simpa only [Fin.zero_le, Finset.filter_true, Finset.card_fin] using\n    Nat.succ_le_of_lt j.isLt",
+      "new_proof": "  intro j\n  change j.val + 1 \u2264 (Finset.univ.filter (fun _ : Fin n => (0 : Fin n) \u2264 j)).card\n  rw [Finset.filter_eq_self.mpr (fun _ _ => Fin.zero_le j), Finset.card_fin]\n  exact Nat.succ_le_of_lt j.isLt"
+    },
+    {
+      "path": "Parking/Law.lean",
+      "before_sha256": "700e1665b7b301921554c0c5bd2299738f38e9a896c2deb7b3f9c0bd997fda66",
+      "after_sha256": "f8406658793d967ba216ef77812f0b808eb64b0c9c5509e928f155d005d0f6d6",
+      "old_proof": "inferInstanceAs (MeasurableSingletonClass {a : Fin n \u2192 Fin n // isParkingFunction a})",
+      "new_proof": "Subtype.instMeasurableSingletonClass"
+    },
+    {
+      "path": "Challenge.lean",
+      "before_sha256": "30b35e4178c66ca7ae8770482e3cbbe0718d93875e40756dca12d1c045cb0b37",
+      "after_sha256": "bcc5aa410d975bd868f3a89c94d2cc741572d8a66074e98ca6859b0a1679f158",
+      "old_proof": "  intro j\n  simpa only [Fin.zero_le, Finset.filter_true, Finset.card_fin] using\n    Nat.succ_le_of_lt j.isLt",
+      "new_proof": "  intro j\n  change j.val + 1 \u2264 (Finset.univ.filter (fun _ : Fin n => (0 : Fin n) \u2264 j)).card\n  rw [Finset.filter_eq_self.mpr (fun _ _ => Fin.zero_le j), Finset.card_fin]\n  exact Nat.succ_le_of_lt j.isLt"
+    },
+    {
+      "path": "Challenge.lean",
+      "before_sha256": "bcc5aa410d975bd868f3a89c94d2cc741572d8a66074e98ca6859b0a1679f158",
+      "after_sha256": "5edb9f70057f6ed13e52287873b2c8df6d08c84e0a6d4800e2fd275aca2a764c",
+      "old_proof": "inferInstanceAs (MeasurableSingletonClass {a : Fin n \u2192 Fin n // isParkingFunction a})",
+      "new_proof": "Subtype.instMeasurableSingletonClass"
+    }
+  ],
+  "challenge_cache_resets": 4,
+  "implementation_holes_added": 0,
+  "meaning": "isParkingFunction_zero retains its statement and counting proof; MeasurableSingletonClass is a proposition and its explicit subtype witness has the same class type; the measurable-space construction is unchanged",
+  "validation": "Pending current Lean build and current semantic closure comparison"
+}

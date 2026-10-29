@@ -1,0 +1,38 @@
+{
+  "scope": "Lean4.35 compatibility only; statements and manuscript argument unchanged",
+  "repairs": [
+    {
+      "declaration": "Parking.card_castSucc_lt",
+      "path": "Parking/Count.lean",
+      "diagnostic": "No goals to be solved after congr 1: the new Lean congruence step already closes the goal.",
+      "change": "Remove three unreachable tactics after congr 1.",
+      "before_sha256": "80247eea25437cb80d50015ff5505d8edf149ca2e616f4956fa8706ee4c3469b",
+      "after_sha256": "a0c1f1abda29a9d7121116f13fee04478a8c6fd39473a2454b4b82e225f6c5c8"
+    },
+    {
+      "declarations": [
+        "Parking.isParkingFn_iff_le_card",
+        "Parking.sum_firstValueCount"
+      ],
+      "path": "Parking/FirstCoordCount.lean",
+      "diagnostic": "Three local goals are already closed by congr 1 under Lean4.35.",
+      "change": "Remove only unreachable filter congruence tactics after the now-complete congr 1 steps.",
+      "before_sha256": "8e8cf8f3dac26c33aa77c5babfba001c80a83d5c8e30d229a6b56c8114d929c7",
+      "after_sha256": "1dc8998d207d5c82a767e749fa7f368b821daef00f242ebf5642d71669b16733",
+      "edits": [
+        {
+          "old": "        congr 1\n        apply filter_congr\n        intro i _\n        show (a i : \u2115) \u2264 s \u2194 (a i : \u2115) < s + 1\n        omega",
+          "new": "        congr 1"
+        },
+        {
+          "old": "      congr 1\n      apply filter_congr\n      intro i _\n      rw [Fin.le_iff_val_le_val]\n      omega",
+          "new": "      congr 1"
+        },
+        {
+          "old": "    congr 1\n    apply filter_congr\n    intro a _\n    rw [Fin.ext_iff]",
+          "new": "    congr 1"
+        }
+      ]
+    }
+  ]
+}

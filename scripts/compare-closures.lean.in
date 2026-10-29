@@ -1,0 +1,248 @@
+/-
+Copyright (c) 2026 Igor Kortchemski.
+SPDX-License-Identifier: Apache-2.0
+Released under the Apache License, Version 2.0; see LICENSE.
+
+Local structural diagnostic informed by Lean 4.35.0:
+  Lake/Check/Compare.lean, Lake/Check/Util.lean, Lake/CLI/Check.lean,
+  LeanExport.lean and LeanExport/Basic.lean.
+The referenced Lean sources are Copyright (c) 2025 Lean FRO, LLC,
+authored by Henrik Böving and released under Apache-2.0.
+-/
+import Lean
+import Lean.Util.Path
+import Lake.Check.Util
+
+/-!
+# Local raw-constant closure comparison
+
+This retained template is not a production module or an official Comparator.
+Copy it to a temporary `.lean` file and run only after Challenge and Solution
+have built, with the shared compilation gate and no concurrent Lean process:
+
+    cp scripts/compare-closures.lean.in .scratch/validation/CompareClosures.lean
+    <shared-compile-gate> lake env lean --run .scratch/validation/CompareClosures.lean
+    rm .scratch/validation/CompareClosures.lean
+
+Run from the project root. The program reads comparator.json and fails closed
+unless it names exactly this project's three theorem targets, Challenge,
+Solution, no definition holes, and the three standard permitted axioms.
+
+Imports are separate, with OLeanLevel.private and loadExts=false explicitly,
+matching the full-value import behavior of LeanExport. Neither environment is
+merged into the other. No namespace, private helper or proof body is filtered.
+Only the three designated target proof bodies are omitted from comparison;
+their ConstantVal (name, universe parameters, type) must match exactly.
+
+Supporting ConstantInfo values are compared with Lean's raw structural BEq,
+including supporting theorem/opaque proof bodies and declaration metadata.
+Traversal uses the actual Lake.Check.runForUsedConsts implementation and the
+primitive seed list in Lean 4.35.0's Lake/CLI/Check.lean. Permitted axioms are
+also seeded and receive full ConstantInfo comparison. On a discrepancy, this
+diagnostic continues through BOTH encountered dependency sets to report more
+failures; the official comparator instead stops at the first discrepancy.
+
+IMPORTANT: this is intentionally a raw-environment diagnostic. LeanExport's
+default serializer removes expression metadata and normalizes let-expression
+nonDep flags before the official comparison. Raw mismatch can therefore be
+stricter than exported mismatch. This program does not normalize those fields,
+use definitional equality, proof irrelevance, or private-name replacement.
+It performs no axiom-policy check, sandbox build, export-format round trip,
+Lean-kernel replay, NanoDa replay or official Palomar preflight. A clean result
+is labeled LOCAL_RAW_CLOSURE_MATCH only, never a Comparator/preflight pass.
+The caller must separately record source/configuration/toolchain input hashes
+and ensure the compiled artifacts correspond to those exact inputs.
+-/
+
+open Lean
+
+namespace ParkingClosureDiagnostic
+
+/-- The only proof bodies intentionally excluded from this comparison. -/
+def theoremTargets : Array Name := #[
+  `Parking.tvDist_firstCoordsLaw_bounds,
+  `Parking.tendsto_tvDist_firstCoordsLaw,
+  `Parking.klDiv_tvDist_firstCoordsLaw_le
+]
+
+def legalAxioms : Array Name := #[`propext, `Quot.sound, `Classical.choice]
+
+/-- Exact primitive seed list from Lean 4.35.0 Lake.CLI.Check.primitiveTargets. -/
+def primitiveTargets : Array Name := #[
+  ``Nat.add, ``Nat.sub, ``Nat.mul, ``Nat.pow, ``Nat.gcd, ``Nat.div, ``Nat.mod,
+  ``Nat.beq, ``Nat.ble, ``Nat.land, ``Nat.lor, ``Nat.xor, ``Nat.shiftLeft,
+  ``Nat.shiftRight, ``String.ofList, ``Char.ofNat, ``List, ``eagerReduce,
+  ``Nat, ``String, ``String.mk, ``Char, ``optParam, ``autoParam,
+  ``semiOutParam, ``outParam
+]
+
+/-- Use the toolchain's actual traversal, including inductive/recursor links. -/
+def relevantConstants (info : ConstantInfo) : Array Name :=
+  ((Lake.Check.runForUsedConsts (m := StateM (Array Name)) info
+    (fun n => modify fun names => names.push n)).run #[]).2
+
+def dependencies (name : Name) (info : ConstantInfo) : Array Name :=
+  if theoremTargets.contains name then info.type.getUsedConstants
+  else relevantConstants info
+
+def kind : ConstantInfo → String
+  | .axiomInfo _ => "axiom"
+  | .defnInfo _ => "definition"
+  | .thmInfo _ => "theorem"
+  | .opaqueInfo _ => "opaque"
+  | .quotInfo _ => "quotient primitive"
+  | .inductInfo _ => "inductive"
+  | .ctorInfo _ => "constructor"
+  | .recInfo _ => "recursor"
+
+def sameNames (actual : Array String) (expected : Array Name) : Bool :=
+  actual.size == expected.size &&
+    expected.all (fun n => actual.contains n.toString)
+
+def validateConfig : IO Unit := do
+  let config ← IO.ofExcept <| Json.parse (← IO.FS.readFile "comparator.json")
+  let challenge ← IO.ofExcept <| config.getObjValAs? String "challenge_module"
+  let solution ← IO.ofExcept <| config.getObjValAs? String "solution_module"
+  let targets ← IO.ofExcept <| config.getObjValAs? (Array String) "theorem_names"
+  let axioms ← IO.ofExcept <| config.getObjValAs? (Array String) "permitted_axioms"
+  unless challenge == "Challenge" && solution == "Solution" do
+    throw <| IO.userError "diagnostic expects separate modules Challenge and Solution"
+  unless sameNames targets theoremTargets do
+    throw <| IO.userError "comparator.json theorem targets differ from the three diagnostic targets"
+  unless sameNames axioms legalAxioms do
+    throw <| IO.userError "comparator.json permitted axioms differ from the three diagnostic seeds"
+  match config.getObjVal? "definition_names" with
+  | .error _ => pure ()
+  | .ok value =>
+    let definitions ← IO.ofExcept <| (fromJson? value : Except String (Array String))
+    unless definitions.isEmpty do
+      throw <| IO.userError "this diagnostic supports no definition holes"
+
+/-- Field-level indicators supplement, never replace, full ConstantInfo equality. -/
+def mismatchDetails (name parent : Name) (c s : ConstantInfo) : Json :=
+  Json.mkObj [
+    ("name", toJson name.toString),
+    ("reached_from", toJson parent.toString),
+    ("challenge_kind", toJson (kind c)),
+    ("solution_kind", toJson (kind s)),
+    ("constant_name_equal", toJson (c.name == s.name)),
+    ("level_params_equal", toJson (c.levelParams == s.levelParams)),
+    ("type_equal", toJson (c.type == s.type)),
+    ("value_equal", toJson (c.value? (allowOpaque := true) == s.value? (allowOpaque := true))),
+    ("constant_info_equal", toJson (c == s))
+  ]
+
+def runComparison (challenge solution : Environment) : IO Unit := do
+  let seedNames := theoremTargets ++ legalAxioms ++ primitiveTargets
+  let mut todo : Array (Name × Name) := seedNames.map fun n => (n, `diagnosticSeed)
+  let mut checked : NameSet := {}
+  let mut checkedCount := 0
+  let mut targetMatches := 0
+  let mut supportingMatches := 0
+  let mut targetFailures := 0
+  let mut supportingFailures := 0
+  let mut missingChallenge := 0
+  let mut missingSolution := 0
+  let mut supportingProofBodies := 0
+  let mut privateNames := 0
+  let mut failures : Array Json := #[]
+  while !todo.isEmpty do
+    let (name, parent) := todo.back!
+    todo := todo.pop
+    if checked.contains name then continue
+    checked := checked.insert name
+    checkedCount := checkedCount + 1
+    if (`_private).isPrefixOf name then privateNames := privateNames + 1
+    let c? := challenge.find? name
+    let s? := solution.find? name
+    match c?, s? with
+    | some c, some s =>
+      if theoremTargets.contains name then
+        let targetEqual := match c, s with
+          | .thmInfo cc, .thmInfo sc => cc.toConstantVal == sc.toConstantVal
+          | _, _ => false
+        if targetEqual then
+          targetMatches := targetMatches + 1
+          IO.println s!"TARGET_CONSTANTVAL_MATCH {name}"
+        else
+          targetFailures := targetFailures + 1
+          let detail := mismatchDetails name parent c s
+          failures := failures.push <| Json.mkObj [
+            ("failure", toJson "target_constant_val_or_kind"), ("detail", detail)]
+          IO.println s!"FAIL_TARGET {detail.compress}"
+      else
+        if let .thmInfo _ := s then
+          supportingProofBodies := supportingProofBodies + 1
+        if c == s then
+          supportingMatches := supportingMatches + 1
+        else
+          supportingFailures := supportingFailures + 1
+          let detail := mismatchDetails name parent c s
+          failures := failures.push <| Json.mkObj [
+            ("failure", toJson "raw_constant_info_mismatch"), ("detail", detail)]
+          IO.println s!"FAIL_SUPPORT {detail.compress}"
+      -- No filtering by owner, namespace, visibility or proposition status.
+      for dependency in dependencies name c do
+        if !checked.contains dependency then todo := todo.push (dependency, name)
+      for dependency in dependencies name s do
+        if !checked.contains dependency then todo := todo.push (dependency, name)
+    | c?, s? =>
+      if c?.isNone then
+        missingChallenge := missingChallenge + 1
+        let detail := Json.mkObj [
+          ("failure", toJson "missing_in_challenge"),
+          ("name", toJson name.toString), ("reached_from", toJson parent.toString)]
+        failures := failures.push detail
+        IO.println s!"FAIL_MISSING {detail.compress}"
+      if s?.isNone then
+        missingSolution := missingSolution + 1
+        let detail := Json.mkObj [
+          ("failure", toJson "missing_in_solution"),
+          ("name", toJson name.toString), ("reached_from", toJson parent.toString)]
+        failures := failures.push detail
+        IO.println s!"FAIL_MISSING {detail.compress}"
+      if let some c := c? then
+        for dependency in dependencies name c do
+          if !checked.contains dependency then todo := todo.push (dependency, name)
+      if let some s := s? then
+        for dependency in dependencies name s do
+          if !checked.contains dependency then todo := todo.push (dependency, name)
+  let clean := failures.isEmpty && targetMatches == theoremTargets.size
+  let summary := Json.mkObj [
+    ("diagnostic", toJson "raw ConstantInfo comparison; not official Comparator"),
+    ("lean_version", toJson Lean.versionString),
+    ("challenge_module", toJson "Challenge"), ("solution_module", toJson "Solution"),
+    ("import_level", toJson "private"), ("load_extensions", toJson false),
+    ("primitive_seed_count", toJson primitiveTargets.size),
+    ("permitted_axiom_seed_count", toJson legalAxioms.size),
+    ("checked_names", toJson checkedCount),
+    ("target_matches", toJson targetMatches), ("target_failures", toJson targetFailures),
+    ("supporting_matches", toJson supportingMatches),
+    ("supporting_failures", toJson supportingFailures),
+    ("supporting_theorem_bodies_compared", toJson supportingProofBodies),
+    ("private_names_visited", toJson privateNames),
+    ("missing_in_challenge", toJson missingChallenge),
+    ("missing_in_solution", toJson missingSolution),
+    ("raw_closures_match", toJson clean),
+    ("failures", Json.arr failures)
+  ]
+  IO.println s!"LOCAL_STRUCTURAL_SUMMARY {summary.compress}"
+  if clean then
+    IO.println "LOCAL_RAW_CLOSURE_MATCH; official Comparator, kernel replay and preflight remain separate"
+  else
+    throw <| IO.userError "local raw closure diagnostic found discrepancies; see LOCAL_STRUCTURAL_SUMMARY"
+
+end ParkingClosureDiagnostic
+
+def main : IO Unit := do
+  unless Lean.versionString == "4.35.0" do
+    throw <| IO.userError s!"this diagnostic was reviewed for Lean 4.35.0, got {Lean.versionString}"
+  ParkingClosureDiagnostic.validateConfig
+  initSearchPath (← findSysroot)
+  IO.println "LOCAL_DIAGNOSTIC importing Challenge with full private constant values"
+  let challenge ← importModules #[{ module := `Challenge }] {}
+    (loadExts := false) (level := OLeanLevel.private)
+  IO.println "LOCAL_DIAGNOSTIC importing Solution in a separate environment"
+  let solution ← importModules #[{ module := `Solution }] {}
+    (loadExts := false) (level := OLeanLevel.private)
+  ParkingClosureDiagnostic.runComparison challenge solution

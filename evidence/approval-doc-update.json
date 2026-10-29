@@ -1,0 +1,51 @@
+{
+  "action": "documentation of the approved export-only changes",
+  "date": "2026-10-29",
+  "user_response": "Approuve",
+  "license_header_evidence": "evidence/license-header-update.json",
+  "target_lean": "v4.35.0",
+  "target_mathlib": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "new_mechanical_check_claimed": false,
+  "files": [
+    {
+      "path": "README.md",
+      "before_sha256": "e1478ffdbf89f756f90236bb9b38dcb1c7b662549272d7b66f4f48b682e2a51a",
+      "after_sha256": "59ada9c61052de907f60e8084384756510ebd04b2e0f26e647c38e2e976bfba9"
+    },
+    {
+      "path": "NOTICE",
+      "before_sha256": "1d9e38a9bf9c4b6bc3790047307f83dc18d15a6b3c67e6a029e13b991487f1cc",
+      "after_sha256": "fed89abdb9c592c92fc6407c50f0f79fa3fc0ba3d8ee3a1d9eced4b2837eb30e"
+    },
+    {
+      "path": "docs/APPROVAL.md",
+      "before_sha256": "c13c7d14a200d70151cff1ff91eb09c64b1f5c9cd23b15862bde4ae42646fa5e",
+      "after_sha256": "8e8df269f73b4e88acf2814a75f951c81ead317e4a3a9ed19cdc67afac1d617b"
+    },
+    {
+      "path": "docs/PROVENANCE.md",
+      "before_sha256": "470cfc9d21f6aee759a1910e9ffaa8ce587ee4969fc25c8a97fbd93364503d23",
+      "after_sha256": "8ec29ee37949d463a10351d8a7932aece54876cf22d195836d9d7ec415eb456c"
+    },
+    {
+      "path": "docs/FROZEN.md",
+      "before_sha256": "64977ec9286607fc3df02c499ff5dcd3d687cf79231f5d854518193f547665fd",
+      "after_sha256": "7033fbceaea619b0a098bd65bb9e24ae2b8186b61c0dc2fcd71c4fd5dfbfaf9d"
+    },
+    {
+      "path": "AGENTS.md",
+      "before_sha256": "07f921c1b302969cc1c14a14f0ecfef9a617840148cac96ac25623e185dad5bc",
+      "after_sha256": "7f1cf8ef57361ead1ca20d9785c4d2f7536a45ec8f03101247b6c02f4e3bee9a"
+    }
+  ],
+  "scope_excludes": [
+    "Challenge.lean",
+    "Solution.lean",
+    "lean-toolchain",
+    "lakefile.toml",
+    "lake-manifest.json",
+    "frozen-anchors.json",
+    "scripts/",
+    "docs/PREPARATION.md"
+  ]
+}

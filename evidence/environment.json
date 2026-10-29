@@ -1,0 +1,9 @@
+{
+  "lean": "leanprover/lean4:v4.35.0",
+  "mathlib": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "mathlib_tag": "v4.35.0",
+  "author_approved": true,
+  "applied": true,
+  "prior_environment_evidence": "history-4.34/",
+  "official_minimum_at_pinned_policy": "v4.35.0-rc2"
+}

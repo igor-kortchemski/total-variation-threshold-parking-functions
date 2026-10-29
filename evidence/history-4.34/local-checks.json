@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-10-29T07:08:01.388961+00:00",
+  "checks": [
+    {
+      "command": "python3 scripts/check-package.py",
+      "exit_code": 0,
+      "stdout": "SOURCE PACKAGE CHECK PASS: 79 modules; mathematical code unchanged; protected files identical; no implementation holes; pinned Git dependencies; small Mathlib-only Challenge template.\nNOT A SUBMISSION: migration, license, active Challenge/Solution and full preflight remain pending.\n",
+      "stderr": ""
+    },
+    {
+      "command": "python3 scripts/check-lean-sources.py",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "ruby scripts/validate-formalization.rb drafts/formalization.yaml.in",
+      "exit_code": 0,
+      "stdout": "drafts/formalization.yaml.in contains no TEMPLATE values\n",
+      "stderr": ""
+    },
+    {
+      "command": "bash -n scripts/verify-comparator.sh",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}
