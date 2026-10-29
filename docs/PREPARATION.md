@@ -34,7 +34,7 @@ The retained [ABI probe](../scripts/frozen_abi.lean.in) and [raw closure probe](
 
 ## Private hosted verification
 
-The authorized [private workflow](../.github/workflows/private-comparator.yml) runs manually in [GitHub Actions](https://github.com/igor-kortchemski/Parking-paper-palomar/actions/workflows/private-comparator.yml). Read each run's exact source commit and retained report for its actual result before attributing a result to a checkout. Repository access is required to view the run and artifacts.
+The authorized [private workflow](../.github/workflows/private-comparator.yml) runs manually in [GitHub Actions](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/private-comparator.yml). Read each run's exact source commit and retained report for its actual result before attributing a result to a checkout. Repository access is required to view the run and artifacts.
 
 The [standalone verifier](../scripts/verify-comparator.sh) requires supported Linux and Bubblewrap, authenticated checker inputs and a separate output directory. It records Comparator/Lean/NanoDa outcomes and the separately pinned advisory checker. Its report explicitly distinguishes private standalone verification from the official full Palomar preflight. No hosted pass is inferred from local source, ABI or raw closure checks.
 

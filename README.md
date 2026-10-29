@@ -1,10 +1,10 @@
 # Parking functions: total variation threshold
 
-[![Private Comparator verification](https://github.com/igor-kortchemski/Parking-paper-palomar/actions/workflows/private-comparator.yml/badge.svg)](https://github.com/igor-kortchemski/Parking-paper-palomar/actions/workflows/private-comparator.yml)
+[![Private Comparator verification](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/private-comparator.yml/badge.svg)](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/private-comparator.yml)
 
 This Lean library reconstructs the supplied parking-function manuscript. The active export uses Lean **4.35.0** and Mathlib **`56a005855ea17e0b0958f73ec801ae140b0a1679`**. All 79 implementation modules and both interface modules build; the implementation has complete proofs and only the three standard logical axioms.
 
-The repository is reserved for **private GitHub verification**. The badge and [Actions runs](https://github.com/igor-kortchemski/Parking-paper-palomar/actions/workflows/private-comparator.yml) require repository access. Hosted Comparator evidence is recorded per run; a completed run verifies only its recorded commit and checks. No public release, Palomar intake, registration or successful full preflight is claimed.
+The repository is reserved for **private GitHub verification**. The badge and [Actions runs](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/private-comparator.yml) require repository access. Hosted Comparator evidence is recorded per run; a completed run verifies only its recorded commit and checks. No public release, Palomar intake, registration or successful full preflight is claimed.
 
 ## Mathematical results
 

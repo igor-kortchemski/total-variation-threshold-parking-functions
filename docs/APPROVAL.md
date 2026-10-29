@@ -17,3 +17,7 @@ The user then specified **â€œfor comparator I prefer a private thing on githubâ€
 The repository must remain private. This authorization does not permit a visibility change, public release, public archive upload, Palomar intake, registration, or redistribution of excluded manuscript files. A private hosted verification report is distinct from the official public-snapshot full preflight.
 
 [Preparation](PREPARATION.md) records completed local Lean 4.35 checks and the private hosted evidence. Each hosted result must name the exact source commit and retained evidence. Approval is not a verification result or an assertion of independent human peer review.
+
+## Repository rename
+
+On 29 October 2026, the user chose `total-variation-threshold-parking-functions` and requested changing the existing repository name. The same private repository is now `igor-kortchemski/total-variation-threshold-parking-functions`; its repository identity, Git history and verification runs are retained. Active links and the local Git remote follow the new name. Historical authorization and verification receipts retain the original name and checked commit. This rename does not authorize a visibility change or Palomar submission.
