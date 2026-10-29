@@ -1,0 +1,207 @@
+name: Build and audit
+
+"on":
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Fresh build and implementation audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out the exact source commit
+        id: checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Free disk on the disposable GitHub-hosted runner
+        id: resources
+        run: |
+          set -Eeuo pipefail
+          if [[ "${RUNNER_ENVIRONMENT:-}" == github-hosted ]]; then
+            sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+            sudo docker image prune --all --force > /dev/null || true
+          fi
+          mkdir -p "$RUNNER_TEMP/build-evidence"
+          {
+            uname -a
+            nproc
+            free -h
+            df -h "$GITHUB_WORKSPACE" "$RUNNER_TEMP"
+          } | tee "$RUNNER_TEMP/build-evidence/resources.log"
+          available_kib="$(df -Pk . | awk 'NR==2 {print $4}')"
+          test "$available_kib" -ge 20971520
+          # No project artifacts or Actions caches are restored in this workflow.
+          test ! -e .lake
+
+      - name: Install the authenticated pinned Lean toolchain
+        id: toolchain
+        run: |
+          set -Eeuo pipefail
+          test "$(tr -d '[:space:]' < lean-toolchain)" = leanprover/lean4:v4.35.0
+          mkdir -p "$RUNNER_TEMP/downloads" "$RUNNER_TEMP/lean-build"
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq zstd ruby
+          curl --fail --location --silent --show-error --proto '=https' --tlsv1.2 --retry 3 \
+            --output "$RUNNER_TEMP/downloads/lean-4.35.0-linux.tar.zst" \
+            https://github.com/leanprover/lean4/releases/download/v4.35.0/lean-4.35.0-linux.tar.zst
+          printf '%s  %s\n' 7289597a44543246c9227b8cae501767e095ce17f6d448b95fc4a8dc97268f6d \
+            "$RUNNER_TEMP/downloads/lean-4.35.0-linux.tar.zst" | sha256sum --check --quiet
+          tar --zstd -xf "$RUNNER_TEMP/downloads/lean-4.35.0-linux.tar.zst" -C "$RUNNER_TEMP/lean-build"
+          echo "$RUNNER_TEMP/lean-build/lean-4.35.0-linux/bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/lean-build/lean-4.35.0-linux/bin/lean" --version \
+            | tee "$RUNNER_TEMP/build-evidence/lean-version.log"
+          stat --printf='%s\n' "$RUNNER_TEMP/downloads/lean-4.35.0-linux.tar.zst" \
+            > "$RUNNER_TEMP/build-evidence/toolchain-archive-bytes.log"
+
+      - name: Check package, source headers and metadata
+        id: checks
+        run: |
+          set -Eeuo pipefail
+          {
+            python3 scripts/check-package.py
+            python3 scripts/check-lean-sources.py
+            ruby scripts/validate-formalization.rb formalization.yaml
+          } 2>&1 | tee "$RUNNER_TEMP/build-evidence/source-checks.log"
+
+      - name: Download the pinned Mathlib dependency cache
+        id: dependencies
+        run: |
+          set -Eeuo pipefail
+          /usr/bin/time -f '%e' -o "$RUNNER_TEMP/build-evidence/cache-seconds.log" \
+            scripts/compile-lock.sh lake exe cache get \
+            2>&1 | tee "$RUNNER_TEMP/build-evidence/cache.log"
+          du -sk .lake/packages | awk '{print $1 * 1024}' \
+            > "$RUNNER_TEMP/build-evidence/dependency-footprint-bytes.log"
+
+      - name: Build every implementation and interface module
+        id: build
+        run: |
+          set -Eeuo pipefail
+          /usr/bin/time -f '%e' -o "$RUNNER_TEMP/build-evidence/build-seconds.log" \
+            scripts/compile-lock.sh lake build \
+            2>&1 | tee "$RUNNER_TEMP/build-evidence/build.log"
+          du -sk .lake | awk '{print $1 * 1024}' \
+            > "$RUNNER_TEMP/build-evidence/lake-footprint-bytes.log"
+
+      - name: Audit axioms and replay every implementation declaration
+        id: audit
+        run: |
+          set -Eeuo pipefail
+          /usr/bin/time -f '%e' -o "$RUNNER_TEMP/build-evidence/audit-seconds.log" \
+            scripts/audit-project.sh \
+            2>&1 | tee "$RUNNER_TEMP/build-evidence/kernel-replay.log"
+
+      - name: Check source integrity after every outcome
+        id: source_integrity
+        if: always() && steps.checkout.outcome == 'success'
+        run: |
+          set -Eeuo pipefail
+          mkdir -p "$RUNNER_TEMP/build-evidence"
+          # The audit regenerates deterministic records. They must match the
+          # committed records; no source or evidence changes are hidden.
+          git diff --exit-code | tee "$RUNNER_TEMP/build-evidence/source-integrity.log"
+          git diff --cached --exit-code
+          test -z "$(git ls-files --others --exclude-standard)"
+          test ! -e .scratch/validation/AuditProject.lean
+
+      - name: Record the commit and measured fresh-checkout results
+        if: always()
+        env:
+          CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
+          RESOURCES_OUTCOME: ${{ steps.resources.outcome }}
+          TOOLCHAIN_OUTCOME: ${{ steps.toolchain.outcome }}
+          CHECKS_OUTCOME: ${{ steps.checks.outcome }}
+          DEPENDENCIES_OUTCOME: ${{ steps.dependencies.outcome }}
+          BUILD_OUTCOME: ${{ steps.build.outcome }}
+          AUDIT_OUTCOME: ${{ steps.audit.outcome }}
+          SOURCE_INTEGRITY_OUTCOME: ${{ steps.source_integrity.outcome }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          evidence = Path(os.environ['RUNNER_TEMP']) / 'build-evidence'
+          evidence.mkdir(exist_ok=True)
+          names = ['CHECKOUT', 'RESOURCES', 'TOOLCHAIN', 'CHECKS', 'DEPENDENCIES',
+                   'BUILD', 'AUDIT', 'SOURCE_INTEGRITY']
+          steps = {name.lower(): os.environ[name + '_OUTCOME'] for name in names}
+          passed = all(value == 'success' for value in steps.values())
+          def metric(filename):
+              path = evidence / filename
+              if not path.is_file():
+                  return None
+              try:
+                  return float(path.read_text().strip())
+              except ValueError:
+                  return None
+          timings = {phase: metric(phase + '-seconds.log')
+                     for phase in ['cache', 'build', 'audit']}
+          quick_start = (timings['cache'] + timings['build']
+                         if timings['cache'] is not None and timings['build'] is not None
+                         and steps['dependencies'] == steps['build'] == 'success' else None)
+          footprints = {name: metric(name + '-bytes.log') for name in
+                        ['toolchain-archive', 'dependency-footprint', 'lake-footprint']}
+          result = {
+              'kind': 'fresh-build-and-implementation-audit',
+              'status': 'passed' if passed else 'not_verified',
+              'repository': os.environ['GITHUB_REPOSITORY'],
+              'source_commit': os.environ['GITHUB_SHA'],
+              'workflow_url': f"{os.environ['GITHUB_SERVER_URL']}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}",
+              'run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
+              'event': os.environ['GITHUB_EVENT_NAME'],
+              'steps': steps,
+              'restored_project_artifacts': False,
+              'timings_seconds': timings,
+              'quick_start_cache_and_build_seconds': quick_start,
+              'sizes_bytes': footprints,
+              'official_palomar_full_preflight': False,
+              'note': 'Fresh checkout; dependency cache downloaded from Mathlib. Build, implementation-only axiom audit, Lean kernel replay and corrupted-proof negative control. This workflow does not run Comparator or independent kernel checkers. Footprints are local disk usage, not total network transfer.'}
+          (evidence / 'build-report.json').write_text(json.dumps(result, indent=2) + '\n')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write(f"Build and implementation audit: **{result['status']}**\n\n")
+              summary.write(f"Checked commit: `{result['source_commit']}`\n\n")
+              summary.write('Fresh checkout with no restored project artifacts. The pinned Mathlib dependency cache is downloaded before compilation.\n\n')
+              summary.write('| Phase | Seconds |\n| --- | ---: |\n')
+              for phase, duration in timings.items():
+                  summary.write(f"| {phase} | {duration if duration is not None else 'unavailable'} |\n")
+              if quick_start is not None:
+                  summary.write(f"\nQuick-start cache + build: **{quick_start:.1f} seconds**, excluding checkout and toolchain installation.\n")
+              summary.write('\n| Size | GiB |\n| --- | ---: |\n')
+              for name, size in footprints.items():
+                  value = f'{size / 2**30:.2f}' if size is not None else 'unavailable'
+                  summary.write(f'| {name} | {value} |\n')
+              summary.write('\nDependency and Lake footprints are local disk usage, not network transfer. See the artifact for resource details, logs and the exact commit. Comparator and Palomar full preflight are separate checks.\n')
+          if not passed:
+              raise SystemExit(1)
+          PY
+
+      - name: Save build and audit evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: build-audit-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/build-evidence/*.json
+            ${{ runner.temp }}/build-evidence/*.log
+            evidence/audit/project-modules.txt
+            evidence/audit/dependency-imports.txt
+            evidence/audit/source-hashes.json
+            evidence/audit/proof-dependencies.tsv
+          if-no-files-found: error
+          retention-days: 30

@@ -1,53 +1,63 @@
-# Parking functions: total variation threshold
+# Total variation threshold for parking functions
 
-[![Private Comparator verification](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/private-comparator.yml/badge.svg)](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/private-comparator.yml)
+[![Build and audit](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/build.yml)
+[![Private proof verification](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/private-comparator.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/private-comparator.yml)
 
-This Lean library reconstructs the supplied parking-function manuscript. The active export uses Lean **4.35.0** and Mathlib **`56a005855ea17e0b0958f73ec801ae140b0a1679`**. All 79 implementation modules and both interface modules build; the implementation has complete proofs and only the three standard logical axioms.
+A Lean formalization of Igor Kortchemski's **A total variation threshold for the first coordinates of uniform parking functions via Lorentzian polynomials**.
 
-The repository is reserved for **private GitHub verification**. The badge and [Actions runs](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/private-comparator.yml) require repository access. Hosted Comparator evidence is recorded per run; a completed run verifies only its recorded commit and checks. No public release, Palomar intake, registration or successful full preflight is claimed.
+How many initial coordinates of a uniform parking function can be approximated by independent uniform variables? The threshold is at scale $n/\log n$. This library proves quantitative total variation bounds, the limiting profile at the threshold, and an entropy comparison with independent marginals.
 
-## Mathematical results
+**[Read the statements](docs/RESULTS.md) · [Explore the proofs](docs/PROOF-GUIDE.md) · [Reproduce the verification](docs/GETTING-STARTED.md)**
 
-Write $P_{n,k}$ for the first $k$ coordinates of a uniform parking function, $Q_{n,k}$ for independent uniform coordinates, and $\mu_n$ for one coordinate's marginal law.
+The repository is currently private. The article's arXiv link will be added when its identifier is available. Build CI runs on pushes and pull requests; the second badge tracks a separate, manually triggered proof verification. Each badge describes a workflow run: consult its checked commit and [verification scope](docs/VERIFICATION.md).
 
-- **Theorem 1.1:** one universal constant $C\ge1$ gives, for every $n\ge2$ and $1\le k\le n$,
+## Paper and formalization
 
-$$
-\sqrt{\frac{k\log(k+1)}{Cn+k\log(k+1)}}\le d_{\mathrm{TV}}(P_{n,k},Q_{n,k})\le\min\left(1,C\sqrt{\frac{k\log(k+1)}n}\right).
-$$
+| Paper | Result | Lean statement | Proof entry point |
+| --- | --- | --- | --- |
+| Theorem 1.1 | Uniform finite-size total variation bounds | [Main bounds](Parking/Frozen/MainBounds.lean#L38) | [Main bounds proof](Parking/Provider/MainBounds.lean#L38) |
+| Theorem 1.2 | Limiting profile, including zero and infinite parameters | [Profile](Parking/Frozen/Profile.lean#L42) | [Profile proof](Parking/Provider/Profile.lean#L46) |
+| Proposition 1.3 | KL divergence and total variation bounds against independent marginals | [Decoupling](Parking/Frozen/Decoupling.lean#L41) | [Decoupling proof](Parking/Provider/Decoupling.lean#L46) |
 
-- **Theorem 1.2:** if $k_n\log n/n\to\lambda\in[0,\infty]$, total variation tends to $2\Phi(\sqrt{\lambda/\pi})-1$ for finite $\lambda$, and to one for $\lambda=\infty$.
-- **Proposition 1.3:** KL divergence from $P_{n,k}$ to $\mu_n^{\otimes k}$ is at most $k(k-1)\log n/[n(n-1)]$, with the corresponding Pinsker TV bound.
+The **[complete correspondence](docs/RESULTS.md)** also covers the intermediate lemmas, introductory consequences, and the separate Pitman–Stanley volume-polynomial remark. The **[notation guide](docs/NOTATION.md)** explains how the paper's objects appear in Lean.
 
-[Challenge.lean](Challenge.lean) gives the actual laws, 19 supporting declarations and these three signatures, with exactly three approved theorem placeholders. [Solution.lean](Solution.lean) imports their complete [Frozen proofs](docs/FROZEN.md). The implementation also proves the introductory corollaries and the separate Pitman–Stanley volume-polynomial remark. [Metadata](formalization.yaml), [Comparator configuration](comparator.json), and [errata and encoding notes](docs/ERRATA-AND-DEVIATIONS.md) describe the scope.
+The implementation has complete proofs. [Challenge.lean](Challenge.lean) is a small statement interface with exactly **three deliberate proof placeholders**; [Solution.lean](Solution.lean) imports the complete proofs of those same statements. These placeholders are excluded from the implementation audit. See [how the two files are checked](docs/VERIFICATION.md#challenge-and-solution).
 
-## Completed local verification
+## Quick start
 
-| Check | Current Lean 4.35 result |
-| --- | --- |
-| Build | All 81 sources; 3,444 Lake jobs. [Coverage](evidence/build-coverage.json), [final-source build](evidence/build-final-source.log). |
-| Source fidelity | Exactly six proof-only edits in four implementation files; all statement and concrete-law source unchanged. [Review](evidence/active-source-review.md). |
-| Implementation kernel replay | 1,570 constants: 1,477 theorems and 93 definitions. The 62,604 reachable constants use only `propext`, `Classical.choice`, `Quot.sound`; a corrupted proof was rejected. [Log](evidence/audit/kernel-replay.log). |
-| Statement ABI | Both Challenge and Solution match all three originally approved ABI hashes. [Details](docs/CHALLENGE-FIDELITY.md). |
-| Local raw closure diagnostic | Three target `ConstantVal` records and 34,347 supporting constants match, including 24,773 supporting theorem bodies and 4,036 private names. [Log](evidence/closure-comparison.log). This is not the official Comparator. |
-
-[Preparation](docs/PREPARATION.md) distinguishes these checks from hosted Comparator/NanoDa verification and the official full preflight. Earlier Lean 4.34 results are retained only in [historical evidence](evidence/history-4.34/).
-
-## Build and check
-
-From a fresh checkout with the pinned toolchain installed, run these commands sequentially:
+Install Git and [Lean through elan](https://lean-lang.org/install/), then run:
 
 ```sh
+git clone https://github.com/igor-kortchemski/total-variation-threshold-parking-functions.git
+cd total-variation-threshold-parking-functions
 scripts/compile-lock.sh lake exe cache get
 scripts/compile-lock.sh lake build
-python3 scripts/check-package.py
-python3 scripts/check-lean-sources.py
-ruby scripts/validate-formalization.rb formalization.yaml
-scripts/audit-project.sh
 ```
 
-The build includes `Parking`, `Challenge` and `Solution`. The audit excludes Challenge's deliberate placeholders and replays every implementation declaration in Lean's kernel. The Ruby check validates starter metadata fields; it is not the complete schema or Palomar policy validator. The [private workflow](.github/workflows/private-comparator.yml) provides the supported Linux verification environment; [the full preflight workflow](.github/workflows/palomar-preflight.yml) is a separate, unrun process requiring a later-authorized public snapshot.
+Cloning requires access while the repository is private. The project selects **Lean 4.35.0** and pins Mathlib to **`56a005855ea17e0b0958f73ec801ae140b0a1679`**. Open the cloned folder in VS Code with the Lean 4 extension to inspect statements and follow definitions.
+
+For prerequisites, audit commands, resource measurements, and troubleshooting, see **[Getting started](docs/GETTING-STARTED.md)**.
+
+## Verification
+
+The automatic [build workflow](.github/workflows/build.yml) builds all 79 implementation modules plus Challenge and Solution, checks source and metadata constraints, and audits all implementation declarations in Lean's kernel. It also checks the allowed axiom dependencies and rejects a deliberately corrupted proof.
+
+The separate [proof verification workflow](.github/workflows/private-comparator.yml) compares the three recorded statements and their concrete definitions with the supplied proofs, then checks the exports with Lean and NanoDa, with con-ron as an additional advisory checker. The other results in the library are covered by the implementation build and kernel audit, not additional Comparator targets.
+
+See **[verification results and exact checked commits](docs/VERIFICATION.md)**. Official Palomar full preflight and registration are separate later steps.
+
+## Errata and deviations
+
+The [source comparison](docs/ERRATA-AND-DEVIATIONS.md) records **0 identified mathematical errata and 6 encoding or elaboration entries** for the supplied manuscript. These include zero-based indexing, extended-real parameters, and explicit versions of estimates. The [proof guide](docs/PROOF-GUIDE.md) describes the project's arguments and its use of Mathlib.
+
+## Citation
+
+Use **[CITATION.cff](CITATION.cff)** for the software citation and record the commit used (`git rev-parse HEAD`). The accompanying paper is:
+
+> Igor Kortchemski. *A total variation threshold for the first coordinates of uniform parking functions via Lorentzian polynomials*.
+
+The arXiv identifier will be added to the citation and project metadata when available. No identifier has been assigned in these files.
 
 ## License and provenance
 
-The export is licensed under [Apache-2.0](LICENSE), with retained attribution in [NOTICE](NOTICE) and [Provenance](docs/PROVENANCE.md). The manuscript source, bibliography and PDF are excluded. [Approval](docs/APPROVAL.md) records the export changes and subsequent authorization for a private repository, push and manual verification. The original reference projects and verified development library remain unchanged. AI source review is recorded; independent human peer review is not claimed.
+The formalization is licensed under **[Apache-2.0](LICENSE)**; retained contributions are credited in [NOTICE](NOTICE) and [Provenance](docs/PROVENANCE.md). Manuscript source and PDF are not included, and the code license does not license the article. Proof development and source review used AI assistance under the author's direction; independent human peer review is not claimed.

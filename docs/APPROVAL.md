@@ -21,3 +21,7 @@ The repository must remain private. This authorization does not permit a visibil
 ## Repository rename
 
 On 29 October 2026, the user chose `total-variation-threshold-parking-functions` and requested changing the existing repository name. The same private repository is now `igor-kortchemski/total-variation-threshold-parking-functions`; its repository identity, Git history and verification runs are retained. Active links and the local Git remote follow the new name. Historical authorization and verification receipts retain the original name and checked commit. This rename does not authorize a visibility change or Palomar submission.
+
+## Reader documentation and automatic CI
+
+On 29 October 2026, the user approved the proposed README, complete paper-to-Lean correspondence, notation and proof guides, quick-start validation, citation file, and automatic build checks with “Ok let's go for everything we said”. This authorizes the corresponding documentation and CI changes, necessary private commits and pushes, and validation runs. Automatic build checks on pushes and pull requests are part of this request. The existing mathematical sources, pinned environment, and proof-verification policy are retained. The repository remains private; the arXiv identifier is to be added later, before the final public Palomar preflight. Public visibility, arXiv submission, Palomar intake, and registration are not performed as part of this preparation.
