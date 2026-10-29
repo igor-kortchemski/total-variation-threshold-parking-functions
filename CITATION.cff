@@ -8,7 +8,7 @@ title: "Total variation threshold for parking functions: Lean formalization"
 authors:
   - family-names: Kortchemski
     given-names: Igor
-version: "0.1.1"
+version: "0.1.0"
 repository-code: "https://github.com/igor-kortchemski/total-variation-threshold-parking-functions"
 url: "https://github.com/igor-kortchemski/total-variation-threshold-parking-functions"
 license: Apache-2.0
