@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-29",
+  "authorization": {
+    "user_message": "make the third correction",
+    "scope": "Correct the stale DRAFT_SORRY status comment identified by the private review"
+  },
+  "base_commit": "701c81884f45b991e8cc666e1f57ae64c50c70de",
+  "path": "Parking/Frozen/Profile.lean",
+  "change": "Replace DRAFT_SORRY with SEALED in the module documentation comment",
+  "anchor_id": "thm_profile_v1_palomar2",
+  "contract_unchanged": {
+    "id": "parking_threshold.thm:profile",
+    "version": "1"
+  },
+  "before_sha256": "841112175fcea390171e1ca4ed5ad3c067e9d08a604753d2e4cb0c8fd73d924c",
+  "after_sha256": "8692fed541a33fce9e1b35ca20a1e77513dbc5a4982da9f0c6398351acd6c77c",
+  "prefix_before_sha256": "6bdb06cd993e75bf335799417e7ef10593c8b147a86a9e563eccca9f86970237",
+  "prefix_after_sha256": "92aed32ac14bf4982b4aafee5abf75aa5820859bc6415899ea86271564b90a75",
+  "suffix_unchanged": true,
+  "statement_and_proof_bytes_unchanged": true,
+  "abi_sha256": "b47583fb8752c011849eb5cf38b396134981b271bed5c4c3d35303fb02b87d1a",
+  "verification": {
+    "source_checks": "PASS: check-package.py and check-lean-sources.py",
+    "build": {
+      "command": "scripts/compile-lock.sh lake build Solution",
+      "exit_code": 0,
+      "output": "\u2714 [3430/3432] Built Parking.Frozen.Profile (40s)\nBuild completed successfully (3432 jobs)."
+    },
+    "solution_abi": {
+      "status": "PASS",
+      "all_three_abi_blocks_identical_to": "evidence/solution-abi-raw.txt",
+      "sha256": {
+        "Parking.tvDist_firstCoordsLaw_bounds": "ff544decb2bedb055a042a7735665ce805574dedd767c506f8f39eb227d814aa",
+        "Parking.tendsto_tvDist_firstCoordsLaw": "b47583fb8752c011849eb5cf38b396134981b271bed5c4c3d35303fb02b87d1a",
+        "Parking.klDiv_tvDist_firstCoordsLaw_le": "bdd2284b1f51d6ad604ab262deafb182f2914b170650bf6944469300fc3e2aaf"
+      }
+    },
+    "main_theorem_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "full_kernel_replay_rerun": false,
+    "comparator_nanoda_rerun": false,
+    "scope": "Comment-only maintenance. Exact source comparison confirms all executable Lean text is unchanged. Historical kernel and hosted verification records retain their original scope and checked commit."
+  }
+}

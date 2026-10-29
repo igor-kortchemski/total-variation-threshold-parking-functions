@@ -18,6 +18,8 @@ Zero-based `Fin n` indices and positive-natural size preserve the source interpr
 
 The [successor record](../evidence/frozen-successors.json) links each predecessor to its active anchor. Protected prefixes have new hashes because their comments changed; suffixes and mathematical contracts are unchanged. [Header evidence](../evidence/license-header-update.json) and [comment evidence](../evidence/frozen-comment-update.json) identify those separate steps.
 
+On 29 October 2026, the author requested correction of the profile header's stale `DRAFT_SORRY` label to `SEALED`. The [maintenance record](../evidence/profile-status-comment-update.json) records this comment-only change and its updated source and prefix hashes. The anchor identity, mathematical contract, statement and proof are unchanged.
+
 Both Challenge and Solution reproduce all three original approved ABI SHA-256 values under Lean 4.35. [Challenge fidelity](CHALLENGE-FIDELITY.md) lists the values and links the raw outputs. The implementation [kernel replay](../evidence/audit/kernel-replay.log) rechecks all 1,570 project constants, including these exports, with only `propext`, `Classical.choice` and `Quot.sound` reachable. A deliberately corrupted proof was rejected.
 
 The manifest's empty `definition_closure` arrays are not an empty-closure assertion. The ABI probe follows actual project definitions and instances, and the separate [raw structural diagnostic](../evidence/closure-comparison.log) compares supporting proof bodies and private helpers. Neither is an official Comparator or full-preflight result. Private hosted verification is tracked in [Preparation](PREPARATION.md).

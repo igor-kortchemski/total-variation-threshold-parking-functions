@@ -75,7 +75,7 @@
       "abi_sha256": "b47583fb8752c011849eb5cf38b396134981b271bed5c4c3d35303fb02b87d1a",
       "definition_closure": [],
       "state": "SEALED",
-      "prefix_sha256": "6bdb06cd993e75bf335799417e7ef10593c8b147a86a9e563eccca9f86970237",
+      "prefix_sha256": "92aed32ac14bf4982b4aafee5abf75aa5820859bc6415899ea86271564b90a75",
       "suffix_sha256": "a7054d39c438539d216299e7938d916ad7842584573cc3622d22e20dc8bc4a47",
       "draft_allowlist": {
         "frozen_paths": [],
