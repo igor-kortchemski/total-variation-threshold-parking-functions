@@ -1,0 +1,168 @@
+{
+  "kind": "arxiv-v1-source-correspondence",
+  "date": "2026-10-30",
+  "status": "passed",
+  "arxiv_id": "2610.40082v1",
+  "source_url": "https://arxiv.org/src/2610.40082v1",
+  "source_archive_sha256": "2c51b0a0763a03afad0fb6920e78e783f69a98f8e82e22cc5e39f92bed18d9d2",
+  "arxiv_tex_sha256": "d325dd70478fcd95b43e27119c5e3d6a7331813a07b6f29f64f7409d7f84df06",
+  "audited_tex_sha256": "801831ad26108af44e6ffeff29e236e19f712e26da0ede2d51daffd45482adf5",
+  "original_formalization_manuscript_sha256": "7670d0719c75a0c860181730b7fdffb39f96ca88d2d6f185daefc29ec9ad839b",
+  "numbered_result_labels_unchanged": true,
+  "mathematical_body_after_intro_and_ai_account_byte_identical": true,
+  "environment_count": 15,
+  "environments": [
+    {
+      "index": 1,
+      "environment": "theorem",
+      "label": "thm:main",
+      "audited_line": 89,
+      "arxiv_line": 95,
+      "sha256": "2b2658f63bea3b41cc66a1575cbfa946b273625f34f0bb93247f85eb6ce46560",
+      "byte_identical": true
+    },
+    {
+      "index": 2,
+      "environment": "theorem",
+      "label": "thm:profile",
+      "audited_line": 113,
+      "arxiv_line": 119,
+      "sha256": "ea4058dd2548551fd37cb914b69eaa2941cfa069a7208df7ce9ac4c631d6631a",
+      "byte_identical": true
+    },
+    {
+      "index": 3,
+      "environment": "proposition",
+      "label": "prop:decoupling",
+      "audited_line": 136,
+      "arxiv_line": 142,
+      "sha256": "cd4456a6baa8bd0d79771009516a0df595105aeee653781cc4e713e749ad1079",
+      "byte_identical": true
+    },
+    {
+      "index": 4,
+      "environment": "lemma",
+      "label": "lem:marginal",
+      "audited_line": 195,
+      "arxiv_line": 201,
+      "sha256": "fdf5c4c471987019c7bd8722d687b39ff31fe625570eebf82ac505d14f266102",
+      "byte_identical": true
+    },
+    {
+      "index": 5,
+      "environment": "proof",
+      "label": "eq:marginal_reflection",
+      "audited_line": 213,
+      "arxiv_line": 219,
+      "sha256": "e9ebf53e9502703a28ac1998f86887ffafb19b4fe2b33cf2ffeeb95fee905826",
+      "byte_identical": true
+    },
+    {
+      "index": 6,
+      "environment": "lemma",
+      "label": "lem:occupation_logconcavity",
+      "audited_line": 292,
+      "arxiv_line": 298,
+      "sha256": "77f90ed96ef1ff2b67f65d964cf2e57236331376cd7ccc8399f87930dbc6e4f8",
+      "byte_identical": true
+    },
+    {
+      "index": 7,
+      "environment": "proof",
+      "label": "eq:occupation",
+      "audited_line": 304,
+      "arxiv_line": 310,
+      "sha256": "85ca7e8ef95352bea084938b08c42d636ddac751ad528254aa745d6f1ebf866d",
+      "byte_identical": true
+    },
+    {
+      "index": 8,
+      "environment": "remark",
+      "label": null,
+      "audited_line": 348,
+      "arxiv_line": 354,
+      "sha256": "54b36360cc78f2fe760e8fb25f782e704f2a894ab8191b26dc4827bddb557074",
+      "byte_identical": true
+    },
+    {
+      "index": 9,
+      "environment": "lemma",
+      "label": "lem:sample_entropy",
+      "audited_line": 359,
+      "arxiv_line": 365,
+      "sha256": "464af7859241912e98b6d4f8c926fb174457ef9320ccddc8c24e97419641c580",
+      "byte_identical": true
+    },
+    {
+      "index": 10,
+      "environment": "proof",
+      "label": null,
+      "audited_line": 372,
+      "arxiv_line": 378,
+      "sha256": "9204bbb02f7b8578bdc9630a048c330277026c272b1286b4a2a4232c35655344",
+      "byte_identical": true
+    },
+    {
+      "index": 11,
+      "environment": "proof",
+      "label": null,
+      "audited_line": 406,
+      "arxiv_line": 412,
+      "sha256": "5b9d2cf50d0a4b735a6bdb7a06e6c8556e64b42f0f7b8bb5c68e6d85f39431c3",
+      "byte_identical": true
+    },
+    {
+      "index": 12,
+      "environment": "lemma",
+      "label": "lem:products",
+      "audited_line": 433,
+      "arxiv_line": 439,
+      "sha256": "b98aa1ba5f73aeaa999eb0faf1be8e561f09a47cabc40db0a01e5e6389cc654b",
+      "byte_identical": true
+    },
+    {
+      "index": 13,
+      "environment": "proof",
+      "label": null,
+      "audited_line": 442,
+      "arxiv_line": 448,
+      "sha256": "5497ee430ae751b0230e9851d03cfe7825a9252a0d41f4e2bec429f1a8301d4e",
+      "byte_identical": true
+    },
+    {
+      "index": 14,
+      "environment": "proof",
+      "label": "eq:tv_decoupling",
+      "audited_line": 487,
+      "arxiv_line": 493,
+      "sha256": "953c7f9c5f986938a8fbd6eff8b196d31c437f62784338edcf76b15d459dc69f",
+      "byte_identical": true
+    },
+    {
+      "index": 15,
+      "environment": "proof",
+      "label": null,
+      "audited_line": 573,
+      "arxiv_line": 579,
+      "sha256": "98593669d3d23cc0a9d7fc5652d04054ae20d2f8a4a20705b3134a7ed3f15cb9",
+      "byte_identical": true
+    }
+  ],
+  "differences": [
+    "Introductory parking-function explanation expanded without changing its meaning.",
+    "Bellin citation added.",
+    "Acknowledgments wording revised.",
+    "Bibliography inlined for arXiv, includes Bellin and sole Robbins authorship."
+  ],
+  "numbering": {
+    "thm:main": "Theorem 1.1",
+    "thm:profile": "Theorem 1.2",
+    "prop:decoupling": "Proposition 1.3",
+    "lem:marginal": "Lemma 2.1",
+    "lem:occupation_logconcavity": "Lemma 2.2",
+    "lem:sample_entropy": "Lemma 3.1",
+    "lem:products": "Lemma 4.1"
+  },
+  "manuscript_source_redistributed": false,
+  "scope": "Source comparison against the retained 29 October manuscript review; this is not an additional human peer review or a new Lean kernel check."
+}

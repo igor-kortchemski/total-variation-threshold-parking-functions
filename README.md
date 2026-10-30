@@ -1,15 +1,15 @@
 # Total variation threshold for parking functions
 
 [![Build and audit](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/build.yml)
-[![Private proof verification](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/private-comparator.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/private-comparator.yml)
+[![Palomar full preflight](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/palomar-preflight.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/palomar-preflight.yml)
 
-A Lean formalization of Igor Kortchemski's **A total variation threshold for the first coordinates of uniform parking functions via Lorentzian polynomials**.
+A Lean formalization of Igor Kortchemski's **[A total variation threshold for the first coordinates of uniform parking functions via Lorentzian polynomials](https://arxiv.org/abs/2610.40082)**, [arXiv:2610.40082v1](https://arxiv.org/abs/2610.40082v1).
 
 How many initial coordinates of a uniform parking function can be approximated by independent uniform variables? The threshold is at scale $n/\log n$. This library proves quantitative total variation bounds, the limiting profile at the threshold, and an entropy comparison with independent marginals.
 
 **[Read the statements](docs/RESULTS.md) · [Explore the proofs](docs/PROOF-GUIDE.md) · [Reproduce the verification](docs/GETTING-STARTED.md)**
 
-The repository is currently private. The article's arXiv link will be added when its identifier is available. Build CI runs on pushes and pull requests; the second badge tracks a separate, manually triggered proof verification. Each badge describes a workflow run: consult its checked commit and [verification scope](docs/VERIFICATION.md).
+Build CI runs on pushes and pull requests; the second badge tracks the manually triggered official Palomar full preflight. Each badge describes a workflow run: consult its checked commit and [verification scope](docs/VERIFICATION.md). The [source comparison](evidence/arxiv-v1-correspondence.json) confirms that the published v1 retains the audited mathematical statements and proofs.
 
 ## Paper and formalization
 
@@ -34,7 +34,7 @@ scripts/compile-lock.sh lake exe cache get
 scripts/compile-lock.sh lake build
 ```
 
-Cloning requires access while the repository is private. The project selects **Lean 4.35.0** and pins Mathlib to **`56a005855ea17e0b0958f73ec801ae140b0a1679`**. Open the cloned folder in VS Code with the Lean 4 extension to inspect statements and follow definitions.
+The project selects **Lean 4.35.0** and pins Mathlib to **`56a005855ea17e0b0958f73ec801ae140b0a1679`**. Open the cloned folder in VS Code with the Lean 4 extension to inspect statements and follow definitions.
 
 For prerequisites, audit commands, resource measurements, and troubleshooting, see **[Getting started](docs/GETTING-STARTED.md)**.
 
@@ -42,9 +42,9 @@ For prerequisites, audit commands, resource measurements, and troubleshooting, s
 
 The automatic [build workflow](.github/workflows/build.yml) builds all 79 implementation modules plus Challenge and Solution, checks source and metadata constraints, and audits all implementation declarations in Lean's kernel. It also checks the allowed axiom dependencies and rejects a deliberately corrupted proof.
 
-The separate [proof verification workflow](.github/workflows/private-comparator.yml) compares the three recorded statements and their concrete definitions with the supplied proofs, then checks the exports with Lean and NanoDa, with con-ron as an additional advisory checker. The other results in the library are covered by the implementation build and kernel audit, not additional Comparator targets.
+The [official full preflight workflow](.github/workflows/palomar-preflight.yml) checks the public snapshot and its metadata, compares the three recorded statements and their concrete definitions with the supplied proofs, and checks the exports with Lean and NanoDa, with con-ron as an additional advisory checker. The other results in the library are covered by the implementation build and kernel audit, not additional Comparator targets. The successful private verification of [v1.0.0](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/releases/tag/v1.0.0) is retained with its reports.
 
-See **[verification results and exact checked commits](docs/VERIFICATION.md)**. Official Palomar full preflight and registration are separate later steps.
+See **[verification results and exact checked commits](docs/VERIFICATION.md)**. Palomar submission, editorial review, and registration are separate from a preflight run.
 
 ## Errata and deviations
 
@@ -54,9 +54,9 @@ The [source comparison](docs/ERRATA-AND-DEVIATIONS.md) records **0 identified ma
 
 Use **[CITATION.cff](CITATION.cff)** for the software citation and record the commit used (`git rev-parse HEAD`). The accompanying paper is:
 
-> Igor Kortchemski. *A total variation threshold for the first coordinates of uniform parking functions via Lorentzian polynomials*.
+> Igor Kortchemski. *A total variation threshold for the first coordinates of uniform parking functions via Lorentzian polynomials*. 2026. [arXiv:2610.40082](https://arxiv.org/abs/2610.40082).
 
-The arXiv identifier will be added to the citation and project metadata when available. No identifier has been assigned in these files.
+The source of record for this formalization is [arXiv:2610.40082v1](https://arxiv.org/abs/2610.40082v1).
 
 ## License and provenance
 

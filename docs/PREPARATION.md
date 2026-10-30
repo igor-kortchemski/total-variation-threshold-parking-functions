@@ -1,6 +1,6 @@
 # Export verification status
 
-The active export uses Lean `v4.35.0` and Mathlib `56a005855ea17e0b0958f73ec801ae140b0a1679`. The author approved its migration, licensing and Challenge/Solution interface, then requested private GitHub Comparator verification. The repository must remain private. This preparation has not entered Palomar intake or registration.
+The active export uses Lean `v4.35.0` and Mathlib `56a005855ea17e0b0958f73ec801ae140b0a1679`. The author approved its migration, licensing and Challenge/Solution interface, then requested private GitHub Comparator verification. The author subsequently requested public GitHub publication and approved the arXiv:2610.40082v1 metadata update, final checks and v1.0.1/Palomar submission preparation. The repository is public; intake and registration have their own recorded outcomes.
 
 ## Completed local checks
 
@@ -34,11 +34,11 @@ The retained [ABI probe](../scripts/frozen_abi.lean.in) and [raw closure probe](
 
 ## Private hosted verification
 
-The authorized [private workflow](../.github/workflows/private-comparator.yml) runs manually in [GitHub Actions](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/private-comparator.yml). Read each run's exact source commit and retained report for its actual result before attributing a result to a checkout. Repository access is required to view the run and artifacts.
+The authorized [private workflow](../.github/workflows/private-comparator.yml) runs manually in [GitHub Actions](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/private-comparator.yml). Read each run's exact source commit and retained report for its actual result before attributing a result to a checkout. Its successful v1.0.0 reports are retained as [release assets](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/releases/tag/v1.0.0). The private-repository guard is retained; use the official full preflight for the public repository.
 
 The [standalone verifier](../scripts/verify-comparator.sh) requires supported Linux and Bubblewrap, authenticated checker inputs and a separate output directory. It records Comparator/Lean/NanoDa outcomes and the separately pinned advisory checker. Its report explicitly distinguishes private standalone verification from the official full Palomar preflight. No hosted pass is inferred from local source, ABI or raw closure checks.
 
-The [official full preflight workflow](../.github/workflows/palomar-preflight.yml) remains unrun. Its public immutable GitHub snapshot and truthful authorization input require a separate authorized publication step; the private-repository request does not authorize changing visibility or submitting to Palomar.
+The [official full preflight workflow](../.github/workflows/palomar-preflight.yml) operates on the exact public commit and records the declared authorization relationship. Inspect its completed report and source commit before attributing a result to a checkout. The author approved running it for the arXiv-linked release. A successful preflight is required before intake and does not itself submit or register the result.
 
 ## Historical evidence and pins
 

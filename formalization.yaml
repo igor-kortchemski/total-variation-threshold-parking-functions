@@ -28,11 +28,11 @@
       "authors": [
         "Igor Kortchemski"
       ],
-      "id": "sha256:7670d0719c75a0c860181730b7fdffb39f96ca88d2d6f185daefc29ec9ad839b",
+      "id": "https://arxiv.org/abs/2610.40082v1",
       "type": "paper",
       "relationship": "formalizes",
-      "note": "Supplied source manuscript identified by content hash. No public identifier or publication status is asserted. The mathematical account and declaration alignment are included in this package; manuscript source files and PDF are excluded from the export. The export code license does not license the manuscript.",
-      "license": "unknown",
+      "note": "Published source of record: arXiv:2610.40082v1, submitted 29 October 2026. The source comparison in evidence/arxiv-v1-correspondence.json records byte-identical mathematical statements and proofs relative to the retained audited manuscript; historical manuscript hashes remain in docs/PROVENANCE.md. The article is distributed by arXiv under its non-exclusive distribution license. Manuscript source files and PDF are excluded from this repository; Apache-2.0 covers the formalization code, not the article.",
+      "license": "arXiv non-exclusive distribution license (https://arxiv.org/licenses/nonexclusive-distrib/1.0/)",
       "author_endorsement": "participated"
     }
   ],
@@ -44,7 +44,7 @@
     }
   ],
   "status": {
-    "scope": "The implementation reconstructs all mathematical arguments of the supplied manuscript, including introductory corollaries and the separate Pitman–Stanley volume-polynomial remark. Lean 4.35.0 builds all 79 implementation modules plus Challenge and Solution. The selected Comparator record contains Theorems 1.1 and 1.2 and Proposition 1.3. Implementation proof-hole counts exclude exactly three deliberate theorem holes in Challenge. All 1570 implementation declarations have passed a fresh Lean-kernel replay with only the three standard axioms. Historical narrative is not a formal theorem target. Private hosted Comparator evidence is recorded separately per exact commit; this is not official Palomar full preflight.",
+    "scope": "The implementation reconstructs all mathematical arguments of arXiv:2610.40082v1, including introductory corollaries and the separate Pitman–Stanley volume-polynomial remark. Lean 4.35.0 builds all 79 implementation modules plus Challenge and Solution. The selected Comparator record contains Theorems 1.1 and 1.2 and Proposition 1.3. Implementation proof-hole counts exclude exactly three deliberate theorem holes in Challenge. All 1570 implementation declarations have passed a fresh Lean-kernel replay with only the three standard axioms. Historical narrative is not a formal theorem target. Hosted verification evidence is recorded per exact commit. The v1.0.0 private check and official public-snapshot preflight are distinguished in docs/VERIFICATION.md.",
     "sorry_count": 0,
     "sorry_in_definitions": 0,
     "axioms": [
@@ -85,7 +85,7 @@
       }
     ],
     "spend_usd": "not tracked",
-    "notes": "The author supplied the manuscript, directed the formalization, and approved the export-only environment migration, Apache-2.0 licensing of the export including the retained parallel-ledger components, exactly three Challenge-only placeholders, and the Solution-only frozen import exception. AI agents developed proofs and cross-reviewed source correspondence. No independent human mathematical review or editorial endorsement is claimed. The earlier ledger contribution is recorded in related_formalizations and docs/PROVENANCE.md. The approval did not authorize publication, intake or registration."
+    "notes": "The author supplied the manuscript, directed the formalization, and approved the export-only environment migration, Apache-2.0 licensing of the export including the retained parallel-ledger components, exactly three Challenge-only placeholders, and the Solution-only frozen import exception. AI agents developed proofs and cross-reviewed source correspondence. No independent human mathematical review or editorial endorsement is claimed. The earlier ledger contribution is recorded in related_formalizations and docs/PROVENANCE.md. The author later requested public GitHub publication and approved the arXiv metadata update, final checks, v1.0.1 preparation and Palomar submission preparation. Registration remains a separate decision after the official review; see docs/APPROVAL.md."
   },
   "fidelity": {
     "divergences": "Zero-based Fin indices encode the paper’s one-based coordinates and values; positive-natural size avoids n=0. The profile parameter and KL divergence use extended nonnegative reals, with an explicit infinite profile endpoint. Asymptotic constants are made uniform and explicit where needed. Calculations omitted in the manuscript are proved. Internal proofs at cited-result boundaries may differ while the cited interfaces and manuscript argument are retained; see docs/ERRATA-AND-DEVIATIONS.md. The export has six proof-only compatibility edits across four source files and four Challenge auxiliary-cache resets. Source statements, data-bearing definitions and substantive manuscript proof routes are unchanged; no strengthened premise or unresolved mathematical obligation is reported."
@@ -93,7 +93,7 @@
   "review": {
     "status": "AI source-audited; Lean 4.35.0 verified; private hosted checker evidence recorded per commit",
     "reviewers": [],
-    "notes": "Independent AI workstreams reviewed statements, definitions, proof routes, endpoints and the exact export. Under Lean 4.35.0 the independent export builds 81 source modules and replays all 1570 implementation declarations (1477 theorems, 93 definitions), with only propext, Classical.choice and Quot.sound in the 62604-constant dependency closure. A corrupted proof is rejected. All three Challenge/Solution ABI hashes equal the approved original hashes. A separate raw structural diagnostic matches 34350 constants, including supporting proof bodies and private helpers; this does not substitute for Comparator. The private manual GitHub workflow records its actual mandatory Lean/NanoDa and separate advisory con-ron outcomes for the exact checked commit. No independent human peer review, official full Palomar preflight, intake, registration or editorial outcome is claimed."
+    "notes": "Independent AI workstreams reviewed statements, definitions, proof routes, endpoints and the exact export. Under Lean 4.35.0 the independent export builds 81 source modules and replays all 1570 implementation declarations (1477 theorems, 93 definitions), with only propext, Classical.choice and Quot.sound in the 62604-constant dependency closure. A corrupted proof is rejected. All three Challenge/Solution ABI hashes equal the approved original hashes. A separate raw structural diagnostic matches 34350 constants, including supporting proof bodies and private helpers; this does not substitute for Comparator. The private manual GitHub workflow records its actual mandatory Lean/NanoDa and separate advisory con-ron outcomes for the exact checked commit. Official full-preflight, intake and registration outcomes are recorded separately for their exact source commit; no independent human peer review or editorial endorsement is claimed. A source comparison on 30 October 2026 confirms that arXiv:2610.40082v1 retains all 15 audited mathematical statement/proof environments byte-for-byte; see evidence/arxiv-v1-correspondence.json."
   },
   "alignment": {
     "namespace": "Parking",

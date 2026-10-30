@@ -2,7 +2,7 @@
 
 [Overview](../README.md) · [Notation](NOTATION.md) · [Proof guide](PROOF-GUIDE.md) · [Verification](VERIFICATION.md)
 
-This guide maps every numbered mathematical result in **A total variation threshold for the first coordinates of uniform parking functions via Lorentzian polynomials**, by Igor Kortchemski, together with its unnumbered introductory consequences. Numbering and source labels refer to the manuscript identified in [provenance](PROVENANCE.md); the arXiv reference will be added when available.
+This guide maps every numbered mathematical result in **[A total variation threshold for the first coordinates of uniform parking functions via Lorentzian polynomials](https://arxiv.org/abs/2610.40082v1)**, by Igor Kortchemski, together with its unnumbered introductory consequences. Numbering and source labels refer to arXiv:2610.40082v1. The [source comparison](../evidence/arxiv-v1-correspondence.json) confirms that its mathematical statements and proofs are unchanged from the audited manuscript identified in [provenance](PROVENANCE.md).
 
 All declaration names below are in the namespace `Parking`, unless a different namespace is written explicitly. File links open the defining declaration. The [notation guide](NOTATION.md) explains how to read its parameters and probability laws.
 

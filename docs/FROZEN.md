@@ -22,6 +22,6 @@ On 29 October 2026, the author requested correction of the profile header's stal
 
 Both Challenge and Solution reproduce all three original approved ABI SHA-256 values under Lean 4.35. [Challenge fidelity](CHALLENGE-FIDELITY.md) lists the values and links the raw outputs. The implementation [kernel replay](../evidence/audit/kernel-replay.log) rechecks all 1,570 project constants, including these exports, with only `propext`, `Classical.choice` and `Quot.sound` reachable. A deliberately corrupted proof was rejected.
 
-The manifest's empty `definition_closure` arrays are not an empty-closure assertion. The ABI probe follows actual project definitions and instances, and the separate [raw structural diagnostic](../evidence/closure-comparison.log) compares supporting proof bodies and private helpers. Neither is an official Comparator or full-preflight result. Private hosted verification is tracked in [Preparation](PREPARATION.md).
+The manifest's empty `definition_closure` arrays are not an empty-closure assertion. The ABI probe follows actual project definitions and instances, and the separate [raw structural diagnostic](../evidence/closure-comparison.log) compares supporting proof bodies and private helpers. Neither is an official Comparator or full-preflight result. Hosted verification and the public-snapshot preflight are tracked in [Preparation](PREPARATION.md).
 
 Historical Lean 4.34 anchors and checks remain under [evidence/history-4.34](../evidence/history-4.34/). Original reference projects and the verified development library remain unchanged.

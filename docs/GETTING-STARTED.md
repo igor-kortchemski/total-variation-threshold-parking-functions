@@ -4,7 +4,7 @@
 
 ## Read without building
 
-Start with the [paper-to-Lean correspondence](RESULTS.md). Each entry links to its Lean declaration and proof. The [notation guide](NOTATION.md) explains the probability laws and indexing conventions. GitHub displays the source without installing Lean; repository access is required while this repository is private.
+Start with the [paper-to-Lean correspondence](RESULTS.md). Each entry links to its Lean declaration and proof. The [notation guide](NOTATION.md) explains the probability laws and indexing conventions. GitHub displays the source without installing Lean.
 
 ## Install the prerequisites
 
@@ -26,7 +26,7 @@ scripts/compile-lock.sh lake exe cache get
 scripts/compile-lock.sh lake build
 ```
 
-While the repository is private, authenticate GitHub access before cloning; GitHub CLI users can run `gh auth login` and `gh auth setup-git`. The repository URL stays the same when visibility changes.
+The public repository can be cloned without signing in to GitHub.
 
 The first Lake invocation lets elan obtain the pinned Lean toolchain. `cache get` fetches the pinned dependencies and Mathlib's precompiled artifacts. `lake build` then builds the project, including all implementation modules and both interface modules. Three warnings about `sorry` in **Challenge.lean** are expected: they belong to its statement interface. Implementation proof holes are forbidden and checked separately.
 
@@ -62,11 +62,11 @@ Each run records its exact commit, hardware, cache/build/audit durations, Lean a
 ## Troubleshooting
 
 - **`lake` is not found:** finish the elan setup and restart the shell so its binary directory is on `PATH`.
-- **Clone denied or repository not found:** confirm that GitHub is authenticated as an account with repository access.
+- **Clone denied or repository not found:** check the repository URL and network access; this public repository does not require GitHub authentication.
 - **A dependency or cache download fails:** check network access and available disk space, then rerun the cache command. Keep the pinned manifest and toolchain unchanged.
 - **The compile lock waits:** another command may still be running. Read `.scratch/compile.lock/pid` and inspect that process before intervening; a permission error when inspecting it does not prove the lock is stale.
 - **A proof fails or a check reports changed sources:** retain the error, exact commit, and output of the version command. Read the [verification scope](VERIFICATION.md) before comparing results from different revisions.
 
 ## Independent proof verification
 
-The implementation audit above uses Lean's kernel. The separate [manual Comparator workflow](../.github/workflows/private-comparator.yml) checks the three recorded Challenge/Solution targets and their exports with additional checkers in its supported Linux sandbox. Its setup and exact results are explained in [Verification](VERIFICATION.md). Official Palomar full preflight is a separate operation on the final public commit.
+The implementation audit above uses Lean's kernel. The [official full preflight workflow](../.github/workflows/palomar-preflight.yml) checks the public snapshot, its metadata, the three recorded Challenge/Solution targets and their exports with additional checkers. Its setup and exact results are explained in [Verification](VERIFICATION.md). The earlier private workflow and its successful reports are retained as historical evidence; its private-repository guard remains in force.
