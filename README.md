@@ -5,6 +5,8 @@
 
 A Lean formalization of Igor Kortchemski's **[A total variation threshold for the first coordinates of uniform parking functions via Lorentzian polynomials](https://arxiv.org/abs/2610.40082)**, [arXiv:2610.40082v1](https://arxiv.org/abs/2610.40082v1).
 
+Registered as **[PALOMAR-2026-10-30-000007, version 1](https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-30-000007&version=1)**. The registered snapshot is [v1.0.1](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/releases/tag/v1.0.1), commit [`f5daa3e`](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/commit/f5daa3e5871a3d9e9c853334ca5b2e528f2309aa).
+
 How many initial coordinates of a uniform parking function can be approximated by independent uniform variables? The threshold is at scale $n/\log n$. This library proves quantitative total variation bounds, the limiting profile at the threshold, and an entropy comparison with independent marginals.
 
 **[Read the statements](docs/RESULTS.md) · [Explore the proofs](docs/PROOF-GUIDE.md) · [Reproduce the verification](docs/GETTING-STARTED.md)**
@@ -44,7 +46,7 @@ The automatic [build workflow](.github/workflows/build.yml) builds all 79 implem
 
 The [official full preflight workflow](.github/workflows/palomar-preflight.yml) checks the public snapshot and its metadata, compares the three recorded statements and their concrete definitions with the supplied proofs, and checks the exports with Lean and NanoDa, with con-ron as an additional advisory checker. The other results in the library are covered by the implementation build and kernel audit, not additional Comparator targets. The successful private verification of [v1.0.0](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/releases/tag/v1.0.0) is retained with its reports.
 
-See **[verification results and exact checked commits](docs/VERIFICATION.md)**. Palomar submission, editorial review, and registration are separate from a preflight run.
+See **[verification results and the registered snapshot](docs/VERIFICATION.md)**. The Palomar record includes the official verification and editorial review for v1.0.1; workflow badges may describe later commits.
 
 ## Errata and deviations
 

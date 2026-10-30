@@ -11,7 +11,15 @@
 | Source correspondence review | Definitions, assumptions, endpoint cases, and the paper's proof routes are compared with the formalization. This is an AI-assisted source review, distinct from kernel checking. | [Results](RESULTS.md), [errata and deviations](ERRATA-AND-DEVIATIONS.md), [source review](../evidence/active-source-review.md) |
 | Official Palomar full preflight | The official pipeline checks its exact submitted repository snapshot and configuration. | [Workflow](../.github/workflows/palomar-preflight.yml), [runs](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/workflows/palomar-preflight.yml); inspect the exact commit and completed report |
 
-The additional lemmas, introductory consequences, and geometric remark are included in the implementation build and kernel audit. They are not separately selected targets of the three-result Comparator configuration. No independent human peer review or Palomar registration is claimed.
+The additional lemmas, introductory consequences, and geometric remark are included in the implementation build and kernel audit. They are not separately selected targets of the three-result Comparator configuration. No independent human peer review is claimed.
+
+## Registered snapshot
+
+**[PALOMAR-2026-10-30-000007, version 1](https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-30-000007&version=1)** was registered on 30 October 2026. It records [v1.0.1](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/releases/tag/v1.0.1), commit [`f5daa3e5871a3d9e9c853334ca5b2e528f2309aa`](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/tree/f5daa3e5871a3d9e9c853334ca5b2e528f2309aa), with the three targets in `comparator.json`.
+
+The [official submission verification](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/41020160464) passed with no errors or warnings: Comparator confirmed the statements, Lean and NanoDa accepted the proofs, and con-ron accepted all 60,681 exported declarations. The official automated editorial review identified no blocking problems, nonblocking warnings, comments or requested changes. The public Palomar record includes that review and the source-preservation record.
+
+The same commit passed the [implementation build and audit](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/runs/41017773613) and [official full preflight](https://github.com/igor-kortchemski/total-variation-threshold-parking-functions/actions/runs/41017884101); their reports are retained as v1.0.1 release assets. The registered tag remains fixed. Later documentation or citation commits on `main` do not change the source snapshot recorded by Palomar.
 
 ## Read the commit, not just the badge
 

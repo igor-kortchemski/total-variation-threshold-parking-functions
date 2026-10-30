@@ -8,6 +8,14 @@ authors:
   - family-names: Kortchemski
     given-names: Igor
 version: "1.0.1"
+commit: "f5daa3e5871a3d9e9c853334ca5b2e528f2309aa"
+identifiers:
+  - type: other
+    value: "PALOMAR-2026-10-30-000007"
+    description: "Palomar registry version 1, recording software release v1.0.1."
+  - type: url
+    value: "https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-30-000007&version=1"
+    description: "Public Palomar record for the registered source commit."
 repository-code: "https://github.com/igor-kortchemski/total-variation-threshold-parking-functions"
 url: "https://github.com/igor-kortchemski/total-variation-threshold-parking-functions"
 license: Apache-2.0
