@@ -32,8 +32,8 @@ Install Git and [Lean through elan](https://lean-lang.org/install/), then run:
 ```sh
 git clone https://github.com/igor-kortchemski/total-variation-threshold-parking-functions.git
 cd total-variation-threshold-parking-functions
-scripts/compile-lock.sh lake exe cache get
-scripts/compile-lock.sh lake build
+lake exe cache get
+lake build
 ```
 
 The project selects **Lean 4.35.0** and pins Mathlib to **`56a005855ea17e0b0958f73ec801ae140b0a1679`**. Open the cloned folder in VS Code with the Lean 4 extension to inspect statements and follow definitions.

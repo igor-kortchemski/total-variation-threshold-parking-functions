@@ -22,19 +22,21 @@ The pinned environment is Lean **4.35.0** and Mathlib commit **`56a005855ea17e0b
 ```sh
 git clone https://github.com/igor-kortchemski/total-variation-threshold-parking-functions.git
 cd total-variation-threshold-parking-functions
-scripts/compile-lock.sh lake exe cache get
-scripts/compile-lock.sh lake build
+lake exe cache get
+lake build
 ```
 
 The public repository can be cloned without signing in to GitHub.
 
 The first Lake invocation lets elan obtain the pinned Lean toolchain. `cache get` fetches the pinned dependencies and Mathlib's precompiled artifacts. `lake build` then builds the project, including all implementation modules and both interface modules. Three warnings about `sorry` in **Challenge.lean** are expected: they belong to its statement interface. Implementation proof holes are forbidden and checked separately.
 
-Always run Lean and Lake through `scripts/compile-lock.sh`; it prevents simultaneous compilation in one checkout. To inspect the selected toolchain:
+To inspect the selected toolchain:
 
 ```sh
-scripts/compile-lock.sh lean --version
+lean --version
 ```
+
+The optional wrapper `scripts/compile-lock.sh` runs a command while holding a lock in `.scratch/compile.lock`, so that at most one Lean compilation runs at a time in one checkout. Prefix commands with it if several processes may build concurrently; the CI workflow and the audit script below use it.
 
 Open this folder, rather than an individual file, in VS Code. Start with [Law.lean](../Parking/Law.lean) for the objects or a statement linked from [Results](RESULTS.md). The editor's “Go to Definition” follows the proof's dependencies.
 
